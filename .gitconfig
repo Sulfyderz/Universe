@@ -1,0 +1,16 @@
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[user]
+	name = Sulfyderz
+	email = Sulfyderz@live.fr
+[alias]
+	ci = commit
+	co = checkout
+	st = status
+	br = branch
+[push]
+	default = matching
+[http]
+	sslVerify = false
