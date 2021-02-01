@@ -236,7 +236,8 @@ default < fn - d : yabai -m window --toggle topmost;\
 
 # toggle window fullscreen zoom
 default < fn - f : yabai -m window --toggle topmost;\
-	  yabai -m window --toggle zoom-fullscreen
+	  yabai -m window --toggle zoom-fullscreen;\
+	  yabai -m window --toggle topmost
 
 # toggle window native fullscreen (and border)
 default < shift + fn - f : yabai -m window --toggle border;\
