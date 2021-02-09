@@ -232,7 +232,8 @@ default < fn - x : yabai -m space --mirror x-axis
 
 # toggle window parent zoom
 default < fn - d : yabai -m window --toggle topmost;\
-	  yabai -m window --toggle zoom-parent
+	  yabai -m window --toggle zoom-parent;\
+	  yabai -m window --toggle topmost
 
 # toggle window fullscreen zoom
 default < fn - f : yabai -m window --toggle topmost;\
