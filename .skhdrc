@@ -122,7 +122,7 @@ default < shift + fn + alt - l : yabai -m window --swap east
 ## for no animation, add this in the condition: wis=$(yabai -m query --windows --window "${wid}" | grep "space" | sed 's/[^0-9]*//g');\ yabai -m space --focus "${wis}"; 
 default < fn + cmd + alt - h : idbeg=$(yabai -m query --displays --display | grep "spaces" | sed 's/.*\[//g' | sed 's/].*//g' | sed 's/,//g' | cut -d' ' -f 1);\
                  ids=$(yabai -m query --spaces --space | grep "index" | sed 's/[^0-9]*//g');\
-		 wid=$(yabai -m query --windows --window | grep '"id"' | sed 's/[^0-9]*//g');\
+				 wid=$(yabai -m query --windows --window | grep '"id"' | sed 's/[^0-9]*//g');\
                  if [[ $ids != $idbeg ]]; then yabai -m window "${wid}" --space prev; yabai -m window --focus "${wid}"; fi
 ## for no animation, add this in the condition: wis=$(yabai -m query --windows --window "${wid}" | grep "space" | sed 's/[^0-9]*//g');\ yabai -m space --focus "${wis}"; 
 default < fn + cmd + alt - l : idend=$(yabai -m query --displays --display | grep "spaces" | sed 's/.*\[//g' | sed 's/].*//g' | sed 's/,//g' | rev | cut -d' ' -f 1 | rev);\

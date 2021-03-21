@@ -1,4 +1,8 @@
-#!/usr/bin/env sh
+#!/usr/bin/env zsh
+
+# Handling yabai for MacOS Big Sur
+sudo yabai --load-sa
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 
 # Configurating
 yabai -m config mouse_follows_focus          on
