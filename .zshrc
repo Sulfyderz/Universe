@@ -33,7 +33,6 @@ then
     export ftp_proxy="http://proxy.univ-lemans.fr:3128"
 fi
 
-
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/Users/sulfyderz/Work/Tools/Package-Managers/Users/sulfyderz/Work/Tools/Package-Managers/Miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
