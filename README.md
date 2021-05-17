@@ -1,4 +1,8 @@
-# Sulfyderz's configuration
+# Config
+By Sulfyderz.
+
+## About:
+Config contains configuration files.
 
 ## Configuration files:
 - `.bash_profile` for **bash**;
