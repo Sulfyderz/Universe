@@ -14,23 +14,23 @@ plugin-tmux:
 
 # Symbolic link section
 link-bash:
-	ln -s $(pwd)/.bash_profile ~
-	ln -s $(pwd)/.inputrc ~
+	ln -s $(PWD)/.bash_profile ~
+	ln -s $(PWD)/.inputrc ~
 
 link-git:
-	ln -s $(pwd)/.gitconfig ~
+	ln -s $(PWD)/.gitconfig ~
 
 link-tmux:
-	ln -s $(pwd)/.tmux.conf ~
+	ln -s $(PWD)/.tmux.conf ~
 
 link-skhd:
-	ln -s $(pwd)/.skhdrc ~
+	ln -s $(PWD)/.skhdrc ~
 
 link-vim:
-	ln -s $(pwd)/.vimrc ~
+	ln -s $(PWD)/.vimrc ~
 
 link-yabai:
-	ln -s $(pwd)/.yabairc ~
+	ln -s $(PWD)/.yabairc ~
 
 link-zsh:
-	ln -s $(pwd)/.zshrc ~
+	ln -s $(PWD)/.zshrc ~
