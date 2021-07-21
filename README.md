@@ -1,8 +1,8 @@
-# Config
+# Deploy
 By Sulfyderz.
 
 ## About:
-Config contains configuration files.
+Deploy sets up configuration files.
 
 ## Configuration files:
 - `.bash_profile` for **bash**;
@@ -15,12 +15,12 @@ Config contains configuration files.
 - `.zshrc` for **zsh**.
 
 ## How to install ?
-You only need the `Makefile`.
+You just have to use the `Makefile`.
 
-To install all plugins:
+To only install all plugins:
 `make plugin-all`
 
-To create all symbolic links:
+To only create all symbolic links only:
 `make link-all`
 
 For a specific plugin or link, replace `all` with the corresponding plugin or link.
