@@ -24,18 +24,18 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 ## Homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
 ## Flutter
-export PATH="$PATH:/Users/sulfyderz/Work/Tools/SDKs/Flutter/bin"
+export PATH="$PATH:/Users/sulfyderz/Workshop/Tool/SDKs/Flutter/bin"
 ## Conda 
 ### >>> conda initialize >>>
 ### !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/sulfyderz/Work/Tools/Package-Managers/Miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/Users/sulfyderz/Workshop/Tool/Package-Manager/Miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/Users/sulfyderz/Work/Tools/Package-Managers/Miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/sulfyderz/Work/Tools/Package-Managers/Miniconda3/etc/profile.d/conda.sh"
+    if [ -f "/Users/sulfyderz/Workshop/Tool/Package-Manager/Miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/sulfyderz/Workshop/Tool/Package-Manager/Miniconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/Users/sulfyderz/Work/Tools/Package-Managers/Miniconda3/bin:$PATH"
+        export PATH="/Users/sulfyderz/Workshop/Tool/Package-Manager/Miniconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
@@ -51,4 +51,3 @@ then
     export https_proxy="http://proxy.univ-lemans.fr:3128"
     export ftp_proxy="http://proxy.univ-lemans.fr:3128"
 fi
-
