@@ -10,6 +10,7 @@
 	co = checkout
 	st = status
 	br = branch
+	sw = switch
 [push]
 	default = matching
 [http]
