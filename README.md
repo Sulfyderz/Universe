@@ -1,8 +1,8 @@
-# Deploy
+# Universe
 By Sulfyderz.
 
 ## About:
-Deploy sets up configuration files.
+Universe sets up configuration files.
 
 ## Configuration files:
 - `.bash_profile` for **bash**;
