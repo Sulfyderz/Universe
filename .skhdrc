@@ -83,14 +83,14 @@ default < ctrl + fn - c : yabai -m space --create;\
                 yabai -m space --focus $(echo $id | rev | cut -d' ' -f 1 | rev)
 
 # destroy desktop
-default < ctrl + fn - w : idbeg=$(yabai -m query --displays --display | grep "spaces" | sed 's/.*\[//g' | sed 's/].*//g' | sed 's/,//g' | cut -d' ' -f 1);\
+default < ctrl + fn - w : idss=$(yabai -m query --displays --display | grep "spaces" | sed 's/.*\[//g' | sed 's/].*//g' | sed 's/,//g' | cut -d' ' -f 1);\
 		ids=$(yabai -m query --spaces --space | grep "index" | sed 's/[^0-9]*//g');\
-		idss=$(yabai -m query --displays --display | grep "spaces" | sed 's/.*\[//g' | sed 's/].*//g' | sed 's/,//g');\
+		idbeg=$(echo $idss | cut -d' ' -f 1);\
 		maxs=$(echo $idss | tr -cd ' \t' |wc -c);\
                 maxs=$(echo $(($maxs+1)));\
 		natfulState=$(yabai -m query --windows --space | grep "native");\
 		focusW="-658";\
-		if [[ $natfulState != *"1"* ]];\
+		if [[ $natfulState != *"true"* ]];\
 			then if [[ "$maxs" -gt "2" ]] && [[ "$idbeg" != "$ids" ]];\
 				then wids=$(yabai -m query --windows --space | grep '"id"' | sed 's/[^0-9]*//g' | tr "\n" " ");\
 				eval "arrWids=($wids)";\
