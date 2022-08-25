@@ -1,10 +1,10 @@
-# Universe
+# <img width="40" height="40" src="https://gitlab.com/uploads/-/system/project/avatar/24016226/galaxy.png" alt="Banner"> Universe
 By Sulfyderz.
 
-## About:
+## About
 Universe sets up configuration files.
 
-## Configuration files:
+## Configuration files
 - `.bash_profile` for **bash**;
 - `.gitconfig` for **git**;
 - `.inputrc` for **bash**;
@@ -14,13 +14,14 @@ Universe sets up configuration files.
 - `.yabairc` for **yabai**;
 - `.zshrc` for **zsh**.
 
-## How to install ?
-You just have to use the `Makefile`.
-
-To only install all plugins:
-`make plugin-all`
-
+## How to use it?
+You just have to use the `Makefile`.<br/>
+To only install all plugins:<br/>
+```
+make plugin-all
+```
 To only create all symbolic links only:
-`make link-all`
-
+```
+make link-all
+```
 For a specific plugin or link, replace `all` with the corresponding plugin or link.
