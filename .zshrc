@@ -1,5 +1,5 @@
 # Alias
-alias ta="tmux attach"
+alias ta='tmux attach'
 alias tad="tmux attach -d"
 alias tls="tmux list-sessions"
 alias tkill="tmux kill-session -t"
@@ -7,6 +7,22 @@ alias co="conda"
 alias coa="conda activate"
 alias cod="conda deactivate"
 alias cols="conda list"
+alias co_arm='__conda_setup="$("/Users/sulfyderz/Workshop/Tool/Package-Manager/Miniconda3/bin/conda" "shell.zsh" "hook" 2> /dev/null)"; \
+if [ $? -eq 0 ]; then eval "$__conda_setup"; \
+else \
+if [ -f "/Users/sulfyderz/Workshop/Tool/Package-Manager/Miniconda3/etc/profile.d/conda.sh" ]; then . "/Users/sulfyderz/Workshop/Tool/Package-Manager/Miniconda3/etc/profile.d/conda.sh"; \
+else \
+export PATH="/Users/sulfyderz/Workshop/Tool/Package-Manager/Miniconda3/bin:$PATH"; \
+fi; \
+fi;'
+alias co_x86='__conda_setup="$("/Users/sulfyderz/Workshop/Tool/Package-Manager/Miniconda3-x86/bin/conda" "shell.zsh" "hook" 2> /dev/null)"; \
+if [ $? -eq 0 ]; then eval "$__conda_setup"; \
+else \
+if [ -f "/Users/sulfyderz/Workshop/Tool/Package-Manager/Miniconda3-x86/etc/profile.d/conda.sh" ]; then . "/Users/sulfyderz/Workshop/Tool/Package-Manager/Miniconda3-x86/etc/profile.d/conda.sh"; \
+else \
+export PATH="/Users/sulfyderz/Workshop/Tool/Package-Manager/Miniconda3-x86/bin:$PATH"; \
+fi; \
+fi;'
 alias dk="docker"
 
 # Color
@@ -26,20 +42,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 ## Flutter
 export PATH="$PATH:/Users/sulfyderz/Workshop/Tool/SDKs/Flutter/bin"
 ## Conda
-### >>> conda initialize >>>
-### !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/sulfyderz/Workshop/Tool/Package-Manager/Miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/sulfyderz/Workshop/Tool/Package-Manager/Miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/sulfyderz/Workshop/Tool/Package-Manager/Miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/sulfyderz/Workshop/Tool/Package-Manager/Miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-### <<< conda initialize <<<
+co_arm
 
 # Network
 ## LIUM (to delete)
