@@ -25,7 +25,7 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 eval "$(/opt/homebrew/bin/brew shellenv)"
 ## Flutter
 export PATH="$PATH:/Users/sulfyderz/Workshop/Tool/SDKs/Flutter/bin"
-## Conda 
+## Conda
 ### >>> conda initialize >>>
 ### !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/Users/sulfyderz/Workshop/Tool/Package-Manager/Miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -40,7 +40,6 @@ else
 fi
 unset __conda_setup
 ### <<< conda initialize <<<
-
 
 # Network
 ## LIUM (to delete)
