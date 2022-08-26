@@ -227,7 +227,8 @@ default < ctrl + fn - k : yabai -m window --insert north
 default < ctrl + fn - l : yabai -m window --insert east
 
 # rotate tree
-default < fn - r : yabai -m space --rotate 90
+default < fn - r : yabai -m space --rotate 270
+default < shift + fn - r : yabai -m space --rotate 90
 
 # mirror tree y-axis
 default < fn - y : yabai -m space --mirror y-axis
