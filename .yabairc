@@ -34,7 +34,7 @@ do
 done
 
 # Rules
-yabai -m rule --add app="System Preferences" manage=off layer=above
+yabai -m rule --add app="System Settings" manage=off layer=above
 yabai -m rule --add app="Calculator" manage=off layer=above
 yabai -m rule --add app="Raycast" manage=off layer=above
 

@@ -236,6 +236,9 @@ default < fn - y : yabai -m space --mirror y-axis
 # mirror tree x-axis
 default < fn - x : yabai -m space --mirror x-axis
 
+# balance all windows
+default < fn - b : yabai -m space --balance
+
 # toggle window parent zoom
 default < fn - d : yabai -m window --toggle topmost;\
 	  yabai -m window --toggle zoom-parent;\
@@ -251,7 +254,7 @@ default < shift + fn - f : yabai -m window --toggle border;\
 		  yabai -m window --toggle native-fullscreen
 
 # toggle window border
-default < fn - b : yabai -m window --toggle border
+default < fn - o : yabai -m window --toggle border
 
 # toggle window split type
 default < fn - e : yabai -m window --toggle split
