@@ -39,10 +39,12 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 # Software
 ## Homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
-## Flutter
-export PATH="$PATH:/Users/sulfyderz/Workshop/Tool/SDKs/Flutter/bin"
 ## Conda
 co_arm
+## Pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
 # Network
 ## LIUM (to delete)
