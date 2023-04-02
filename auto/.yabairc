@@ -29,8 +29,8 @@ yabai -m config window_gap                   0
 # Starting with no gap or padding for all spaces
 for space in $(yabai -m query --spaces | jq ".[] | .index")
 do
-  yabai -m space $space --toggle padding
-  yabai -m space $space --toggle gap
+	yabai -m space $space --toggle padding
+	yabai -m space $space --toggle gap
 done
 
 # Rules
