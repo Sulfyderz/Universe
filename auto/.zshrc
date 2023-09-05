@@ -27,7 +27,7 @@ alias dk="docker"
 
 # Color
 export TERM=xterm-256color
-export PS1="%F{15}[%f%F{14}%n%f%F{15}@%f%F{208}%m%f%F{15}:%f%F{11}%~%f%F{15}]%#%f"
+export PS1="%F{15}[%f%F{51}%n%f%F{15}@%f%F{203}%m%f%F{15}:%f%F{220}%~%f%F{15}]%#%f"
 export PS2="%F{15}%_>%f"
 export CLICOLOR=1
 export LSCOLORS=HxexxxxxxxxxxxxxxxHxHx
