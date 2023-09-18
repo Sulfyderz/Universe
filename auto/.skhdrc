@@ -14,16 +14,16 @@ default < ctrl + fn - 0x13 : yabai -m space --padding abs:0:0:600:600
 default < ctrl + fn - 0x14 : yabai -m space --padding abs:0:0:1200:1200
 
 # focus window
-default < alt - h : yabai -m window --focus west
-default < alt - j : yabai -m window --focus south
-default < alt - k : yabai -m window --focus north
-default < alt - l : yabai -m window --focus east
+default < lalt - h : yabai -m window --focus west
+default < lalt - j : yabai -m window --focus south
+default < lalt - k : yabai -m window --focus north
+default < lalt - l : yabai -m window --focus east
 
 # focus display
-default < lcmd + alt - h : yabai -m display --focus west
-default < lcmd + alt - j : yabai -m display --focus south
-default < lcmd + alt - k : yabai -m display --focus north
-default < lcmd + alt - l : yabai -m display --focus east
+default < lcmd + lalt - h : yabai -m display --focus west
+default < lcmd + lalt - j : yabai -m display --focus south
+default < lcmd + lalt - k : yabai -m display --focus north
+default < lcmd + lalt - l : yabai -m display --focus east
 
 # focus desktop
 default < lcmd - h : idbeg=$(yabai -m query --displays --display | grep "spaces" | sed 's/.*\[//g' | sed 's/].*//g' | sed 's/,//g' | cut -d' ' -f 1);\
@@ -72,7 +72,7 @@ default < lcmd - 0x1D : ids=$(yabai -m query --displays --display | grep "spaces
                 if [[ "10" -gt "$maxs" ]]; then yabai -m space --focus $(echo $ids| cut -d' ' -f $maxs); else yabai -m space --focus $(echo $ids| cut -d' ' -f 10); fi
 
 # create desktop, move window and follow focus
-default < shift + ctrl + fn - c : yabai -m space --create;\
+default < lshift + ctrl + fn - c : yabai -m space --create;\
                   id=$(yabai -m query --displays --display | grep "spaces" | sed 's/.*\[//g' | sed 's/].*//g' | sed 's/,//g' );\
                   yabai -m window --space $(echo $id | rev | cut -d' ' -f 1 | rev);\
                   yabai -m space --focus $(echo $id | rev | cut -d' ' -f 1 | rev)
@@ -112,16 +112,16 @@ default < ctrl + fn - w : idss=$(yabai -m query --displays --display | grep "spa
 		fi
 
 # move window
-default < fn + alt - h : yabai -m window --warp west
-default < fn + alt - j : yabai -m window --warp south
-default < fn + alt - k : yabai -m window --warp north
-default < fn + alt - l : yabai -m window --warp east
+default < fn + lalt - h : yabai -m window --warp west
+default < fn + lalt - j : yabai -m window --warp south
+default < fn + lalt - k : yabai -m window --warp north
+default < fn + lalt - l : yabai -m window --warp east
 
 # swap window
-default < shift + fn + alt - h : yabai -m window --swap west
-default < shift + fn + alt - j : yabai -m window --swap south
-default < shift + fn + alt - k : yabai -m window --swap north
-default < shift + fn + alt - l : yabai -m window --swap east
+default < lshift + fn + lalt - h : yabai -m window --swap west
+default < lshift + fn + lalt - j : yabai -m window --swap south
+default < lshift + fn + lalt - k : yabai -m window --swap north
+default < lshift + fn + lalt - l : yabai -m window --swap east
 
 # send window to desktop and follow focus
 ## for no animation, add this in the condition: wis=$(yabai -m query --windows --window "${wid}" | grep "space" | sed 's/[^0-9]*//g');\ yabai -m space --focus "${wis}"; 
@@ -196,10 +196,10 @@ default < fn + lcmd - 0x1D : ids=$(yabai -m query --displays --display | grep "s
 		 else yabai -m window "${wid}" --space $(echo $ids| cut -d' ' -f 10); yabai -m space --focus $(echo $ids| cut -d' ' -f 10); fi
 
 # send window to display and follow focus
-default < fn + lcmd + alt - h : yabai -m window --display west; yabai -m display --focus west
-default < fn + lcmd + alt - j : yabai -m window --display south; yabai -m display --focus south
-default < fn + lcmd + alt - k : yabai -m window --display north; yabai -m display --focus north
-default < fn + lcmd + alt - l : yabai -m window --display east; yabai -m display --focus east
+default < fn + lcmd + lalt - h : yabai -m window --display west; yabai -m display --focus west
+default < fn + lcmd + lalt - j : yabai -m window --display south; yabai -m display --focus south
+default < fn + lcmd + lalt - k : yabai -m window --display north; yabai -m display --focus north
+default < fn + lcmd + lalt - l : yabai -m window --display east; yabai -m display --focus east
 
 # balance size of windows
 default < fn - 0x27 : yabai -m space --balance
@@ -213,11 +213,11 @@ default < fn - m : yabai -m window --resize top_left:-20:-20;\
                   yabai -m window --resize bottom_right:20:20
 
 # decrease window size
-default < shift + fn - h : yabai -m window --resize left:20:0
-default < shift + fn - j : yabai -m window --resize bottom:0:-20
-default < shift + fn - k : yabai -m window --resize top:0:20
-default < shift + fn - l : yabai -m window --resize right:-20:0
-default < shift + fn - m : yabai -m window --resize top_left:20:20;\
+default < lshift + fn - h : yabai -m window --resize left:20:0
+default < lshift + fn - j : yabai -m window --resize bottom:0:-20
+default < lshift + fn - k : yabai -m window --resize top:0:20
+default < lshift + fn - l : yabai -m window --resize right:-20:0
+default < lshift + fn - m : yabai -m window --resize top_left:20:20;\
                   yabai -m window --resize bottom_right:-20:-20
 
 # set insertion point in focused container
@@ -250,7 +250,7 @@ default < fn - f : yabai -m window --toggle topmost;\
 	  yabai -m window --toggle topmost
 
 # toggle window native fullscreen (and border)
-default < shift + fn - f : yabai -m window --toggle border;\
+default < lshift + fn - f : yabai -m window --toggle border;\
 		  yabai -m window --toggle native-fullscreen
 
 # toggle window border
