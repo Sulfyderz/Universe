@@ -1,13 +1,12 @@
 #!/usr/bin/env zsh
 
-# Handling yabai for MacOS Big Sur and above
-sudo yabai --load-sa
+# Adding the script
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
 
-# Configurating
+# Configuring
 yabai -m config mouse_follows_focus          on
 yabai -m config focus_follows_mouse          off
-yabai -m config window_topmost               off
 yabai -m config window_opacity               on
 yabai -m config window_opacity_duration      0.1
 yabai -m config active_window_opacity        1.0
@@ -34,9 +33,9 @@ do
 done
 
 # Rules
-yabai -m rule --add app="System Settings" manage=off layer=above
-yabai -m rule --add app="Calculator" manage=off layer=above
-yabai -m rule --add app="Raycast" manage=off layer=above
-yabai -m rule --add app="Digital Colour Meter" manage=off layer=above
+yabai -m rule --add app="System Settings" manage=off layer=normal
+yabai -m rule --add app="Calculator" manage=off layer=normal
+yabai -m rule --add app="Raycast" manage=off layer=normal
+yabai -m rule --add app="Digital Colour Meter" manage=off layer=normal
 
 echo "Yabai configuration loaded."
