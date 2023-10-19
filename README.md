@@ -37,7 +37,7 @@ Experience the unparalleled convenience of Universe - your ultimate configuratio
 - **zsh-autosuggestions**.
 
 ## Configuration command available with Universe
-## Non-specific
+### Non-specific
 - **configure-conda-mute** for deactivating the prompt modifier of conda (useful only when starship is applied).
 
 ## How to use Universe?
@@ -68,7 +68,7 @@ To only import all configuration files:
 ```
 make link__linux
 ```
-To install a particular software or import a particular configuration file for a software, add `-` followed by the corresponding software just before`__linux` (e.g. `link-zsh__linux`).
+To install a particular software or import a particular configuration file for a software, add `-` followed by the corresponding software just before `__linux` (e.g. `link-zsh__linux`).
 
 ### macOS-specific
 To install all software and import all configuration files (`macOS` is optional):
@@ -83,7 +83,7 @@ To only import all configuration files:
 ```
 make link__macOS
 ```
-To install a particular software or import a particular configuration file for a software, add `-` followed by the corresponding software just before`__macOS` (e.g. `link-zsh__macOS`).
+To install a particular software or import a particular configuration file for a software, add `-` followed by the corresponding software just before `__macOS` (e.g. `link-zsh__macOS`).
 
 ## Recommendation on the installation path
 We recommmend you to install Universe in the following path: `~/.config/universe`.
