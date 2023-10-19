@@ -45,7 +45,7 @@ You just have to use the `Makefile`.
 ### Non-specific
 To apply a command `x`:
 ```
-make configure-x
+make command-x
 ```
 To install a software `x`:
 ```

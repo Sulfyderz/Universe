@@ -15,9 +15,9 @@ link__linux: link-git link-tmux link-starship link-vim link-zsh__linux
 
 link__macOS: link-git link-tmux link-skhd__macOS link-starship link-vim link-yabai__macOS link-zsh__macOS
 
-# Configuration section
+# Command section
 ## Deactivating the prompt modifier of conda (useful only when starship is applied)
-configure-conda-mute:
+command-conda-mute:
 	conda config --set changeps1 false
 
 # Installing section
