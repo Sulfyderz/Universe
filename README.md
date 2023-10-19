@@ -38,14 +38,14 @@ Experience the unparalleled convenience of Universe - your ultimate configuratio
 
 ## Configuration command available with Universe
 ### Non-specific
-- **configure-conda-mute** for deactivating the prompt modifier of conda (useful only when starship is applied).
+- **conda-mute** for deactivating the prompt modifier of conda (useful only when starship is applied).
 
 ## How to use Universe?
 You just have to use the `Makefile`.
 ### Non-specific
 To apply a command `x`:
 ```
-make x
+make configure-x
 ```
 To install a software `x`:
 ```
