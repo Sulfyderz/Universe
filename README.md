@@ -41,8 +41,7 @@ Experience the unparalleled convenience of Universe - your ultimate configuratio
 - **conda-mute** for deactivating the prompt modifier of conda (useful only when starship is applied).
 
 ## How to use Universe?
-You just have to use the `Makefile`.
-### Non-specific
+You just have to use the `Makefile`.<br/>
 To apply a command `x`:
 ```
 make command-x
@@ -55,6 +54,7 @@ To import a configuration file for a software `x`:
 ```
 make link-x
 ```
+*Note: For a OS-specific command, software or configuration file, add `__` followed by the OS name (e.g. `link-zsh__macOS`).*
 ### Linux-specific
 To install all software and import all configuration files:
 ```
@@ -68,8 +68,6 @@ To only import all configuration files:
 ```
 make link__linux
 ```
-To install a particular software or import a particular configuration file for a software, add `-` followed by the corresponding software just before `__linux` (e.g. `link-zsh__linux`).
-
 ### macOS-specific
 To install all software and import all configuration files (`macOS` is optional):
 ```
@@ -83,7 +81,6 @@ To only import all configuration files:
 ```
 make link__macOS
 ```
-To install a particular software or import a particular configuration file for a software, add `-` followed by the corresponding software just before `__macOS` (e.g. `link-zsh__macOS`).
 
 ## Recommendation on the installation path
 We recommmend you to install Universe in the following path: `~/.config/universe`.
