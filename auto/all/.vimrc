@@ -9,8 +9,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " theme
-" Plugin 'fatih/molokai'
-Plugin 'morhetz/gruvbox'
+Plugin 'fatih/molokai'
 
 " ligne du bas
 Plugin 'itchyny/lightline.vim'
@@ -23,9 +22,8 @@ call vundle#end()
 
 " activation des couleurs
 syntax enable
-set t_Co=256
-set background=dark
-colorscheme gruvbox
+let g:molokai_original=1
+colorscheme molokai
 
 " search
 set ignorecase
