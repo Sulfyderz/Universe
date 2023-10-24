@@ -47,6 +47,7 @@ eval "$(pyenv init -)"
 ## Starship
 eval "$(starship init zsh)"
 ## zsh-autosuggestions 
+export ZSH_AUTOSUGGEST_MANUAL_REBIND=true
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 ## fzf
 export FZF_DEFAULT_OPTS='--height 30% -m --border --reverse --prompt="❯ " --pointer="❯" --marker="❯" --color="prompt:white,spinner:203,info:203,marker:203,pointer:51"'
