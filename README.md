@@ -31,6 +31,7 @@ Experience the unparalleled convenience of Universe - your ultimate configuratio
 ### Non-specific
 - **tmux-resurrect**.
 ### macOS-specific
+- **fzf**;
 - **homebrew**;
 - **starship**;
 - **tmux**;
