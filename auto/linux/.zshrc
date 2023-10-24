@@ -28,5 +28,3 @@ command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 ## Starship
 eval "$(starship init zsh)"
-## zsh-autosuggestions 
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
