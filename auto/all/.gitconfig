@@ -11,6 +11,8 @@
 	st = status
 	br = branch
 	sw = switch
+	ph = push
+	pl = pull
 [push]
 	default = matching
 [http]
