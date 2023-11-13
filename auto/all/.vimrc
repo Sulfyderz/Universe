@@ -2,6 +2,10 @@
 " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 " vim +PluginInstall +qall
 
+" encoding
+set encoding=utf-8
+set fileencoding=utf-8
+
 " required
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -11,16 +15,16 @@ Plugin 'VundleVim/Vundle.vim'
 " theme
 Plugin 'fatih/molokai'
 
-" ligne du bas
+" bottom line
 Plugin 'itchyny/lightline.vim'
 
-" commentaire automatique
+" automatic comment
 Plugin 'tpope/vim-commentary'
 
 call vundle#end()
 
 
-" activation des couleurs
+" color activation
 syntax enable
 let g:molokai_original=1
 colorscheme molokai
@@ -60,9 +64,5 @@ set splitright
 set laststatus=2 " always show the status line
 set showcmd
 
-" drop message d'accueil
+" drop home message
 set shortmess=I
-
-" encoding
-set encoding=utf-8
-set fileencoding=utf-8

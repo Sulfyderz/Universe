@@ -7,7 +7,7 @@ linux: install__linux link__linux
 
 macOS: install__macOS link__macOS
 
-install__linux: install-tmux-resurrect
+install__linux: install-tmux-resurrect install-starship__linux
 
 install__macOS: install-tmux-resurrect install-homebrew__macOS install-starship__macOS install-tmux__macOS install-zsh-autosuggestions__macOS install-fzf__macOS
 
@@ -24,6 +24,10 @@ command-conda-mute:
 ## Non-specific
 install-tmux-resurrect:
 	git clone https://github.com/tmux-plugins/tmux-resurrect ./auto/all/plugins/tmux-resurrect/
+
+## Linux-specific
+install-starship__linux:
+	curl -sS https://starship.rs/install.sh | sh
 
 ## macOS-specific
 install-fzf__macOS:
