@@ -53,7 +53,3 @@ source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 export FZF_DEFAULT_OPTS='--height 30% -m --border --reverse --prompt="❯ " --pointer="❯" --marker="❯" --color="prompt:white,spinner:203,info:203,marker:203,pointer:51"'
 source $(brew --prefix)/opt/fzf/shell/completion.zsh
 source $(brew --prefix)/opt/fzf/shell/key-bindings.zsh
-
-
-
-
