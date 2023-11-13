@@ -26,7 +26,7 @@ install-fzf:
 	eval "$(/opt/homebrew/bin/brew shellenv)" && brew install fzf
 
 install-homebrew:
-	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 install-tmux:
 	eval "$(/opt/homebrew/bin/brew shellenv)" && brew install tmux 
