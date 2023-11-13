@@ -20,18 +20,9 @@ compinit
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 # Software
-## Homebrew
-eval "$(/opt/homebrew/bin/brew shellenv)"
 ## Pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 ## Starship
 eval "$(starship init zsh)"
-## zsh-autosuggestions 
-export ZSH_AUTOSUGGEST_MANUAL_REBIND=true
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-## fzf
-export FZF_DEFAULT_OPTS='--height 30% -m --border --reverse --prompt="❯ " --pointer="❯" --marker="❯" --color="prompt:white,spinner:203,info:203,marker:203,pointer:51"'
-source $(brew --prefix)/opt/fzf/shell/completion.zsh
-source $(brew --prefix)/opt/fzf/shell/key-bindings.zsh

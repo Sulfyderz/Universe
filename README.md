@@ -29,11 +29,12 @@ Experience the unparalleled convenience of Universe - your ultimate configuratio
 
 ## Software installation handled by Universe
 ### Non-specific
+- **tmux-resurrect**.
+### macOS-specific
 - **fzf**;
 - **homebrew**;
 - **starship**;
 - **tmux**;
-- **tmux-resurrect**.
 - **zsh-autosuggestions**.
 
 ## Configuration command available with Universe
