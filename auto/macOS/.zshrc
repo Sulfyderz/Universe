@@ -47,6 +47,6 @@ eval "$(starship init zsh)"
 export ZSH_AUTOSUGGEST_MANUAL_REBIND=true
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 ## fzf
-export FZF_DEFAULT_OPTS='--height 30% -m --border --reverse --prompt="❯ " --pointer="❯" --marker="❯" --color="prompt:white,spinner:203,info:203,marker:203,pointer:51"'
+export FZF_DEFAULT_OPTS='--height 30% -m --border --reverse --prompt="❯ " --pointer="❯" --marker="❯" --color="prompt:15,spinner:203,info:203,marker:203,pointer:51"'
 source $(brew --prefix)/opt/fzf/shell/completion.zsh
 source $(brew --prefix)/opt/fzf/shell/key-bindings.zsh
