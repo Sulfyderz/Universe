@@ -7,13 +7,16 @@ linux: install__linux link__linux
 
 macOS: install__macOS link__macOS
 
-install__linux: install-tmux-resurrect install-starship__linux
+install__linux: install-tmux-resurrect install-starship__linux install-fzf__linux
 
 install__macOS: install-tmux-resurrect install-homebrew__macOS install-starship__macOS install-tmux__macOS install-zsh-autosuggestions__macOS install-fzf__macOS
 
 link__linux: link-git link-tmux link-starship link-vim link-zsh__linux
 
 link__macOS: link-git link-tmux link-skhd__macOS link-starship link-vim link-yabai__macOS link-zsh__macOS
+
+# Variable
+path_makefile := $(abspath $(lastword $(MAKEFILE_LIST)))
 
 # Command section
 ## Deactivating the prompt modifier of conda (useful only when starship is applied)
@@ -26,6 +29,9 @@ install-tmux-resurrect:
 	git clone https://github.com/tmux-plugins/tmux-resurrect ./auto/all/plugins/tmux-resurrect/
 
 ## Linux-specific
+install-fzf__linux:
+	sudo apt install fzf
+
 install-starship__linux:
 	curl -sS https://starship.rs/install.sh | sh
 
@@ -48,33 +54,31 @@ install-zsh-autosuggestions__macOS:
 # Symbolic link section
 ## Non-specific
 link-bash:
-	ln -s $(PWD)/auto/all/.bash_profile ~
-	ln -s $(PWD)/auto/all/.inputrc ~
+	ln -s $(path_makefile)/auto/all/.bash_profile ~
+	ln -s $(path_makefile)/auto/all/.inputrc ~
 
 link-git:
-	ln -s $(PWD)/auto/all/.gitconfig ~
+	ln -s $(path_makefile)/auto/all/.gitconfig ~
 
 link-tmux:
-	ln -s $(PWD)/auto/all/.tmux.conf ~
+	ln -s $(path_makefile)/auto/all/.tmux.conf ~
 
 link-starship:
-	ln -s $(PWD)/auto/all/starship.toml ~/.config/
+	ln -s $(path_makefile)/auto/all/starship.toml ~/.config/
 
 link-vim:
-	ln -s $(PWD)/auto/all/.vimrc ~
+	ln -s $(path_makefile)/auto/all/.vimrc ~
 
 ## Linux-specific
 link-zsh__linux:
-	ln -s $(PWD)/auto/linux/.zshrc ~
+	ln -s $(path_makefile)/auto/linux/.zshrc ~
 
 ## macOS-specific
 link-skhd__macOS:
-	ln -s $(PWD)/auto/macOS/.skhdrc ~
+	ln -s $(path_makefile)/auto/macOS/.skhdrc ~
 
 link-yabai__macOS:
-	ln -s $(PWD)/auto/macOS/.yabairc ~
+	ln -s $(path_makefile)/auto/macOS/.yabairc ~
 
 link-zsh__macOS:
-	ln -s $(PWD)/auto/macOS/.zshrc ~
-
-
+	ln -s $(path_makefile)/auto/macOS/.zshrc ~
