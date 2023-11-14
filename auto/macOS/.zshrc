@@ -41,10 +41,6 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 eval "$(/opt/homebrew/bin/brew shellenv)"
 ## Conda
 co_arm
-## Pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
 ## Starship
 eval "$(starship init zsh)"
 ## zsh-autosuggestions 
