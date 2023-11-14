@@ -1,8 +1,4 @@
 # Alias
-alias ta='tmux attach'
-alias tad="tmux attach -d"
-alias tls="tmux list-sessions"
-alias tkill="tmux kill-session -t"
 alias co="conda"
 alias coa="conda activate"
 alias cod="conda deactivate"
@@ -24,14 +20,18 @@ export PATH="/Users/sulfyderz/Workshop/Tool/Package-Manager/Miniconda3-x86/bin:$
 fi; \
 fi;'
 alias dk="docker"
+alias ta='tmux attach'
+alias tad="tmux attach -d"
+alias tkill="tmux kill-session -t"
+alias tls="tmux list-sessions"
 
 # Color
-export TERM=xterm-256color
+export CLICOLOR=1
 export PS1="%F{15}[%f%F{51}%n%f%F{15}@%f%F{203}%m%f%F{15}:%f%F{220}%~%f%F{15}]%#%f"
 export PS2="%F{15}%_>%f"
-export CLICOLOR=1
 export LSCOLORS="GxgxxxxxxxxxxxxxxxHxHx"
 export LS_COLORS="di=1;36:ln=36:so=0:pi=0:ex=0:bd=0:cd=0:su=0:sg=0:tw=1;37:ow=1;37:no=0:fi=0:do=0:or=0:mi=0:st=0"
+export TERM=xterm-256color
 autoload -Uz compinit
 compinit
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
