@@ -8,6 +8,9 @@ symbol = "aws "
 format = '\[[$symbol($subscription)]($style)\]'
 symbol = "az "
 
+[battery]
+disabled = true
+
 [bun]
 format = '\[[$symbol($version)]($style)\]'
 symbol = "bun "
