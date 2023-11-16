@@ -1,0 +1,146 @@
+#!/bin/bash
+# Variable and constant declaration
+curDir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+env=$(uname)
+ext=$([ "$env" = "Darwin" ] && echo "__macOS" || echo "__linux")
+extOmit=$([ "$env" = "Darwin" ] && echo "__linux" || echo "__macOS")
+client="client"
+server="server"
+## Color
+colorOff='\033[0m'
+boldGreen='\033[1;32m'
+boldRed='\033[1;31m'
+boldWhite='\033[1;37m'
+
+
+# Function declaration
+Help()
+{
+	# Display Help
+	echo "Universe: your ultimate configuration file manager, application configurator and software installer."
+	echo
+	echo "Syntax: universe [install|update|link|command|list|help]"
+	echo "Options:"
+	echo " install	Installs a given software handled by Universe and related to your OS. If nothing is given, it installs all software related to your OS."
+	echo " update		Updates a software installed with 'install'. If nothing is given, it updates all software handled by Universe and related to your OS."
+	echo " link		Setups a configuration file handled by Universe and related to your OS for a given software. It nothing is given, it setups all configuration files related to your OS."
+	echo " command	Applies a given command related to your OS."
+	echo " list		Shows the available options for 'install', 'update', 'link' and 'command' related to your OS. If nothing is given, it shows all the options for 'install', 'update', 'link' and 'command' related to your OS."
+	echo " help		Prints this help."
+}
+
+
+## No option given
+if [ "$#" -eq 0 ]
+then
+	Help
+	exit 0
+fi
+
+## Check the main option
+if [ $1 != "install" ] && [ $1 != "link" ] && [ $1 != "command" ] && [ $1 != "update" ] && [ $1 != "list" ] && [ $1 != "help" ] && [ $1 != "-h" ]
+then
+	echo -e "${boldRed}Error:${colorOff} '$1' Not recognized by universe."
+	exit 3
+fi
+
+## Check if the option "-s" is given
+i=1
+mode=$client
+for arg in "$@"
+do
+	if [ $arg = "-s" ]
+	then
+		mode=$server
+	fi
+done
+
+## Proceed the main option if no other option is given (other than "-s")
+if [ $1 = "help" ] || [ $1 = "-h" ]
+then
+	if [ "$#" -gt 1 ]
+	then
+		echo -e "${boldRed}Error:${colorOff} 'help' doesn't take options."	
+		exit 3
+	else
+		Help
+		exit 0
+	fi
+elif [ "$#" -eq 1 ]
+then
+	if [ $1 = "install" ] || [ $1 = "link" ] || [ $1 = "update" ]
+	then
+		echo -e "${boldWhite}Mode:${colorOff} ${boldGreen}Client${colorOff}" 
+		echo
+		make -C $curDir/build/$mode $1$ext
+		exit $?
+	elif [ $1 = "list" ]
+	then
+		$curDir/universe list "install" "update" "link" "command" 
+		exit $?
+	else
+		echo -e "${boldRed}Error:${colorOff} No option is given to '$1'."
+		exit 3
+	fi
+elif [ "$#" -eq 2 ] && [ $2 = '-s' ]
+then
+	if [ $1 = "install" ] || [ $1 = "link" ] || [ $1 = "update" ]
+	then
+		echo -e "${boldWhite}Mode:${colorOff} ${boldRed}Server${colorOff}"
+		echo
+		make -C $curDir/build/$mode $1
+		exit $?
+	elif [ $1 = "list" ]
+	then
+		$curDir/universe list "-s" "install" "update" "link" "command"
+		exit $?
+	fi
+fi
+
+## Display the mode used
+if [ $mode = $client ]
+then
+	echo -e "${boldWhite}Mode:${colorOff} ${boldGreen}Client${colorOff}"
+else
+	echo -e "${boldWhite}Mode:${colorOff} ${boldRed}Server${colorOff}"
+fi
+
+## Proceed the other options 
+i=1
+nbArg=$([ "$mode" = $server ] && echo "$(expr $# - 1)" || echo "$#")
+for arg in "$@"
+do
+	if [ $i != 1 ] && [ $arg != '-s' ]
+	then
+		if [ $1 = "list" ]
+		then
+			echo
+			if [ $arg != "install" ] && [ $arg != "link" ] && [ $arg != "command" ] && [ $arg != "update" ]
+			then
+				echo -e "${boldRed}Error:${colorOff} '$arg' not recognized by '$1'."
+			else
+				echo -e "${boldWhite}List for '$arg':${colorOff}"
+				list=$(grep "^$arg-[a-z]*" "$curDir/build/$mode/Makefile" | grep  -v $extOmit | wc -l)
+				if [ $list -eq 0 ]
+				then
+					echo "   No options available."
+				else
+					grep "^$arg-[a-z]*" "$curDir/build/$mode/Makefile" | sed 's/://' | sed 's/'$ext'//' | sed 's/'$arg'-//' | grep  -v $extOmit | sed -e 's/^/   /'
+				fi
+			fi
+		else
+			if [ $(cat "$curDir/build/$mode/Makefile" | grep -w "$1-$arg:" | wc -l) != 0 ]
+			then
+				make -C $curDir/build/$mode  $1-$arg
+			elif [ $(cat "$curDir/build/$mode/Makefile" | grep -w "$1-$arg$ext:" | wc -l) != 0 ]
+			then
+				make -C $curDir/build/$mode $1-$arg$ext
+			else
+				echo -e "${boldRed}Error:${colorOff} '$arg' not recognized by '$1'."
+				exit 3
+			fi
+		fi
+	
+	fi
+	((i++))
+done
