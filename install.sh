@@ -12,7 +12,8 @@ boldYellow='\033[1;33m'
 
 
 # Executable
-if [ ! -f ~/.bin/universe ]; then
+if [ ! -f ~/.bin/universe ] || [ ! -e ~/.bin/universe ]
+then
 	echo -e "${boldWhite}Installation steps:${colorOff}"
 	mkdir -p ~/.bin
 	chmod +x $curDir/universe
