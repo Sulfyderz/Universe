@@ -8,3 +8,10 @@ root_universe := $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../../)
 ## Reboot
 command-linux-reboot__linux:
 	-sudo reboot
+
+# Installing section
+## Linux-specific
+install-shell-completion__linux:
+	-sudo apt install bash-completion
+
+

@@ -1,13 +1,14 @@
 # Alias
-alias ta='tmux attach'
-alias tad="tmux attach -d"
-alias tls="tmux list-sessions"
-alias tkill="tmux kill-session -t"
 alias co="conda"
 alias coa="conda activate"
 alias cod="conda deactivate"
 alias cols="conda list"
 alias dk="docker"
+alias ls="ls --color=auto"
+alias ta='tmux attach'
+alias tad="tmux attach -d"
+alias tls="tmux list-sessions"
+alias tkill="tmux kill-session -t"
 alias unvs="universe"
 alias unvsc="universe command"
 alias unvsi="universe install"
@@ -27,10 +28,6 @@ compinit
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 # Software
-## Pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
 ## Starship
 eval "$(starship init zsh)"
 ## Universe

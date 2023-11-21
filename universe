@@ -88,7 +88,8 @@ then
 	then
 		echo -e "${boldWhite}Mode:${colorOff} ${boldGreen}Client${colorOff}" 
 		echo
-		make -C $curDir/build/$mode $1$ext
+		echo -e "${boldWhite}Processing all '$1' related to your OS:${colorOff}"
+		make -C $curDir/build/$mode $1$ext --no-print-directory
 		exit $?
 	elif [ $1 = "list" ]
 	then
@@ -105,7 +106,8 @@ then
 	then
 		echo -e "${boldWhite}Mode:${colorOff} ${boldRed}Server${colorOff}"
 		echo
-		make -C $curDir/build/$mode $1
+		echo -e "${boldWhite}Processing all '$1' related to your OS:${colorOff}" 
+		make -C $curDir/build/$mode $1$ext --no-print-directory
 		exit $?
 	elif [ $1 = "list" ]
 	then
@@ -186,9 +188,9 @@ do
 			echo -e "${boldWhite}Processing '$1 $arg':${colorOff}" 
 			if [ $(cat "$curDir/build/$mode/Makefile" | grep -w "$1-$arg:" | wc -l) != 0 ]
 			then
-				make -C $curDir/build/$mode $1-$arg
+				make -C $curDir/build/$mode $1-$arg --no-print-directory
 			else
-				make -C $curDir/build/$mode $1-$arg$ext
+				make -C $curDir/build/$mode $1-$arg$ext --no-print-directory
 			fi
 		fi
 	
