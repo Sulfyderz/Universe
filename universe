@@ -21,13 +21,24 @@ Help()
 	echo
 	echo "Syntax: universe [options]"
 	echo
-	echo "		Options:"
-	echo " 			-i, install									Installs a given software handled by Universe and related to your OS. If nothing is given, it installs all software related to your OS."
-	echo " update		Updates a software installed with 'install'. If nothing is given, it updates all software handled by Universe and related to your OS."
-	echo " link		Setups a configuration file handled by Universe and related to your OS for a given software. It nothing is given, it setups all configuration files related to your OS."
-	echo " command	Applies a given command related to your OS."
-	echo " list		Shows the available options for 'install', 'update', 'link' and 'command' related to your OS. If nothing is given, it shows all the options for 'install', 'update', 'link' and 'command' related to your OS."
-	echo " help		Prints this help."
+	echo "  Options:"
+	echo "    install		   Installs a given software handled by Universe and related"
+	echo "			   to your OS. If nothing is given, it installs all software"
+	echo "			   related to your OS."
+	echo "    update		   Updates a software installed with 'install'. If nothing is"
+	echo "			   given, it updates all software handled by Universe and"
+	echo "			   related to your OS."
+	echo "    link		   Setups a configuration file handled by Universe and"
+	echo "             		   related to your OS for a given software. If nothing is"
+	echo "			   given, it setups all configuration files related to your"
+	echo "			   OS."
+	echo "    command         	   Applies a command for a specific software, according to"
+	echo "             		   your OS."
+	echo "    list		   Shows the available options for 'install', 'update', 'link'"
+	echo "			   and 'command' related to your OS. If nothing is given, it" 
+	echo "			   shows all the options for 'install', 'update', 'link' and"
+	echo "			   'command' related to your OS."
+	echo "    -h, help		   Prints this help."
 }
 
 
@@ -165,7 +176,7 @@ do
 			fi
 		else
 			echo
-			echo -e "${boldWhite}Processing '$1' for '$arg':${colorOff}" 
+			echo -e "${boldWhite}Processing '$1 $arg':${colorOff}" 
 			if [ $(cat "$curDir/build/$mode/Makefile" | grep -w "$1-$arg:" | wc -l) != 0 ]
 			then
 				make -C $curDir/build/$mode  $1-$arg
