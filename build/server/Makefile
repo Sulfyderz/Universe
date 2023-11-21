@@ -6,5 +6,5 @@ root_universe := $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../../)
 
 # Command section
 ## Reboot
-command-linux-reboot:
+command-linux-reboot__linux:
 	-sudo reboot

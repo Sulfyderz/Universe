@@ -24,6 +24,12 @@ alias ta='tmux attach'
 alias tad="tmux attach -d"
 alias tkill="tmux kill-session -t"
 alias tls="tmux list-sessions"
+alias unvs="universe"
+alias unvsc="universe command"
+alias unvsi="universe install"
+alias unvsln="universe link"
+alias unvsls="universe list"
+alias unvsu="universe update"
 
 # Color
 export CLICOLOR=1
@@ -50,3 +56,5 @@ source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 export FZF_DEFAULT_OPTS='--height 30% -m --border --reverse --prompt="❯ " --pointer="❯" --marker="❯" --color="prompt:15,spinner:203,info:203,marker:203,pointer:51"'
 source $(brew --prefix)/opt/fzf/shell/completion.zsh
 source $(brew --prefix)/opt/fzf/shell/key-bindings.zsh
+## Universe
+export PATH="$PATH:$HOME/.bin";
