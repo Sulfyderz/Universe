@@ -43,6 +43,7 @@ Help()
 }
 
 
+# Executable
 ## No option given
 if [ "$#" -eq 0 ]
 then
@@ -51,10 +52,10 @@ then
 fi
 
 ## Check the main option
-if [ $1 != "install" ] && [ $1 != "link" ] && [ $1 != "command" ] && [ $1 != "update" ] && [ $1 != "list" ] && [ $1 != "help" ] && [ $1 != "-h" ]
+mainOption=("install" "link" "command" "update" "list" "help" "-h")
+if [ $(echo ${mainOption[@]} | grep -ow $1 | wc -w) = 0 ]
 then
-	echo
-	echo -e "${boldRed}Error:${colorOff} '$1' Not recognized by universe."
+	echo -e "${boldRed}Error:${colorOff} ${boldWhite}'$1'${colorOff} not recognized by ${boldWhite}Universe${colorOff}."
 	exit 3
 fi
 
