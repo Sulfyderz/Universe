@@ -57,4 +57,4 @@ export FZF_DEFAULT_OPTS='--height 30% -m --border --reverse --prompt="❯ " --po
 source $(brew --prefix)/opt/fzf/shell/completion.zsh
 source $(brew --prefix)/opt/fzf/shell/key-bindings.zsh
 ## Universe
-export PATH="$PATH:$HOME/.bin";
+export PATH="$PATH:$HOME/.bin"

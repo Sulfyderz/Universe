@@ -8,6 +8,12 @@ alias coa="conda activate"
 alias cod="conda deactivate"
 alias cols="conda list"
 alias dk="docker"
+alias unvs="universe"
+alias unvsc="universe command"
+alias unvsi="universe install"
+alias unvsln="universe link"
+alias unvsls="universe list"
+alias unvsu="universe update"
 
 # Color
 export TERM=xterm-256color
@@ -27,3 +33,5 @@ command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 ## Starship
 eval "$(starship init zsh)"
+## Universe
+export PATH="$PATH:$HOME/.bin"
