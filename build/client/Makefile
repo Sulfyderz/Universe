@@ -27,7 +27,8 @@ install-tmux-resurrect:
 
 ## Linux-specific
 install-fzf__linux:
-	-sudo apt install fzf
+	-git clone --depth 1 https://github.com/junegunn/fzf.git $(root_universe)/files/client/auto/linux/plugins/fzf/
+	-$(root_universe)/files/client/auto/linux/plugins/fzf/install
 
 install-starship__linux:
 	-curl -sS https://starship.rs/install.sh | sh

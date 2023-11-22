@@ -28,6 +28,8 @@ compinit
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 # Software
+## fzf
+export FZF_DEFAULT_OPTS='--height 30% -m --border --reverse --prompt="❯ " --pointer="❯" --marker="❯" --color="prompt:15,spinner:203,info:203,marker:203,pointer:51"'
 ## Starship
 eval "$(starship init zsh)"
 ## Universe
