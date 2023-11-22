@@ -23,12 +23,12 @@ command-conda-mute:
 # Installing section
 ## Non-specific
 install-tmux-resurrect:
-	-git clone https://github.com/tmux-plugins/tmux-resurrect $(root_universe)/files/client/auto/all/plugins/tmux-resurrect/
+	-git clone https://github.com/tmux-plugins/tmux-resurrect $(root_universe)/bin/tmux-resurrect/
 
 ## Linux-specific
 install-fzf__linux:
-	-git clone --depth 1 https://github.com/junegunn/fzf.git $(root_universe)/files/client/auto/linux/plugins/fzf/
-	-$(root_universe)/files/client/auto/linux/plugins/fzf/install
+	-git clone --depth 1 https://github.com/junegunn/fzf.git $(root_universe)/bin/fzf/
+	-$(root_universe)/bin/fzf/install
 
 install-starship__linux:
 	-curl -sS https://starship.rs/install.sh | sh
