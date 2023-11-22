@@ -1,0 +1,45 @@
+#!/bin/bash
+# Variable and constant declaration
+curDir=$(dirname "$(realpath "$0")")
+shHandled=("zsh" "bash")
+activeSh=$(basename $SHELL)
+## Color
+colorOff='\033[0m'
+boldGreen='\033[1;32m'
+boldRed='\033[1;31m'
+boldWhite='\033[1;37m'
+boldYellow='\033[1;33m'
+
+
+# Executable
+if [ ! -e ~/.bin/universe ]
+then
+	echo -e "${boldRed}Error:${colorOff} ${boldWhite}Universe${colorOff} is not installed."
+	echo
+	echo -e "Do you want to install ${boldWhite}Universe${colorOff}? [y/n]"
+	read -r answer
+	while [ $answer != 'n' ] && [ $answer != 'y' ]
+	do
+		echo -e "${boldRed}Error:${colorOff} Answer not recognized. Please type 'y' (yes) or 'n' (no)."
+		read -r answer
+	done
+	if [ $answer = 'y' ]
+	then
+		echo
+		$curDir/install
+	fi
+else
+	echo -e "Do you want to uninstall ${boldWhite}Universe${colorOff}? [y/n]"
+	read -r answer
+	while [ $answer != 'n' ] && [ $answer != 'y' ]
+	do
+		echo -e "${boldRed}Error:${colorOff} Answer not recognized. Please type 'y' (yes) or 'n' (no)."
+		read -r answer
+	done
+	if [ $answer = 'y' ]
+	then
+		rm  ~/.bin/universe
+		echo
+		echo -e "${boldGreen}Universe is uninstalled.${colorOff}"
+	fi
+fi

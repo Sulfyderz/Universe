@@ -41,17 +41,5 @@ then
 else
 	echo -e "${boldYellow}Warning:${colorOff} ${boldWhite}Universe${colorOff} is already setup."
 	echo
-	echo "Do you want to uninstall it? [y/n]"
-	read -r answer
-	while [ $answer != 'n' ] && [ $answer != 'y' ]
-	do
-		echo -e "${boldRed}Error:${colorOff} Answer not recognized. Please type 'y' (yes) or 'n' (no)."
-		read -r answer
-	done
-	if [ $answer = 'y' ]
-	then
-		rm  ~/.bin/universe
-		echo
-		echo -e "${boldGreen}Universe is uninstalled.${colorOff}"
-	fi
+	$curDir/uninstall
 fi
