@@ -1,8 +1,10 @@
 # Oneshell means all lines in a recipe run in the same shell
 .ONESHELL:
 
+
 # Variables
 root_universe := $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../../)
+
 
 # Shorcuts
 ## Linux-specific
@@ -17,7 +19,8 @@ update__macOS: update-fzf__macOS update-tmux-resurrect update-vundle update-zsh-
 
 
 # Command section
-## Deactivating the prompt modifier of conda (useful only when starship is applied)
+## Non-specific
+### Deactivating the prompt modifier of conda (useful only when starship is applied)
 command-conda-mute:
 	-conda config --set changeps1 false
 
