@@ -8,10 +8,12 @@ root_universe := $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../../)
 ## Linux-specific
 install__linux: install-tmux-resurrect install-starship__linux install-fzf__linux
 link__linux: link-git link-tmux link-starship link-vim link-zsh__linux
+update__linux: update-fzf__linux
 
 ## macOS-specific
 install__macOS: install-tmux-resurrect install-homebrew__macOS install-starship__macOS install-tmux__macOS install-zsh-autosuggestions__macOS install-fzf__macOS
 link__macOS: link-git link-tmux link-skhd__macOS link-starship link-vim link-yabai__macOS link-zsh__macOS
+update__macOS: update-fzf__macOS
 
 
 # Command section
@@ -28,7 +30,7 @@ install-tmux-resurrect:
 ## Linux-specific
 install-fzf__linux:
 	-git clone --depth 1 https://github.com/junegunn/fzf.git $(root_universe)/bin/fzf/
-	-$(root_universe)/bin/fzf/install
+	-$(root_universe)/bin/fzf/install --key-bindings --completion --no-update-rc
 
 install-starship__linux:
 	-curl -sS https://starship.rs/install.sh | sh
@@ -51,6 +53,17 @@ install-tmux__macOS:
 
 install-zsh-autosuggestions__macOS:
 	-eval "$(/opt/homebrew/bin/brew shellenv)" && brew install zsh-autosuggestions
+
+
+# Updating section
+## Linux-specific
+update-fzf__linux:
+	-git -C $(root_universe)/bin/fzf pull
+	-$(root_universe)/bin/fzf/install --key-bindings --completion --no-update-rc
+
+## macOS-specific
+update-fzf__macOS:
+	-brew update; brew upgrade fzf
 
 
 # Symbolic link section
