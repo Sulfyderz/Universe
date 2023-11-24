@@ -8,12 +8,12 @@ root_universe := $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../../)
 ## Linux-specific
 install__linux: install-tmux-resurrect install-starship__linux install-fzf__linux
 link__linux: link-git link-tmux link-starship link-vim link-zsh__linux
-update__linux: update-fzf__linux
+update__linux: update-fzf__linux update-zsh-autosuggestions__linux
 
 ## macOS-specific
 install__macOS: install-tmux-resurrect install-homebrew__macOS install-starship__macOS install-tmux__macOS install-zsh-autosuggestions__macOS install-fzf__macOS
 link__macOS: link-git link-tmux link-skhd__macOS link-starship link-vim link-yabai__macOS link-zsh__macOS
-update__macOS: update-fzf__macOS
+update__macOS: update-fzf__macOS update-zsh-autosuggestions__macOS
 
 
 # Command section
@@ -59,10 +59,15 @@ install-zsh-autosuggestions__macOS:
 update-fzf__linux:
 	-git -C $(root_universe)/bin/fzf pull && $(root_universe)/bin/fzf/install --key-bindings --completion --no-update-rc
 
+update-zsh-autosuggestions__linux:
+	-git -C $(root_universe)/bin/zsh-autosuggestions pull
+
 ## macOS-specific
 update-fzf__macOS:
-	-brew update; brew upgrade fzf
+	-eval "$(/opt/homebrew/bin/brew shellenv)" && brew update && brew upgrade fzf
 
+update-zsh-autosuggestions__macOS:
+	-eval "$(/opt/homebrew/bin/brew shellenv)" && brew update && brew upgrade zsh-autosuggestions
 
 # Symbolic link section
 ## Non-specific
