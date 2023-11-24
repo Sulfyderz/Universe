@@ -29,8 +29,7 @@ install-tmux-resurrect:
 
 ## Linux-specific
 install-fzf__linux:
-	-git clone --depth 1 https://github.com/junegunn/fzf.git $(root_universe)/bin/fzf/
-	-$(root_universe)/bin/fzf/install --key-bindings --completion --no-update-rc
+	-git clone --depth 1 https://github.com/junegunn/fzf.git $(root_universe)/bin/fzf/ && $(root_universe)/bin/fzf/install --key-bindings --completion --no-update-rc
 
 install-starship__linux:
 	-curl -sS https://starship.rs/install.sh | sh
@@ -58,8 +57,7 @@ install-zsh-autosuggestions__macOS:
 # Updating section
 ## Linux-specific
 update-fzf__linux:
-	-git -C $(root_universe)/bin/fzf pull
-	-$(root_universe)/bin/fzf/install --key-bindings --completion --no-update-rc
+	-git -C $(root_universe)/bin/fzf pull && $(root_universe)/bin/fzf/install --key-bindings --completion --no-update-rc
 
 ## macOS-specific
 update-fzf__macOS:
@@ -79,8 +77,7 @@ link-tmux:
 	-ln -sf $(root_universe)/files/client/auto/all/.tmux.conf ~
 
 link-starship:
-	-mkdir -p ~/.config/
-	-ln -sf $(root_universe)/files/client/auto/all/starship.toml ~/.config/
+	-mkdir -p ~/.config/ && ln -sf $(root_universe)/files/client/auto/all/starship.toml ~/.config/
 
 link-vim:
 	-ln -sf $(root_universe)/files/client/auto/all/.vimrc ~
