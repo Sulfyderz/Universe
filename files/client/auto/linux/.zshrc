@@ -39,3 +39,4 @@ export ZSH_AUTOSUGGEST_MANUAL_REBIND=true
 source ~/.universe/bin/zsh-autosuggestions/zsh-autosuggestions.zsh
 ## Universe
 export PATH="$PATH:$HOME/.bin"
+export UNIVERSE_PATH="~/.universe"
