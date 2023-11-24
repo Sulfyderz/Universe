@@ -1,52 +1,52 @@
-" Save in ~/.vimrc or ~/.vim/vimrc and run the following two lines
+" Save in ~/.vimrc or ~/.vim/vimrc and run the following two lines:
 " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 " vim +PluginInstall +qall
 
-" encoding
+" Encoding
 set encoding=utf-8
 set fileencoding=utf-8
 
-" required
+" Required
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
-" theme
+" Theme
 Plugin 'fatih/molokai'
 
-" bottom line
+" Bottom line
 Plugin 'itchyny/lightline.vim'
 
-" automatic comment
+" Automatic comment
 Plugin 'tpope/vim-commentary'
 
 call vundle#end()
 
 
-" color activation
+" Color activation
 syntax enable
 let g:molokai_original=1
 colorscheme molokai
 
-" search
+" Search
 set ignorecase
 set smartcase
 set incsearch
 set hlsearch
 
-" settings
+" Settings
 filetype on
 filetype plugin on
 filetype indent on
 
-" makes backspace sane
+" Makes backspace sane
 set backspace=indent,eol,start
 
-" mouse support
+" Mouse support
 set mouse=a
 
-" indentation
+" Indentation
 set tabstop=4
 set shiftwidth=4
 
@@ -55,14 +55,14 @@ set novisualbell
 set number
 set autoindent
 
-" split
+" Split
 set splitbelow
 set splitright
 
 
-" status line
-set laststatus=2 " always show the status line
+" Status line
+set laststatus=2 " Always show the status line
 set showcmd
 
-" drop home message
+" Drop home message
 set shortmess=I
