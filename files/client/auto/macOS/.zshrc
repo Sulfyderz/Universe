@@ -45,6 +45,9 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 # Software
 ## Homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
+## Universe
+export PATH="$PATH:$HOME/.bin"
+export UNIVERSE_PATH="~/.universe"
 ## Conda
 co_arm
 ## fzf
@@ -57,5 +60,3 @@ eval "$(starship init zsh)"
 ## zsh-autosuggestions 
 export ZSH_AUTOSUGGEST_MANUAL_REBIND=true
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-## Universe
-export PATH="$PATH:$HOME/.bin"
