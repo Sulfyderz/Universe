@@ -39,7 +39,7 @@ Help()
 	echo "			   and 'command' related to your OS. If nothing is given, it" 
 	echo "			   shows all the options for 'install', 'update', 'link' and"
 	echo "			   'command' related to your OS."
-	echo "    -p, prefix	   Prints the path of Universe folder."
+	echo "    -p, prefix		   Prints the path of Universe folder."
 	echo "    -h, help		   Prints this help."
 }
 
