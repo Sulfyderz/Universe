@@ -39,19 +39,19 @@ install-zsh-autosuggestions__linux:
 
 ## macOS-specific
 install-fzf__macOS:
-	-eval "$(/opt/homebrew/bin/brew shellenv)" && brew install fzf
+	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew install fzf
 
 install-homebrew__macOS:
 	-/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 install-starship__macOS:
-	-eval "$(/opt/homebrew/bin/brew shellenv)" && brew install starship
+	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew install starship
 
 install-tmux__macOS:
-	-eval "$(/opt/homebrew/bin/brew shellenv)" && brew install tmux 
+	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew install tmux 
 
 install-zsh-autosuggestions__macOS:
-	-eval "$(/opt/homebrew/bin/brew shellenv)" && brew install zsh-autosuggestions
+	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew install zsh-autosuggestions
 
 
 # Updating section
@@ -64,10 +64,10 @@ update-zsh-autosuggestions__linux:
 
 ## macOS-specific
 update-fzf__macOS:
-	-eval "$(/opt/homebrew/bin/brew shellenv)" && brew update && brew upgrade fzf
+	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew update && brew upgrade fzf
 
 update-zsh-autosuggestions__macOS:
-	-eval "$(/opt/homebrew/bin/brew shellenv)" && brew update && brew upgrade zsh-autosuggestions
+	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew update && brew upgrade zsh-autosuggestions
 
 # Symbolic link section
 ## Non-specific
