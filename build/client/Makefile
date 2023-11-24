@@ -6,14 +6,14 @@ root_universe := $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../../)
 
 # Shorcuts
 ## Linux-specific
-install__linux: install-tmux-resurrect install-starship__linux install-fzf__linux install-vundle
+install__linux: install-fzf__linux install-tmux-resurrect install-starship__linux install-vundle install-zsh-autosuggestions__linux
 link__linux: link-git link-tmux link-starship link-vim link-zsh__linux
-update__linux: update-fzf__linux update-zsh-autosuggestions__linux
+update__linux: update-fzf__linux update-tmux-resurrect update-vundle update-zsh-autosuggestions__linux
 
 ## macOS-specific
-install__macOS: install-tmux-resurrect install-homebrew__macOS install-starship__macOS install-tmux__macOS install-zsh-autosuggestions__macOS install-fzf__macOS install-vundle
+install__macOS: install-fzf__macOS install-tmux-resurrect install-homebrew__macOS install-starship__macOS install-tmux__macOS install-vundle install-zsh-autosuggestions__macOS
 link__macOS: link-git link-tmux link-skhd__macOS link-starship link-vim link-yabai__macOS link-zsh__macOS
-update__macOS: update-fzf__macOS update-zsh-autosuggestions__macOS
+update__macOS: update-fzf__macOS update-tmux-resurrect update-vundle update-zsh-autosuggestions__macOS
 
 
 # Command section
@@ -61,6 +61,9 @@ install-zsh-autosuggestions__macOS:
 ## Non-specific
 update-tmux-resurrect:
 	-git -C $(root_universe)/bin/tmux-resurrect pull
+
+update-vundle:
+	-git -C ~/.vim/bundle/Vundle.vim pull && vim +PluginInstall +qall
 
 ## Linux-specific
 update-fzf__linux:
