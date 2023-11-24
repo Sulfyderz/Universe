@@ -107,8 +107,8 @@ deleted = "×"
 style = 'bold fg:purple' 
 
 [golang]
-format = '\[[$symbol($version)]($style)\]'
-symbol = "go "
+format = '\[[$symbol( $version)]($style)\]'
+symbol = "go"
 
 [gradle]
 format = '\[[$symbol($version)]($style)\]'
