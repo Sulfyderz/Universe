@@ -17,12 +17,12 @@ alias unvsls="universe list"
 alias unvsu="universe update"
 
 # Color
-export TERM=xterm-256color
+export CLICOLOR=1
 export PS1="%F{15}[%f%F{51}%n%f%F{15}@%f%F{203}%m%f%F{15}:%f%F{220}%~%f%F{15}]%#%f"
 export PS2="%F{15}%_>%f"
-export CLICOLOR=1
 export LSCOLORS="GxgxxxxxxxxxxxxxxxHxHx"
 export LS_COLORS="di=1;36:ln=36:so=0:pi=0:ex=0:bd=0:cd=0:su=0:sg=0:tw=1;37:ow=1;37:no=0:fi=0:do=0:or=0:mi=0:st=0"
+export TERM=xterm-256color
 autoload -Uz compinit
 compinit
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
@@ -34,5 +34,8 @@ export FZF_DEFAULT_OPTS='--height 30% -m --border --reverse --prompt="❯ " --po
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 ## Starship
 eval "$(starship init zsh)"
+## zsh-autosuggestions
+export ZSH_AUTOSUGGEST_MANUAL_REBIND=true
+source ~/.universe/bin/zsh-autosuggestions/zsh-autosuggestions.zsh
 ## Universe
 export PATH="$PATH:$HOME/.bin"

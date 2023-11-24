@@ -33,6 +33,9 @@ install-fzf__linux:
 install-starship__linux:
 	-curl -sS https://starship.rs/install.sh | sh
 
+install-zsh-autosuggestions__linux:
+	-git clone https://github.com/zsh-users/zsh-autosuggestions $(root_universe)/bin/zsh-autosuggestions/
+
 ## macOS-specific
 install-fzf__macOS:
 	-eval "$(/opt/homebrew/bin/brew shellenv)" && brew install fzf
