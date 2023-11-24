@@ -27,6 +27,9 @@ command-conda-mute:
 install-tmux-resurrect:
 	-git clone https://github.com/tmux-plugins/tmux-resurrect $(root_universe)/bin/tmux-resurrect/
 
+install-vim-vundle:
+	-git 
+
 ## Linux-specific
 install-fzf__linux:
 	-git clone --depth 1 https://github.com/junegunn/fzf.git $(root_universe)/bin/fzf/ && $(root_universe)/bin/fzf/install --key-bindings --completion --no-update-rc
@@ -55,6 +58,10 @@ install-zsh-autosuggestions__macOS:
 
 
 # Updating section
+## Non-specific
+update-tmux-resurrect:
+	-git -C $(root_universe)/bin/tmux-resurrect pull
+
 ## Linux-specific
 update-fzf__linux:
 	-git -C $(root_universe)/bin/fzf pull && $(root_universe)/bin/fzf/install --key-bindings --completion --no-update-rc
