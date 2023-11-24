@@ -39,21 +39,30 @@ Help()
 	echo "			   and 'command' related to your OS. If nothing is given, it" 
 	echo "			   shows all the options for 'install', 'update', 'link' and"
 	echo "			   'command' related to your OS."
+	echo "    -p, prefix	   Prints the path of Universe folder."
 	echo "    -h, help		   Prints this help."
 }
 
 
 # Executable
 ## No option given
-if [ "$#" -eq 0 ]
+if [ $# -eq 0 ]
 then
 	Help
 	exit 0
 fi
 
 ## Check the main option
-mainOption=("install" "link" "command" "update" "list" "help" "-h")
-if [ $(echo ${mainOption[@]} | grep -ow $1 | wc -w) = 0 ]
+mainOptions=("install" "link" "command" "update" "list" "help" "-h" "prefix" "-p")
+flag=false
+for mainOption in ${mainOptions[@]}
+do
+	if [ $1 = $mainOption ]
+	then
+		flag=true
+	fi
+done
+if [ $flag = false ]
 then
 	echo -e "${boldRed}Error:${colorOff} ${boldWhite}'$1'${colorOff} not recognized by ${boldWhite}Universe${colorOff}."
 	exit 3
@@ -82,7 +91,18 @@ then
 		Help
 		exit 0
 	fi
-elif [ "$#" -eq 1 ]
+elif [ $1 = "prefix" ] || [ $1 = "-p" ]
+then
+	if [ "$#" -gt 1 ]
+	then
+		echo
+		echo -e "${boldRed}Error:${colorOff} ${boldWhite}'prefix'${colorOff} (${boldWhite}-p${colorOff}) doesn't take options."
+		exit 3
+	else
+		echo $curDir
+		exit 0
+	fi
+elif [ $# -eq 1 ]
 then
 	if [ $1 = "install" ] || [ $1 = "link" ] || [ $1 = "update" ]
 	then
@@ -100,7 +120,7 @@ then
 		echo -e "${boldRed}Error:${colorOff} No option is given to ${boldWhite}'$1'${colorOff}."
 		exit 3
 	fi
-elif [ "$#" -eq 2 ] && [ $2 = '-s' ]
+elif [ $# -eq 2 ] && [ $2 = '-s' ]
 then
 	if [ $1 = "install" ] || [ $1 = "link" ] || [ $1 = "update" ]
 	then
@@ -132,7 +152,7 @@ fi
 ## Checking the parameters given to the main option
 i=1
 flag=false
-for arg in "$@"
+for arg in $@
 do
 	fail=false
 	if [ $i != 1 ] && [ $arg != '-s' ]
@@ -149,9 +169,9 @@ do
 				fail=true
 			fi
 		fi
-		if [ "$fail" = true ]
+		if [ $fail = true ]
 		then
-			if [ "$flag" = false ]
+			if [ $flag = false ]
 			then
 				echo
 				flag=true
@@ -161,14 +181,14 @@ do
 	fi
 	((i++))
 done
-if [ "$flag" = true ]
+if [ $flag = true ]
 then
 	exit 3
 fi
 
 ## Proceed the other options 
 i=1
-for arg in "$@"
+for arg in $@
 do
 	if [ $i != 1 ] && [ $arg != '-s' ]
 	then
