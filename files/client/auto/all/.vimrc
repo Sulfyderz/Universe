@@ -1,4 +1,4 @@
-" save in ~/.vimrc or ~/.vim/vimrc and run the following two lines
+" Save in ~/.vimrc or ~/.vim/vimrc and run the following two lines
 " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 " vim +PluginInstall +qall
 
