@@ -47,7 +47,7 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 eval "$(/opt/homebrew/bin/brew shellenv)"
 ## Universe
 export PATH="$PATH:$HOME/.bin"
-export UNIVERSE_PATH="~/.universe"
+export UNIVERSE_PATH="$HOME/.universe"
 ## Conda
 co_arm
 ## fzf
