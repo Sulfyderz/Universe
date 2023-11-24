@@ -6,12 +6,12 @@ root_universe := $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../../)
 
 # Shorcuts
 ## Linux-specific
-install__linux: install-tmux-resurrect install-starship__linux install-fzf__linux
+install__linux: install-tmux-resurrect install-starship__linux install-fzf__linux install-vundle
 link__linux: link-git link-tmux link-starship link-vim link-zsh__linux
 update__linux: update-fzf__linux update-zsh-autosuggestions__linux
 
 ## macOS-specific
-install__macOS: install-tmux-resurrect install-homebrew__macOS install-starship__macOS install-tmux__macOS install-zsh-autosuggestions__macOS install-fzf__macOS
+install__macOS: install-tmux-resurrect install-homebrew__macOS install-starship__macOS install-tmux__macOS install-zsh-autosuggestions__macOS install-fzf__macOS install-vundle
 link__macOS: link-git link-tmux link-skhd__macOS link-starship link-vim link-yabai__macOS link-zsh__macOS
 update__macOS: update-fzf__macOS update-zsh-autosuggestions__macOS
 
@@ -27,8 +27,8 @@ command-conda-mute:
 install-tmux-resurrect:
 	-git clone https://github.com/tmux-plugins/tmux-resurrect $(root_universe)/bin/tmux-resurrect/
 
-install-vim-vundle:
-	-git 
+install-vundle:
+	-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim && vim +PluginInstall +qall
 
 ## Linux-specific
 install-fzf__linux:
