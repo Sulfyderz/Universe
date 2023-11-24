@@ -30,7 +30,7 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 # Software
 ## Universe
 export PATH="$PATH:$HOME/.bin"
-export UNIVERSE_PATH="~/.universe"
+export UNIVERSE_PATH="$HOME/.universe"
 ## fzf
 export FZF_ALT_C_COMMAND='find . -type d | sed '\''s/^.\///'\'''
 export FZF_DEFAULT_OPTS='--height 30% -m --border --reverse --prompt="❯ " --pointer="❯" --marker="❯" --color="prompt:15,spinner:203,info:203,marker:203,pointer:51"'
@@ -39,4 +39,4 @@ export FZF_DEFAULT_OPTS='--height 30% -m --border --reverse --prompt="❯ " --po
 eval "$(starship init zsh)"
 ## zsh-autosuggestions
 export ZSH_AUTOSUGGEST_MANUAL_REBIND=true
-source ~/.universe/bin/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $UNIVERSE_PATH/bin/zsh-autosuggestions/zsh-autosuggestions.zsh
