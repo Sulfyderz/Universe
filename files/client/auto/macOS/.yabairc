@@ -39,5 +39,7 @@ yabai -m rule --add app="Digital Colour Meter" manage=off layer=normal
 
 # Signals
 yabai -m signal --add event=display_resized action="for display in \$(yabai -m query --displays | grep '\"id\":' | cut -d':' -f2 | cut -d',' -f1); do if [ \$(yabai -m query --displays --display \$display | grep '\"w\":' | cut -d':' -f2 | cut -d'.' -f1) -lt 3440 ]; then for space in \$(yabai -m query --displays --display \$display | grep '\"spaces\":' | cut -d'[' -f2 | cut -d']' -f1 | tr -d ','); do yabai -m space \$space --padding abs:0:0:0:0; done; fi; done"
+yabai -m signal --add event=space_created action="for display in \$(yabai -m query --displays | grep '\"id\":' | cut -d':' -f2 | cut -d',' -f1); do if [ \$(yabai -m query --displays --display \$display | grep '\"w\":' | cut -d':' -f2 | cut -d'.' -f1) -lt 3440 ]; then for space in \$(yabai -m query --displays --display \$display | grep '\"spaces\":' | cut -d'[' -f2 | cut -d']' -f1 | tr -d ','); do yabai -m space \$space --padding abs:0:0:0:0; done; fi; done"
+
 
 echo "Yabai configuration loaded."
