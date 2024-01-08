@@ -24,7 +24,7 @@ command-os-setup-ssh-connection-timeout__linux:
 
 # Installing section
 ## Linux-specific
-install-cuda-11.8-__linux:
+install-cuda-11.8__linux:
 	-sudo apt install linux-headers-$(uname -r) && wget https://developer.download.nvidia.com/compute/cuda/11.8.0/local_installers/cuda_11.8.0_520.61.05_linux.run && sudo sh cuda_11.8.0_520.61.05_linux.run --override --silent --toolkit && rm cuda_11.8.0_520.61.05_linux.run
 
 install-git__linux:
