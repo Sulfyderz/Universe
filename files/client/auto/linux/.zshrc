@@ -9,12 +9,12 @@ alias ta='tmux attach'
 alias tad="tmux attach -d"
 alias tls="tmux list-sessions"
 alias tkill="tmux kill-session -t"
-alias unvs="universe"
-alias unvsc="universe command"
-alias unvsi="universe install"
-alias unvsln="universe link"
-alias unvsls="universe list"
-alias unvsu="universe update"
+alias u="universe"
+alias uc="universe command"
+alias ui="universe install"
+alias uln="universe link"
+alias uls="universe list"
+alias uu="universe update"
 
 # Color
 export CLICOLOR=1

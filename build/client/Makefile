@@ -34,6 +34,9 @@ install-vundle:
 	-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim && vim +PluginInstall +qall
 
 ## Linux-specific
+install-conda__linux:
+	-
+
 install-fzf__linux:
 	-git clone --depth 1 https://github.com/junegunn/fzf.git $(root_universe)/bin/fzf/ && $(root_universe)/bin/fzf/install --key-bindings --completion --no-update-rc
 

@@ -23,14 +23,17 @@ command-os-setup-ssh-connection-timeout__linux:
 
 
 # Installing section
-## Linux-specific
+## Linux-specific 
+install-conda__linux:
+	-mkdir -p ~/Tool/Package-Manager/Miniconda3 && wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/Tool/Package-Manager/Miniconda3/miniconda.sh && bash ~/Tool/Package-Manager/Miniconda3/miniconda.sh -b -u -p ~/Tool/Package-Manager/Miniconda3 && rm -rf ~/Tool/Package-Manager/Miniconda3/miniconda.sh
+
 install-cuda-11.8__linux:
 	-sudo apt install linux-headers-$(uname -r) && wget https://developer.download.nvidia.com/compute/cuda/11.8.0/local_installers/cuda_11.8.0_520.61.05_linux.run && sudo sh cuda_11.8.0_520.61.05_linux.run --override --silent --toolkit && rm cuda_11.8.0_520.61.05_linux.run
 
 install-git__linux:
 	-sudo apt install git
 
-install-nvidia-driver__linux:
+install-nvidia-driver-535__linux:
 	-sudo apt install nvidia-driver-535 --yes
 
 install-python3__linux:
