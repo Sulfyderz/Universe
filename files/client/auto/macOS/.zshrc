@@ -3,33 +3,19 @@ alias co="conda"
 alias coa="conda activate"
 alias cod="conda deactivate"
 alias cols="conda list"
-alias co_arm='__conda_setup="$("/Users/sulfyderz/Workshop/Tool/Package-Manager/Miniconda3/bin/conda" "shell.zsh" "hook" 2> /dev/null)"; \
-if [ $? -eq 0 ]; then eval "$__conda_setup"; \
-else \
-if [ -f "/Users/sulfyderz/Workshop/Tool/Package-Manager/Miniconda3/etc/profile.d/conda.sh" ]; then . "/Users/sulfyderz/Workshop/Tool/Package-Manager/Miniconda3/etc/profile.d/conda.sh"; \
-else \
-export PATH="/Users/sulfyderz/Workshop/Tool/Package-Manager/Miniconda3/bin:$PATH"; \
-fi; \
-fi;'
-alias co_x86='__conda_setup="$("/Users/sulfyderz/Workshop/Tool/Package-Manager/Miniconda3-x86/bin/conda" "shell.zsh" "hook" 2> /dev/null)"; \
-if [ $? -eq 0 ]; then eval "$__conda_setup"; \
-else \
-if [ -f "/Users/sulfyderz/Workshop/Tool/Package-Manager/Miniconda3-x86/etc/profile.d/conda.sh" ]; then . "/Users/sulfyderz/Workshop/Tool/Package-Manager/Miniconda3-x86/etc/profile.d/conda.sh"; \
-else \
-export PATH="/Users/sulfyderz/Workshop/Tool/Package-Manager/Miniconda3-x86/bin:$PATH"; \
-fi; \
-fi;'
+alias co_arm='eval "$("/Users/sulfyderz/Workshop/Tool/Package-Manager/Miniconda3/bin/conda" "shell.zsh" "hook" 2> /dev/null)"'
+alias co_x86='eval "$("/Users/sulfyderz/Workshop/Tool/Package-Manager/Miniconda3-x86/bin/conda" "shell.zsh" "hook" 2> /dev/null)"'
 alias dk="docker"
 alias ta='tmux attach'
 alias tad="tmux attach -d"
 alias tkill="tmux kill-session -t"
 alias tls="tmux list-sessions"
-alias unvs="universe"
-alias unvsc="universe command"
-alias unvsi="universe install"
-alias unvsln="universe link"
-alias unvsls="universe list"
-alias unvsu="universe update"
+alias u="universe"
+alias uc="universe command"
+alias ui="universe install"
+alias uln="universe link"
+alias uls="universe list"
+alias uu="universe update"
 
 # Color
 export CLICOLOR=1
