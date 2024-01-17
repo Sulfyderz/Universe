@@ -4,8 +4,9 @@ curDir=$(dirname "$(realpath "$0")")
 env=$(uname)
 ext=$([ "$env" = "Darwin" ] && echo "__macOS" || echo "__linux")
 extOmit=$([ "$env" = "Darwin" ] && echo "__linux" || echo "__macOS")
-client="client"
-server="server"
+localPath="local"
+serverClientPath="server/client"
+serverHostPath="server/host"
 ## Color
 colorOff='\033[0m'
 boldGreen='\033[1;32m'
@@ -15,8 +16,83 @@ boldYellow='\033[1;33m'
 
 
 # Function declaration
-Help()
-{
+checkOptionsExist() {
+	if [ $# -eq 0 ]
+	then
+		displayHelp
+		exit 0
+	fi
+}
+
+checkSecondaryOptions() {
+	mode=$1
+	option=$2
+	ext=$3
+	flag=false
+	for arg in ${@:4}
+	do
+		fail=false
+		if [ $arg != '-s' ] && [ $arg != '-S' ]
+		then
+			if [ $option = "list" ]
+			then
+				if [ $arg != "install" ] && [ $arg != "link" ] && [ $arg != "command" ] && [ $arg != "update" ]
+				then
+					fail=true
+				fi
+			else
+				if [ $(cat "$curDir/build/$mode/Makefile" | grep -w "$option-$arg:" | wc -l) = 0 ] && [ $(cat "$curDir/build/$mode/Makefile" | grep -w "$option-$arg$ext:" | wc -l) = 0 ]
+				then
+					fail=true
+				fi
+			fi
+			if [ $fail = true ]
+			then
+				if [ $flag = false ]
+				then
+					echo
+					flag=true
+				fi
+				echo -e "${boldRed}Error:${colorOff} ${boldWhite}'$arg'${colorOff} not recognized by ${boldWhite}'$option'${colorOff}."
+			fi
+		fi
+	done
+	if [ $flag = true ]
+	then
+		exit 3
+	fi
+}
+
+checkSecondaryOptionsExist() {
+	option=$1
+	if [ $# -eq 2 ] && [ $option != "list" ] && [ $option != "install" ] && [ $option != "link" ] && [ $option != "update" ]
+	then
+		echo
+		echo -e "${boldRed}Error:${colorOff} No option is given to ${boldWhite}'$option'${colorOff}."
+		exit 3
+	fi
+}
+
+checkValidMainOption() {
+	option=$1
+	mainOptions=("install" "link" "command" "update" "list" "--help" "-h" "--prefix" "-p")
+	flag=false
+	for mainOption in ${mainOptions[@]}
+	do
+		if [ $option = $mainOption ]
+		then
+			flag=true
+			break
+		fi
+	done
+	if [ $flag = false ]
+	then
+		echo -e "${boldRed}Error:${colorOff} ${boldWhite}'$option'${colorOff} not recognized by ${boldWhite}Universe${colorOff}."
+		exit 3
+	fi
+}
+
+displayHelp() {
 	# Display Help
 	echo "Universe: your world always with you."
 	echo
@@ -39,181 +115,164 @@ Help()
 	echo "			   and 'command' related to your OS. If nothing is given, it" 
 	echo "			   shows all the options for 'install', 'update', 'link' and"
 	echo "			   'command' related to your OS."
-	echo "    -p, prefix		   Prints the path of Universe folder."
-	echo "    -h, help		   Prints this help."
+	echo "    -p, --prefix		   Prints the path of Universe folder."
+	echo "    -h, --help		   Prints this help."
+}
+
+displayMode() {
+	mode=$1
+	if [ $mode = $localPath ]
+	then
+		echo -e "${boldWhite}Mode:${colorOff} ${boldGreen}Client${colorOff}"
+	else
+		if [ $mode = $serverClientPath ]
+		then
+			echo -e "${boldWhite}Mode:${colorOff} ${boldYellow}Server (Client)${colorOff}"
+		else
+			echo -e "${boldWhite}Mode:${colorOff} ${boldRed}Server (Host)${colorOff}"
+		fi
+		if [ "$env" = "Darwin" ]
+		then
+			echo -e "${boldYellow}Warning:${colorOff} macOS doesn't have a server version."
+		fi
+	fi
+}
+
+displayPrefix() {
+	echo $curDir
+}
+
+execAllOptions() {
+	mode=$1
+	option=$2
+	ext=$3
+	extOmit=$4
+	for arg in ${@:5}
+	do
+		if [ $arg != '-s' ] && [ $arg != '-S' ]
+		then
+			if [ $option = "list" ]
+			then
+				echo
+				echo -e "${boldWhite}List for '$arg':${colorOff}"
+				list=$(grep "^$arg-[a-z]*" "$curDir/build/$mode/Makefile" | grep  -v $extOmit | wc -l)
+				if [ $list -eq 0 ]
+				then
+					echo "   No options available."
+				else
+					grep "^$arg-[a-z]*" "$curDir/build/$mode/Makefile" | sed 's/://' | sed 's/'$ext'//' | sed 's/'$arg'-//' | grep  -v $extOmit | sed -e 's/^/   /'
+				fi
+			else
+				echo
+				echo -e "${boldWhite}Processing '$option $arg':${colorOff}" 
+				if [ $(cat "$curDir/build/$mode/Makefile" | grep -w "$option-$arg:" | wc -l) != 0 ]
+				then
+					make -C $curDir/build/$mode $option-$arg --no-print-directory
+				else
+					make -C $curDir/build/$mode $option-$arg$ext --no-print-directory
+				fi
+			fi
+		
+		fi
+	done
+}
+
+execIfHelpAsMainOption() {
+	if [ $1 = "--help" ] || [ $1 = "-h" ]
+	then
+		displayHelp
+		exit 0
+	fi
+}
+
+execIfPrefixAsMainOption() {
+	if [ $1 = "--prefix" ] || [ $1 = "-p" ]
+	then
+		displayPrefix
+		exit 0
+	fi
+}
+
+execIfSoftAsMainOption() {
+	execIfHelpAsMainOption "$1"
+	execIfPrefixAsMainOption "$1"
+}
+
+execIfShorcut() {
+	mode=$1
+	option=$2
+	ext=$3
+	if [ $# -eq 3 ] || { [ $# -eq 4 ] && [ $4 = '-s' ] ;} || { [ $# -eq 4 ] && [ $4 = '-S' ] ;}
+	then
+		if [ $option = "install" ] || [ $option = "link" ] || [ $option = "update" ]
+		then
+			execShortcutOS "$mode" "$option" "$ext"
+		elif [ $option = "list" ]
+		then
+			execShortcutList "$mode"
+		fi
+	fi
+}
+
+execShortcutOS() {
+	mode=$1
+	option=$2
+	ext=$3
+	displayMode "$mode"
+	echo
+	echo -e "${boldWhite}Processing all '$option' related to your OS:${colorOff}"
+	make -C $curDir/build/$mode $option$ext --no-print-directory
+	exit $?
+}
+
+execShortcutList() {
+	mode=$1
+	if [ $mode = $serverClientPath ]
+	then
+		$curDir/universe list "-s" "install" "update" "link" "command"
+	elif [ $mode = $serverHostPath ]
+	then
+		$curDir/universe list "-S" "install" "update" "link" "command"
+	else
+		$curDir/universe list "install" "update" "link" "command"
+	fi
+	exit $?
+}
+
+getMode() {
+	i=1
+	mode=$localPath
+	for arg in "$@"
+	do
+		if [ $arg = "-s" ]
+		then
+			mode=$serverClientPath
+		elif [ $arg = "-S" ]
+		then
+			mode=$serverHostPath
+		fi
+	done
+	echo "$mode"
 }
 
 
 # Executable
-## No option given
-if [ $# -eq 0 ]
-then
-	Help
-	exit 0
-fi
-
-## Check the main option
-mainOptions=("install" "link" "command" "update" "list" "help" "-h" "prefix" "-p")
-flag=false
-for mainOption in ${mainOptions[@]}
-do
-	if [ $1 = $mainOption ]
-	then
-		flag=true
-	fi
-done
-if [ $flag = false ]
-then
-	echo -e "${boldRed}Error:${colorOff} ${boldWhite}'$1'${colorOff} not recognized by ${boldWhite}Universe${colorOff}."
-	exit 3
-fi
-
-## Check if the option "-s" is given
-i=1
-mode=$client
-for arg in "$@"
-do
-	if [ $arg = "-s" ]
-	then
-		mode=$server
-	fi
-done
-
-## Proceed the main option if no other option is given (other than "-s")
-if [ $1 = "help" ] || [ $1 = "-h" ]
-then
-	if [ "$#" -gt 1 ]
-	then
-		echo
-		echo -e "${boldRed}Error:${colorOff} ${boldWhite}'help'${colorOff} (${boldWhite}-h${colorOff}) doesn't take options."	
-		exit 3
-	else
-		Help
-		exit 0
-	fi
-elif [ $1 = "prefix" ] || [ $1 = "-p" ]
-then
-	if [ "$#" -gt 1 ]
-	then
-		echo
-		echo -e "${boldRed}Error:${colorOff} ${boldWhite}'prefix'${colorOff} (${boldWhite}-p${colorOff}) doesn't take options."
-		exit 3
-	else
-		echo $curDir
-		exit 0
-	fi
-elif [ $# -eq 1 ]
-then
-	if [ $1 = "install" ] || [ $1 = "link" ] || [ $1 = "update" ]
-	then
-		echo -e "${boldWhite}Mode:${colorOff} ${boldGreen}Client${colorOff}" 
-		echo
-		echo -e "${boldWhite}Processing all '$1' related to your OS:${colorOff}"
-		make -C $curDir/build/$mode $1$ext --no-print-directory
-		exit $?
-	elif [ $1 = "list" ]
-	then
-		$curDir/universe list "install" "update" "link" "command" 
-		exit $?
-	else
-		echo
-		echo -e "${boldRed}Error:${colorOff} No option is given to ${boldWhite}'$1'${colorOff}."
-		exit 3
-	fi
-elif [ $# -eq 2 ] && [ $2 = '-s' ]
-then
-	if [ $1 = "install" ] || [ $1 = "link" ] || [ $1 = "update" ]
-	then
-		echo -e "${boldWhite}Mode:${colorOff} ${boldRed}Server${colorOff}"
-		echo
-		echo -e "${boldWhite}Processing all '$1' related to your OS:${colorOff}" 
-		make -C $curDir/build/$mode $1$ext --no-print-directory
-		exit $?
-	elif [ $1 = "list" ]
-	then
-		$curDir/universe list "-s" "install" "update" "link" "command"
-		exit $?
-	fi
-fi
-
+## Check options exist
+checkOptionsExist "$@"
+main=$1
+## Check main option valid
+checkValidMainOption "$main"
+## Get the chosen mode (default -> local, "-s" -> server/client and "-S" -> server/host)
+mode=$(getMode "$@")
+## Proceed if it's a "soft" option
+execIfSoftAsMainOption "$main"
+## Proceed if it's a shortcut
+execIfShorcut "$mode" "$main" "$ext" "${@:2}"
+## Check if the main option has secondary options
+checkSecondaryOptionsExist "$main" "${@:2}"
 ## Display the mode used
-if [ $mode = $client ]
-then
-	echo -e "${boldWhite}Mode:${colorOff} ${boldGreen}Client${colorOff}"
-else
-	echo -e "${boldWhite}Mode:${colorOff} ${boldRed}Server${colorOff}"
-	if [ "$env" = "Darwin" ]
-	then
-		echo
-		echo -e "${boldYellow}Warning:${colorOff} macOS doesn't have a server version."
-	fi
-fi
-
-## Checking the parameters given to the main option
-i=1
-flag=false
-for arg in $@
-do
-	fail=false
-	if [ $i != 1 ] && [ $arg != '-s' ]
-	then
-		if [ $1 = "list" ]
-		then
-			if [ $arg != "install" ] && [ $arg != "link" ] && [ $arg != "command" ] && [ $arg != "update" ]
-			then
-				fail=true
-			fi
-		else
-			if [ $(cat "$curDir/build/$mode/Makefile" | grep -w "$1-$arg:" | wc -l) = 0 ] && [ $(cat "$curDir/build/$mode/Makefile" | grep -w "$1-$arg$ext:" | wc -l) = 0 ]
-			then
-				fail=true
-			fi
-		fi
-		if [ $fail = true ]
-		then
-			if [ $flag = false ]
-			then
-				echo
-				flag=true
-			fi
-			echo -e "${boldRed}Error:${colorOff} ${boldWhite}'$arg'${colorOff} not recognized by ${boldWhite}'$1'${colorOff}."
-		fi
-	fi
-	((i++))
-done
-if [ $flag = true ]
-then
-	exit 3
-fi
-
-## Proceed the other options 
-i=1
-for arg in $@
-do
-	if [ $i != 1 ] && [ $arg != '-s' ]
-	then
-		if [ $1 = "list" ]
-		then
-			echo
-			echo -e "${boldWhite}List for '$arg':${colorOff}"
-			list=$(grep "^$arg-[a-z]*" "$curDir/build/$mode/Makefile" | grep  -v $extOmit | wc -l)
-			if [ $list -eq 0 ]
-			then
-				echo "   No options available."
-			else
-				grep "^$arg-[a-z]*" "$curDir/build/$mode/Makefile" | sed 's/://' | sed 's/'$ext'//' | sed 's/'$arg'-//' | grep  -v $extOmit | sed -e 's/^/   /'
-			fi
-		else
-			echo
-			echo -e "${boldWhite}Processing '$1 $arg':${colorOff}" 
-			if [ $(cat "$curDir/build/$mode/Makefile" | grep -w "$1-$arg:" | wc -l) != 0 ]
-			then
-				make -C $curDir/build/$mode $1-$arg --no-print-directory
-			else
-				make -C $curDir/build/$mode $1-$arg$ext --no-print-directory
-			fi
-		fi
-	
-	fi
-	((i++))
-done
+displayMode "$mode"
+## Check the secondary options
+checkSecondaryOptions "$mode" "$main" "$ext" "${@:2}"
+## Proceed the main option with the secondary options
+execAllOptions "$mode" "$main" "$ext" "$extOmit" "${@:2}"
