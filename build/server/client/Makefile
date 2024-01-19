@@ -88,31 +88,31 @@ update-zsh-autosuggestions__macOS:
 # Symbolic link section
 ## Non-specific
 link-bash:
-	-ln -sf $(root_universe)/files/client/auto/all/.bash_profile ~
-	-ln -sf $(root_universe)/files/client/auto/all/.inputrc ~
+	-ln -sf $(root_universe)/files/server/client/auto/all/.bash_profile ~
+	-ln -sf $(root_universe)/files/server/client/auto/all/.inputrc ~
 
 link-git:
-	-ln -sf $(root_universe)/files/client/auto/all/.gitconfig ~
+	-ln -sf $(root_universe)/files/server/client/auto/all/.gitconfig ~
 
 link-tmux:
-	-ln -sf $(root_universe)/files/client/auto/all/.tmux.conf ~
+	-ln -sf $(root_universe)/files/server/client/auto/all/.tmux.conf ~
 
 link-starship:
-	-mkdir -p ~/.config/ && ln -sf $(root_universe)/files/client/auto/all/starship.toml ~/.config/
+	-mkdir -p ~/.config/ && ln -sf $(root_universe)/files/server/client/auto/all/starship.toml ~/.config/
 
 link-vim:
-	-ln -sf $(root_universe)/files/client/auto/all/.vimrc ~
+	-ln -sf $(root_universe)/files/server/client/auto/all/.vimrc ~
 
 ## Linux-specific
 link-zsh__linux:
-	-ln -sf $(root_universe)/files/client/auto/linux/.zshrc ~
+	-ln -sf $(root_universe)/files/server/client/auto/linux/.zshrc ~
 
 ## macOS-specific
 link-skhd__macOS:
-	-ln -sf $(root_universe)/files/client/auto/macOS/.skhdrc ~
+	-ln -sf $(root_universe)/files/server/client/auto/macOS/.skhdrc ~
 
 link-yabai__macOS:
-	-ln -sf $(root_universe)/files/client/auto/macOS/.yabairc ~
+	-ln -sf $(root_universe)/files/server/client/auto/macOS/.yabairc ~
 
 link-zsh__macOS:
-	-ln -sf $(root_universe)/files/client/auto/macOS/.zshrc ~
+	-ln -sf $(root_universe)/files/server/client/auto/macOS/.zshrc ~

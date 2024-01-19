@@ -142,7 +142,7 @@ displayPrefix() {
 	echo $curDir
 }
 
-execAllOptions() {
+execOptions() {
 	mode=$1
 	option=$2
 	ext=$3
@@ -193,7 +193,7 @@ execIfPrefixAsMainOption() {
 	fi
 }
 
-execIfSoftAsMainOption() {
+execIfSupport() {
 	execIfHelpAsMainOption "$1"
 	execIfPrefixAsMainOption "$1"
 }
@@ -264,8 +264,8 @@ main=$1
 checkValidMainOption "$main"
 ## Get the chosen mode (default -> local, "-s" -> server/client and "-S" -> server/host)
 mode=$(getMode "$@")
-## Proceed if it's a "soft" option
-execIfSoftAsMainOption "$main"
+## Proceed if it's a support option as the main option
+execIfSupport "$main"
 ## Proceed if it's a shortcut
 execIfShorcut "$mode" "$main" "$ext" "${@:2}"
 ## Check if the main option has secondary options
@@ -275,4 +275,4 @@ displayMode "$mode"
 ## Check the secondary options
 checkSecondaryOptions "$mode" "$main" "$ext" "${@:2}"
 ## Proceed the main option with the secondary options
-execAllOptions "$mode" "$main" "$ext" "$extOmit" "${@:2}"
+execOptions "$mode" "$main" "$ext" "$extOmit" "${@:2}"
