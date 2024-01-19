@@ -3,7 +3,7 @@
 
 
 # Variables
-root_universe := $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../../)
+root_universe := $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../../../)
 
 
 # Shortcuts
