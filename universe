@@ -36,7 +36,7 @@ checkSecondaryOptions() {
 		then
 			if [ $option = "list" ]
 			then
-				if [ $arg != "install" ] && [ $arg != "link" ] && [ $arg != "command" ] && [ $arg != "update" ]
+				if [ $arg != "install" ] && [ $arg != "link" ] && [ $arg != "command" ] && [ $arg != "upgrade" ]
 				then
 					fail=true
 				fi
@@ -65,7 +65,7 @@ checkSecondaryOptions() {
 
 checkSecondaryOptionsExist() {
 	option=$1
-	if [ $# -eq 2 ] && [ $option != "list" ] && [ $option != "install" ] && [ $option != "link" ] && [ $option != "update" ]
+	if [ $# -eq 2 ] && [ $option != "list" ] && [ $option != "install" ] && [ $option != "link" ] && [ $option != "upgrade" ]
 	then
 		echo
 		echo -e "${boldRed}Error:${colorOff} No option is given to ${boldWhite}'$option'${colorOff}."
@@ -75,7 +75,7 @@ checkSecondaryOptionsExist() {
 
 checkValidMainOption() {
 	option=$1
-	mainOptions=("install" "link" "command" "update" "list" "--help" "-h" "--prefix" "-p")
+	mainOptions=("install" "upgrade" "link" "command" "list" "update" "--help" "-h" "--prefix" "-p")
 	flag=false
 	for mainOption in ${mainOptions[@]}
 	do
@@ -102,7 +102,7 @@ displayHelp() {
 	echo "    install		   Installs a given software handled by Universe and related"
 	echo "			   to your OS. If nothing is given, it installs all software"
 	echo "			   related to your OS."
-	echo "    update		   Updates a software installed with 'install'. If nothing is"
+	echo "    upgrade		   Updates a software installed with 'install'. If nothing is"
 	echo "			   given, it updates all software handled by Universe and"
 	echo "			   related to your OS."
 	echo "    link		   Setups a configuration file handled by Universe and"
@@ -111,9 +111,9 @@ displayHelp() {
 	echo "			   OS."
 	echo "    command         	   Applies a command for a specific software, according to"
 	echo "             		   your OS."
-	echo "    list		   Shows the available options for 'install', 'update', 'link'"
+	echo "    list		   Shows the available options for 'install', 'upgrade', 'link'"
 	echo "			   and 'command' related to your OS. If nothing is given, it" 
-	echo "			   shows all the options for 'install', 'update', 'link' and"
+	echo "			   shows all the options for 'install', 'upgrade', 'link' and"
 	echo "			   'command' related to your OS."
 	echo "    -p, --prefix		   Prints the path of Universe folder."
 	echo "    -h, --help		   Prints this help."
@@ -196,6 +196,7 @@ execIfPrefixAsMainOption() {
 execIfSupport() {
 	execIfHelpAsMainOption "$1"
 	execIfPrefixAsMainOption "$1"
+	execIfUpgradeAsMainOption "$1"
 }
 
 execIfShorcut() {
@@ -204,13 +205,23 @@ execIfShorcut() {
 	ext=$3
 	if [ $# -eq 3 ] || { [ $# -eq 4 ] && [ $4 = '-s' ] ;} || { [ $# -eq 4 ] && [ $4 = '-S' ] ;}
 	then
-		if [ $option = "install" ] || [ $option = "link" ] || [ $option = "update" ]
+		if [ $option = "install" ] || [ $option = "link" ] || [ $option = "upgrade" ]
 		then
 			execShortcutOS "$mode" "$option" "$ext"
 		elif [ $option = "list" ]
 		then
 			execShortcutList "$mode"
 		fi
+	fi
+}
+
+execIfUpgradeAsMainOption() {
+	if [ $1 = "update" ]
+	then
+		echo
+		echo -e "${boldWhite}Updating Universe:${colorOff}"
+		git pull
+		exit 0
 	fi
 }
 
@@ -229,12 +240,12 @@ execShortcutList() {
 	mode=$1
 	if [ $mode = $serverClientPath ]
 	then
-		$curDir/universe list "-s" "install" "update" "link" "command"
+		$curDir/universe list "-s" "install" "upgrade" "link" "command"
 	elif [ $mode = $serverHostPath ]
 	then
-		$curDir/universe list "-S" "install" "update" "link" "command"
+		$curDir/universe list "-S" "install" "upgrade" "link" "command"
 	else
-		$curDir/universe list "install" "update" "link" "command"
+		$curDir/universe list "install" "upgrade" "link" "command"
 	fi
 	exit $?
 }
@@ -242,16 +253,17 @@ execShortcutList() {
 getMode() {
 	i=1
 	mode=$localPath
-	for arg in "$@"
-	do
-		if [ $arg = "-s" ]
-		then
-			mode=$serverClientPath
-		elif [ $arg = "-S" ]
-		then
-			mode=$serverHostPath
-		fi
-	done
+	if [ -n "$SSH_CONNECTION" ]
+	then
+		mode=$serverClientPath
+		for arg in "$@"
+		do
+			if [ $arg = "-s" ]
+			then
+				mode=$serverHostPath
+			fi
+		done
+	fi
 	echo "$mode"
 }
 
@@ -263,7 +275,7 @@ main=$1
 ## Check main option valid
 checkValidMainOption "$main"
 ## Get the chosen mode (default -> local, "-s" -> server/client and "-S" -> server/host)
-mode=$(getMode "$@")
+mode=$(getMode ${@:2})
 ## Proceed if it's a support option as the main option
 execIfSupport "$main"
 ## Proceed if it's a shortcut
