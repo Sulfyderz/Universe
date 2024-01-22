@@ -15,7 +15,7 @@ alias uc="universe command"
 alias ui="universe install"
 alias uln="universe link"
 alias uls="universe list"
-alias uu="universe update"
+alias uu="universe upgrade"
 
 # Color
 export CLICOLOR=1
