@@ -91,30 +91,50 @@ checkValidMainOption() {
 }
 
 displayHelp() {
-	# Display Help
-	echo "Universe: your world always with you."
-	echo
-	echo "Syntax: universe [options]"
-	echo
-	echo "  Options:"
-	echo "    install		   Installs a given software handled by Universe and related"
-	echo "			   to your OS. If nothing is given, it installs all software"
-	echo "			   related to your OS."
-	echo "    upgrade		   Updates a software installed with 'install'. If nothing is"
-	echo "			   given, it updates all software handled by Universe and"
-	echo "			   related to your OS."
-	echo "    link		   Setups a configuration file handled by Universe and"
-	echo "             		   related to your OS for a given software. If nothing is"
-	echo "			   given, it setups all configuration files related to your"
-	echo "			   OS."
-	echo "    command         	   Applies a command for a specific software, according to"
-	echo "             		   your OS."
-	echo "    list		   Shows the available options for 'install', 'upgrade', 'link'"
-	echo "			   and 'command' related to your OS. If nothing is given, it" 
-	echo "			   shows all the options for 'install', 'upgrade', 'link' and"
-	echo "			   'command' related to your OS."
-	echo "    -p, --prefix		   Prints the path of Universe folder."
-	echo "    -h, --help		   Prints this help."
+	if [ $# -eq 0 ]
+	then
+		echo "Universe: your world always with you."
+		echo
+		echo "Syntax: universe [options]"
+		echo
+		echo "Options:"
+		echo "    install		   Installs a given software handled by Universe and related"
+		echo "			   to your OS. If nothing is given, it installs all software"
+		echo "			   related to your OS."
+		echo "    upgrade		   Updates a software installed with 'install'. If nothing is"
+		echo "			   given, it updates all software handled by Universe and"
+		echo "			   related to your OS."
+		echo "    link		   Setups a configuration file handled by Universe and"
+		echo "             		   related to your OS for a given software. If nothing is"
+		echo "			   given, it setups all configuration files related to your"
+		echo "			   OS."
+		echo "    command         	   Applies a command for a specific software, according to"
+		echo "             		   your OS."
+		echo "    list		   Shows the available options for 'install', 'upgrade', 'link'"
+		echo "			   and 'command' related to your OS. If nothing is given, it" 
+		echo "			   shows all the options for 'install', 'upgrade', 'link' and"
+		echo "			   'command' related to your OS."
+		echo "    -p, --prefix		   Prints the path of Universe folder."
+		echo "    -h, --help		   Prints this help."
+	elif [ $1 = "install" ]
+	then
+		echo "install help"
+	elif [ $1 = "upgrade" ]
+	then
+		echo "upgrade help"
+	elif [ $1 = "link" ]
+	then
+		echo "link help"
+	elif [ $1 = "command" ]
+	then
+		echo "command help"
+	elif [ $1 = "list" ]
+	then
+		echo "list help"
+	elif [ $1 = "update" ]
+	then
+		echo "update help"
+	fi
 }
 
 displayMode() {
@@ -122,18 +142,38 @@ displayMode() {
 	if [ $mode = $localPath ]
 	then
 		echo -e "${colorBoldWhite}Mode:${colorOff} ${colorBoldGreen}Local${colorOff}"
+	elif [ $mode = $serverClientPath ]
+	then
+		echo -e "${colorBoldWhite}Mode:${colorOff} ${colorBoldYellow}Server (Client)${colorOff}"
 	else
-		if [ $mode = $serverClientPath ]
-		then
-			echo -e "${colorBoldWhite}Mode:${colorOff} ${colorBoldYellow}Server (Client)${colorOff}"
-		else
-			echo -e "${colorBoldWhite}Mode:${colorOff} ${colorBoldRed}Server (Host)${colorOff}"
-		fi
+		echo -e "${colorBoldWhite}Mode:${colorOff} ${colorBoldRed}Server (Host)${colorOff}"
 	fi
 }
 
 displayPrefix() {
 	echo $curDir
+}
+
+displayWarnings() {
+	mode=$1
+	option=$2
+	ext=$3
+	displayWarningServerButNotSSH $mode ${@:4}
+}
+
+displayWarningServerButNotSSH() {
+	mode=$1
+	if [ $mode = $localPath ]
+	then
+		for arg in "${@:2}"
+			do
+				if [ $arg = "-s" ]
+				then
+					echo -e "${colorBoldYellow}Warning:${colorOff} ${colorBoldWhite}'-s' option is only available on remote machine. Ignored.${colorOff}"
+					break
+				fi
+		done
+	fi
 }
 
 execOptions() {
@@ -178,6 +218,18 @@ execIfHelpAsMainOption() {
 	fi
 }
 
+execIfHelpAsSecondOptions() {
+	option=$1
+	for arg in "${@:2}"
+		do
+			if [ $arg = "-h" ] || [ $arg = "--help" ]
+			then
+				displayHelp "$option"
+				exit 0
+			fi
+	done
+}
+
 execIfPrefixAsMainOption() {
 	if [ $1 = "--prefix" ] || [ $1 = "-p" ]
 	then
@@ -187,9 +239,11 @@ execIfPrefixAsMainOption() {
 }
 
 execIfSupport() {
-	execIfHelpAsMainOption "$1"
-	execIfPrefixAsMainOption "$1"
-	execIfUpgradeAsMainOption "$1"
+	option=$1
+	execIfHelpAsMainOption "$option"
+	execIfHelpAsSecondOptions "$option" "${@:2}"
+	execIfPrefixAsMainOption "$option"
+	execIfUpdateAsMainOption "$option"
 }
 
 execIfShorcut() {
@@ -197,18 +251,18 @@ execIfShorcut() {
 	option=$2
 	ext=$3
 	if [ $# -eq 3 ] || { [ $# -eq 4 ] && [ $4 = '-s' ] ;}
-	then
+	then		
 		if [ $option = "install" ] || [ $option = "link" ] || [ $option = "upgrade" ]
 		then
-			execShortcutOS "$mode" "$option" "$ext"
+			execShortcutOS "$mode" "$option" "$ext" "$4"
 		elif [ $option = "list" ]
 		then
-			execShortcutList "$mode"
+			execShortcutList "$mode" "$4"
 		fi
 	fi
 }
 
-execIfUpgradeAsMainOption() {
+execIfUpdateAsMainOption() {
 	if [ $1 = "update" ]
 	then
 		echo
@@ -223,6 +277,7 @@ execShortcutOS() {
 	option=$2
 	ext=$3
 	displayMode "$mode"
+	displayWarnings "$mode" "$option" "$ext" "${@:4}"
 	echo
 	echo -e "${colorBoldWhite}Processing all '$option' related to your OS:${colorOff}"
 	make -C $curDir/build/$mode $option$ext --no-print-directory
@@ -231,12 +286,8 @@ execShortcutOS() {
 
 execShortcutList() {
 	mode=$1
-	if [ $mode = $serverHostPath ]
-	then
-		$curDir/universe list "-s" "install" "upgrade" "link" "command"
-	else
-		$curDir/universe list "install" "upgrade" "link" "command"
-	fi
+	flagServerHost=$2
+	$curDir/universe list "$flagServerHost" "install" "upgrade" "link" "command"
 	exit $?
 }
 
@@ -251,6 +302,7 @@ getMode() {
 			if [ $arg = "-s" ]
 			then
 				mode=$serverHostPath
+				break
 			fi
 		done
 	fi
@@ -264,16 +316,18 @@ checkOptionsExist "$@"
 main=$1
 ## Check main option valid
 checkValidMainOption "$main"
-## Get the chosen mode (default -> local, "-s" -> server/client and "-S" -> server/host)
+## Get the chosen mode (default -> local OR server/client if using SSH, "-s" -> server/host if using SSH)
 mode=$(getMode ${@:2})
 ## Proceed if it's a support option as the main option
-execIfSupport "$main"
+execIfSupport "$main" "${@:2}"
 ## Proceed if it's a shortcut
 execIfShorcut "$mode" "$main" "$ext" "${@:2}"
 ## Check if the main option has secondary options
 checkSecondaryOptionsExist "$main" "${@:2}"
 ## Display the mode used
 displayMode "$mode"
+## Display warnings
+displayWarnings "$mode" "$main" "$ext" "${@:2}"
 ## Check the secondary options
 checkSecondaryOptions "$mode" "$main" "$ext" "${@:2}"
 ## Proceed the main option with the secondary options
