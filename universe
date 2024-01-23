@@ -1,18 +1,16 @@
 #!/bin/bash
 # Variable and constant declaration
 curDir=$(dirname "$(realpath "$0")")
-env=$(uname)
-ext=$([ "$env" = "Darwin" ] && echo "__macOS" || echo "__linux")
-extOmit=$([ "$env" = "Darwin" ] && echo "__linux" || echo "__macOS")
+ext=$([ "$(uname)" = "Darwin" ] && echo "__macOS" || echo "__linux")
 localPath="local"
 serverClientPath="server/client"
 serverHostPath="server/host"
 ## Color
 colorOff='\033[0m'
-boldGreen='\033[1;32m'
-boldRed='\033[1;31m'
-boldWhite='\033[1;37m'
-boldYellow='\033[1;33m'
+colorBoldGreen='\033[1;32m'
+colorBoldRed='\033[1;31m'
+colorBoldWhite='\033[1;37m'
+colorBoldYellow='\033[1;33m'
 
 
 # Function declaration
@@ -32,7 +30,7 @@ checkSecondaryOptions() {
 	for arg in ${@:4}
 	do
 		fail=false
-		if [ $arg != '-s' ] && [ $arg != '-S' ]
+		if [ $arg != '-s' ]
 		then
 			if [ $option = "list" ]
 			then
@@ -53,7 +51,7 @@ checkSecondaryOptions() {
 					echo
 					flag=true
 				fi
-				echo -e "${boldRed}Error:${colorOff} ${boldWhite}'$arg'${colorOff} not recognized by ${boldWhite}'$option'${colorOff}."
+				echo -e "${colorBoldRed}Error:${colorOff} ${colorBoldWhite}'$arg'${colorOff} not recognized by ${colorBoldWhite}'$option'${colorOff}."
 			fi
 		fi
 	done
@@ -68,7 +66,7 @@ checkSecondaryOptionsExist() {
 	if [ $# -eq 2 ] && [ $option != "list" ] && [ $option != "install" ] && [ $option != "link" ] && [ $option != "upgrade" ]
 	then
 		echo
-		echo -e "${boldRed}Error:${colorOff} No option is given to ${boldWhite}'$option'${colorOff}."
+		echo -e "${colorBoldRed}Error:${colorOff} No option is given to ${colorBoldWhite}'$option'${colorOff}."
 		exit 3
 	fi
 }
@@ -87,7 +85,7 @@ checkValidMainOption() {
 	done
 	if [ $flag = false ]
 	then
-		echo -e "${boldRed}Error:${colorOff} ${boldWhite}'$option'${colorOff} not recognized by ${boldWhite}Universe${colorOff}."
+		echo -e "${colorBoldRed}Error:${colorOff} ${colorBoldWhite}'$option'${colorOff} not recognized by ${colorBoldWhite}Universe${colorOff}."
 		exit 3
 	fi
 }
@@ -123,17 +121,13 @@ displayMode() {
 	mode=$1
 	if [ $mode = $localPath ]
 	then
-		echo -e "${boldWhite}Mode:${colorOff} ${boldGreen}Client${colorOff}"
+		echo -e "${colorBoldWhite}Mode:${colorOff} ${colorBoldGreen}Local${colorOff}"
 	else
 		if [ $mode = $serverClientPath ]
 		then
-			echo -e "${boldWhite}Mode:${colorOff} ${boldYellow}Server (Client)${colorOff}"
+			echo -e "${colorBoldWhite}Mode:${colorOff} ${colorBoldYellow}Server (Client)${colorOff}"
 		else
-			echo -e "${boldWhite}Mode:${colorOff} ${boldRed}Server (Host)${colorOff}"
-		fi
-		if [ "$env" = "Darwin" ]
-		then
-			echo -e "${boldYellow}Warning:${colorOff} macOS doesn't have a server version."
+			echo -e "${colorBoldWhite}Mode:${colorOff} ${colorBoldRed}Server (Host)${colorOff}"
 		fi
 	fi
 }
@@ -146,25 +140,24 @@ execOptions() {
 	mode=$1
 	option=$2
 	ext=$3
-	extOmit=$4
-	for arg in ${@:5}
+	for arg in ${@:4}
 	do
-		if [ $arg != '-s' ] && [ $arg != '-S' ]
+		if [ $arg != '-s' ]
 		then
 			if [ $option = "list" ]
 			then
 				echo
-				echo -e "${boldWhite}List for '$arg':${colorOff}"
-				list=$(grep "^$arg-[a-z]*" "$curDir/build/$mode/Makefile" | grep  -v $extOmit | wc -l)
+				echo -e "${colorBoldWhite}List for '$arg':${colorOff}"
+				list=$(grep "^$arg-[a-z]*" "$curDir/build/$mode/Makefile" | grep "$ext\|^[^__]*$" | wc -l)
 				if [ $list -eq 0 ]
 				then
 					echo "   No options available."
 				else
-					grep "^$arg-[a-z]*" "$curDir/build/$mode/Makefile" | sed 's/://' | sed 's/'$ext'//' | sed 's/'$arg'-//' | grep  -v $extOmit | sed -e 's/^/   /'
+					grep "^$arg-[a-z]*" "$curDir/build/$mode/Makefile" | sed 's/://' | sed 's/'$ext'//' | sed 's/'$arg'-//' | grep "$ext\|^[^__]*$" | sed -e 's/^/   /' | sort
 				fi
 			else
 				echo
-				echo -e "${boldWhite}Processing '$option $arg':${colorOff}" 
+				echo -e "${colorBoldWhite}Processing '$option $arg':${colorOff}" 
 				if [ $(cat "$curDir/build/$mode/Makefile" | grep -w "$option-$arg:" | wc -l) != 0 ]
 				then
 					make -C $curDir/build/$mode $option-$arg --no-print-directory
@@ -203,7 +196,7 @@ execIfShorcut() {
 	mode=$1
 	option=$2
 	ext=$3
-	if [ $# -eq 3 ] || { [ $# -eq 4 ] && [ $4 = '-s' ] ;} || { [ $# -eq 4 ] && [ $4 = '-S' ] ;}
+	if [ $# -eq 3 ] || { [ $# -eq 4 ] && [ $4 = '-s' ] ;}
 	then
 		if [ $option = "install" ] || [ $option = "link" ] || [ $option = "upgrade" ]
 		then
@@ -219,7 +212,7 @@ execIfUpgradeAsMainOption() {
 	if [ $1 = "update" ]
 	then
 		echo
-		echo -e "${boldWhite}Updating Universe:${colorOff}"
+		echo -e "${colorBoldWhite}Updating Universe:${colorOff}"
 		git pull
 		exit 0
 	fi
@@ -231,19 +224,16 @@ execShortcutOS() {
 	ext=$3
 	displayMode "$mode"
 	echo
-	echo -e "${boldWhite}Processing all '$option' related to your OS:${colorOff}"
+	echo -e "${colorBoldWhite}Processing all '$option' related to your OS:${colorOff}"
 	make -C $curDir/build/$mode $option$ext --no-print-directory
 	exit $?
 }
 
 execShortcutList() {
 	mode=$1
-	if [ $mode = $serverClientPath ]
+	if [ $mode = $serverHostPath ]
 	then
 		$curDir/universe list "-s" "install" "upgrade" "link" "command"
-	elif [ $mode = $serverHostPath ]
-	then
-		$curDir/universe list "-S" "install" "upgrade" "link" "command"
 	else
 		$curDir/universe list "install" "upgrade" "link" "command"
 	fi
@@ -287,4 +277,4 @@ displayMode "$mode"
 ## Check the secondary options
 checkSecondaryOptions "$mode" "$main" "$ext" "${@:2}"
 ## Proceed the main option with the secondary options
-execOptions "$mode" "$main" "$ext" "$extOmit" "${@:2}"
+execOptions "$mode" "$main" "$ext" "${@:2}"
