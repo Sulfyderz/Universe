@@ -14,7 +14,7 @@ colorBoldYellow='\033[1;33m'
 
 
 # Function declaration
-checkOptionsExist() {
+checkArgsExist() {
 	if [ $# -eq 0 ]
 	then
 		displayHelp
@@ -22,9 +22,9 @@ checkOptionsExist() {
 	fi
 }
 
-checkSecondaryOptions() {
+checkCommandArgs() {
 	mode=$1
-	option=$2
+	command=$2
 	ext=$3
 	flag=false
 	for arg in ${@:4}
@@ -32,14 +32,14 @@ checkSecondaryOptions() {
 		fail=false
 		if [ $arg != '-s' ]
 		then
-			if [ $option = "list" ]
+			if [ $command = "list" ]
 			then
 				if [ $arg != "install" ] && [ $arg != "link" ] && [ $arg != "command" ] && [ $arg != "upgrade" ]
 				then
 					fail=true
 				fi
 			else
-				if [ $(cat "$curDir/build/$mode/Makefile" | grep -w "$option-$arg:" | wc -l) = 0 ] && [ $(cat "$curDir/build/$mode/Makefile" | grep -w "$option-$arg$ext:" | wc -l) = 0 ]
+				if [ $(cat "$curDir/build/$mode/Makefile" | grep -w "$command-$arg:" | wc -l) = 0 ] && [ $(cat "$curDir/build/$mode/Makefile" | grep -w "$command-$arg$ext:" | wc -l) = 0 ]
 				then
 					fail=true
 				fi
@@ -51,7 +51,7 @@ checkSecondaryOptions() {
 					echo
 					flag=true
 				fi
-				echo -e "${colorBoldRed}Error:${colorOff} ${colorBoldWhite}'$arg'${colorOff} not recognized by ${colorBoldWhite}'$option'${colorOff}."
+				echo -e "${colorBoldRed}Error:${colorOff} ${colorBoldWhite}'$arg'${colorOff} not recognized by ${colorBoldWhite}'$command'${colorOff}."
 			fi
 		fi
 	done
@@ -61,23 +61,23 @@ checkSecondaryOptions() {
 	fi
 }
 
-checkSecondaryOptionsExist() {
-	option=$1
-	if [ $# -eq 2 ] && [ $option != "list" ] && [ $option != "install" ] && [ $option != "link" ] && [ $option != "upgrade" ]
+checkCommandArgsExist() {
+	command=$1
+	if [ $# -eq 1 ] && [ $command != "list" ] && [ $command != "install" ] && [ $command != "link" ] && [ $command != "upgrade" ]
 	then
 		echo
-		echo -e "${colorBoldRed}Error:${colorOff} No option is given to ${colorBoldWhite}'$option'${colorOff}."
+		echo -e "${colorBoldRed}Error:${colorOff} No argument is given to ${colorBoldWhite}'$command'${colorOff}."
 		exit 3
 	fi
 }
 
-checkValidMainOption() {
-	option=$1
-	mainOptions=("install" "upgrade" "link" "command" "list" "update" "--help" "-h" "--prefix" "-p")
+checkValidCommand() {
+	command=$1
+	commandChoices=("install" "upgrade" "link" "command" "list" "update" "--help" "-h" "--prefix" "-p")
 	flag=false
-	for mainOption in ${mainOptions[@]}
+	for commandChoice in ${commandChoices[@]}
 	do
-		if [ $option = $mainOption ]
+		if [ $command = $commandChoice ]
 		then
 			flag=true
 			break
@@ -85,7 +85,7 @@ checkValidMainOption() {
 	done
 	if [ $flag = false ]
 	then
-		echo -e "${colorBoldRed}Error:${colorOff} ${colorBoldWhite}'$option'${colorOff} not recognized by ${colorBoldWhite}Universe${colorOff}."
+		echo -e "${colorBoldRed}Error:${colorOff} ${colorBoldWhite}'$command'${colorOff} not recognized by ${colorBoldWhite}Universe${colorOff}."
 		exit 3
 	fi
 }
@@ -93,47 +93,107 @@ checkValidMainOption() {
 displayHelp() {
 	if [ $# -eq 0 ]
 	then
-		echo "Universe: your world always with you."
+		echo "usage: universe [-h | --help] [-p | --prefix] <command> [<args>]"
 		echo
-		echo "Syntax: universe [options]"
-		echo
-		echo "Options:"
-		echo "    install		   Installs a given software handled by Universe and related"
+		echo "Commands:"
+		echo "    install		   Installs a list of software handled by Universe and related"
 		echo "			   to your OS. If nothing is given, it installs all software"
 		echo "			   related to your OS."
-		echo "    upgrade		   Updates a software installed with 'install'. If nothing is"
-		echo "			   given, it updates all software handled by Universe and"
-		echo "			   related to your OS."
+		echo "    upgrade		   Upgrades a list of software installed with 'install'. If"
+		echo "			   nothing is given, it upgrades all software handled by Universe"
+		echo "			   and related to your OS."
 		echo "    link		   Setups a configuration file handled by Universe and"
 		echo "             		   related to your OS for a given software. If nothing is"
 		echo "			   given, it setups all configuration files related to your"
 		echo "			   OS."
 		echo "    command         	   Applies a command for a specific software, according to"
 		echo "             		   your OS."
-		echo "    list		   Shows the available options for 'install', 'upgrade', 'link'"
-		echo "			   and 'command' related to your OS. If nothing is given, it" 
-		echo "			   shows all the options for 'install', 'upgrade', 'link' and"
-		echo "			   'command' related to your OS."
-		echo "    -p, --prefix		   Prints the path of Universe folder."
-		echo "    -h, --help		   Prints this help."
+		echo "    list		   Shows the available arguments for a list of commands related"
+		echo "			   to your OS. If nothing is given, it shows all the arguments "
+		echo "			   for the 'install', 'upgrade', 'link' and 'command' commands"
+		echo "			   related to your OS."
+		echo "    update		   Updates Universe."
+		echo
+		echo "Options:"
+		echo "    -p, --prefix	   Shows the Universe folder and exit."
+		echo "    -h, --help		   Shows this help message and exit."
 	elif [ $1 = "install" ]
 	then
-		echo "install help"
+		echo "usage: universe install [-h | --help] [-s] [<args>]"
+		echo
+		echo "Installs a list of software handled by Universe and related to your OS. If nothing is"
+		echo "given, it installs all software related to your OS. To see what you can install,"
+		echo "call the command 'universe list [-s] install'."
+		echo
+		echo "Options:"
+		echo "    -h, --help		   Shows this help message and exit."
+		echo "    -s			   Enables the server host mode (only available on remote"
+		echo "			   machine)."
 	elif [ $1 = "upgrade" ]
 	then
-		echo "upgrade help"
+		echo "usage: universe upgrade [-h | --help] [-s] [<args>]"
+		echo
+		echo "Upgrades a list of software installed with the command 'universe install'. If nothing is"
+		echo "given, it upgrades all software handled by Universe and related to your OS. To see what "
+		echo "you can upgrade, call the command 'universe list [-s] upgrade'."
+		echo
+		echo "Options:"
+		echo "    -h, --help		   Shows this help message and exit."
+		echo "    -s			   Enables the server host mode (only available on remote"
+		echo "			   machine)."
 	elif [ $1 = "link" ]
 	then
-		echo "link help"
+		echo "usage: universe link [-h | --help] [-s] [<args>]"
+		echo
+		echo "Setups a configuration file handled by Universe and related to your OS for a given"
+		echo "software. If nothing is given, it setups all configuration files related to your"
+		echo "OS. To see what you can setup, call the command 'universe list [-s] link'."
+		echo
+		echo "Options:"
+		echo "    -h, --help		   Shows this help message and exit."
+		echo "    -s			   Enables the server host mode (only available on remote"
+		echo "			   machine)."
 	elif [ $1 = "command" ]
 	then
-		echo "command help"
+		echo "usage: universe command [-h | --help] [-s] [<args>]"
+		echo
+		echo "Applies a command for a specific software, according to your OS. To see what you can"
+		echo "setup, call the command 'universe list [-s] command'."
+		echo
+		echo "Options:"
+		echo "    -h, --help		   Shows this help message and exit."
+		echo "    -s			   Enables the server host mode (only available on remote"
+		echo "			   machine)."
 	elif [ $1 = "list" ]
 	then
-		echo "list help"
+		echo "usage: universe list [-h | --help] [-s] <commands>"
+		echo
+		echo "Shows the available arguments for 'install', 'upgrade', 'link' and 'command' related to"
+		echo "your OS. If nothing is given, it shows all the arguments for 'install', 'upgrade',"
+		echo "'link' and 'command' related to your OS."
+		echo
+		echo "Commands:"
+		echo "    install		   Shows the available arguments for the 'universe install'"
+		echo "			   command related to your OS."
+		echo "    upgrade		   Shows the available arguments for the 'universe upgrade'"
+		echo "			   command related to your OS."
+		echo "    link		   Shows the available arguments for the 'universe link'"
+		echo "			   command related to your OS."
+		echo "    command         	   Shows the available arguments for the 'universe command'"
+		echo "			   command related to your OS."
+		echo
+		echo "Options:"
+		echo "    -h, --help		   Shows this help message and exit."
+		echo "    -s			   Enables the server host mode (only available on remote"
+		echo "			   machine)."
 	elif [ $1 = "update" ]
 	then
-		echo "update help"
+		echo "usage: universe update [-h | --help]"
+		echo
+		echo "Updates Universe to its last version."
+		echo
+		echo "Options:"
+		echo "    -h, --help		   Shows this help message and exit."
 	fi
 }
 
@@ -156,7 +216,7 @@ displayPrefix() {
 
 displayWarnings() {
 	mode=$1
-	option=$2
+	command=$2
 	ext=$3
 	displayWarningServerButNotSSH $mode ${@:4}
 }
@@ -176,33 +236,33 @@ displayWarningServerButNotSSH() {
 	fi
 }
 
-execOptions() {
+execCommand() {
 	mode=$1
-	option=$2
+	command=$2
 	ext=$3
 	for arg in ${@:4}
 	do
 		if [ $arg != '-s' ]
 		then
-			if [ $option = "list" ]
+			if [ $command = "list" ]
 			then
 				echo
 				echo -e "${colorBoldWhite}List for '$arg':${colorOff}"
 				list=$(grep "^$arg-[a-z]*" "$curDir/build/$mode/Makefile" | grep "$ext\|^[^__]*$" | wc -l)
 				if [ $list -eq 0 ]
 				then
-					echo "   No options available."
+					echo "   No arguments available."
 				else
 					grep "^$arg-[a-z]*" "$curDir/build/$mode/Makefile" | sed 's/://' | sed 's/'$ext'//' | sed 's/'$arg'-//' | grep "$ext\|^[^__]*$" | sed -e 's/^/   /' | sort
 				fi
 			else
 				echo
-				echo -e "${colorBoldWhite}Processing '$option $arg':${colorOff}" 
-				if [ $(cat "$curDir/build/$mode/Makefile" | grep -w "$option-$arg:" | wc -l) != 0 ]
+				echo -e "${colorBoldWhite}Processing '$command $arg':${colorOff}" 
+				if [ $(cat "$curDir/build/$mode/Makefile" | grep -w "$command-$arg:" | wc -l) != 0 ]
 				then
-					make -C $curDir/build/$mode $option-$arg --no-print-directory
+					make -C $curDir/build/$mode $command-$arg --no-print-directory
 				else
-					make -C $curDir/build/$mode $option-$arg$ext --no-print-directory
+					make -C $curDir/build/$mode $command-$arg$ext --no-print-directory
 				fi
 			fi
 		
@@ -210,7 +270,7 @@ execOptions() {
 	done
 }
 
-execIfHelpAsMainOption() {
+execIfHelpOption() {
 	if [ $1 = "--help" ] || [ $1 = "-h" ]
 	then
 		displayHelp
@@ -218,19 +278,19 @@ execIfHelpAsMainOption() {
 	fi
 }
 
-execIfHelpAsSecondOptions() {
-	option=$1
+execIfHelpCommandOption() {
+	command=$1
 	for arg in "${@:2}"
-		do
-			if [ $arg = "-h" ] || [ $arg = "--help" ]
-			then
-				displayHelp "$option"
-				exit 0
-			fi
+	do
+		if [ $arg = "-h" ] || [ $arg = "--help" ]
+		then
+			displayHelp "$command"
+			exit 0
+		fi
 	done
 }
 
-execIfPrefixAsMainOption() {
+execIfPrefixOption() {
 	if [ $1 = "--prefix" ] || [ $1 = "-p" ]
 	then
 		displayPrefix
@@ -239,55 +299,55 @@ execIfPrefixAsMainOption() {
 }
 
 execIfSupport() {
-	option=$1
-	execIfHelpAsMainOption "$option"
-	execIfHelpAsSecondOptions "$option" "${@:2}"
-	execIfPrefixAsMainOption "$option"
-	execIfUpdateAsMainOption "$option"
+	command=$1
+	execIfHelpOption "$command"
+	execIfHelpCommandOption "$command" "${@:2}"
+	execIfPrefixOption "$command"
+	execIfUpdateAsCommand "$command"
 }
 
 execIfShorcut() {
 	mode=$1
-	option=$2
+	command=$2
 	ext=$3
 	if [ $# -eq 3 ] || { [ $# -eq 4 ] && [ $4 = '-s' ] ;}
 	then		
-		if [ $option = "install" ] || [ $option = "link" ] || [ $option = "upgrade" ]
+		if [ $command = "install" ] || [ $command = "link" ] || [ $command = "upgrade" ]
 		then
-			execShortcutOS "$mode" "$option" "$ext" "$4"
-		elif [ $option = "list" ]
+			execShortcutOS "$mode" "$command" "$ext" "$4"
+		elif [ $command = "list" ]
 		then
 			execShortcutList "$mode" "$4"
 		fi
 	fi
 }
 
-execIfUpdateAsMainOption() {
+execIfUpdateAsCommand() {
 	if [ $1 = "update" ]
 	then
 		echo
 		echo -e "${colorBoldWhite}Updating Universe:${colorOff}"
-		git pull
+		git -C $curDir pull
 		exit 0
 	fi
 }
 
 execShortcutOS() {
 	mode=$1
-	option=$2
+	command=$2
 	ext=$3
 	displayMode "$mode"
-	displayWarnings "$mode" "$option" "$ext" "${@:4}"
+	displayWarnings "$mode" "$command" "$ext" "${@:4}"
 	echo
-	echo -e "${colorBoldWhite}Processing all '$option' related to your OS:${colorOff}"
-	make -C $curDir/build/$mode $option$ext --no-print-directory
+	echo -e "${colorBoldWhite}Processing all '$command' related to your OS:${colorOff}"
+	make -C $curDir/build/$mode $command$ext --no-print-directory
 	exit $?
 }
 
 execShortcutList() {
 	mode=$1
-	flagServerHost=$2
-	$curDir/universe list "$flagServerHost" "install" "upgrade" "link" "command"
+	serverHostOption=$2
+	$curDir/universe list "$serverHostOption" "install" "upgrade" "link" "command"
 	exit $?
 }
 
@@ -311,24 +371,24 @@ getMode() {
 
 
 # Executable
-## Check options exist
-checkOptionsExist "$@"
-main=$1
-## Check main option valid
-checkValidMainOption "$main"
+## Check arguments exist
+checkArgsExist $@
+command=$1
+## Check valid command
+checkValidCommand $command
 ## Get the chosen mode (default -> local OR server/client if using SSH, "-s" -> server/host if using SSH)
 mode=$(getMode ${@:2})
-## Proceed if it's a support option as the main option
-execIfSupport "$main" "${@:2}"
+## Proceed if it's an option or the update command
+execIfSupport $command ${@:2}
 ## Proceed if it's a shortcut
-execIfShorcut "$mode" "$main" "$ext" "${@:2}"
-## Check if the main option has secondary options
-checkSecondaryOptionsExist "$main" "${@:2}"
+execIfShorcut $mode $command $ext ${@:2}
+## Check if the command arguments exist
+checkCommandArgsExist $command ${@:2}
 ## Display the mode used
-displayMode "$mode"
+displayMode $mode
 ## Display warnings
-displayWarnings "$mode" "$main" "$ext" "${@:2}"
-## Check the secondary options
-checkSecondaryOptions "$mode" "$main" "$ext" "${@:2}"
-## Proceed the main option with the secondary options
-execOptions "$mode" "$main" "$ext" "${@:2}"
+displayWarnings $mode $command $ext ${@:2}
+## Check the command arguments
+checkCommandArgs $mode $command $ext ${@:2}
+## Proceed the command with its arguments
+execCommand $mode $command $ext ${@:2}
