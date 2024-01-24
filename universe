@@ -96,8 +96,8 @@ displayHelp() {
 		echo "usage: universe [-h | --help] [-p | --prefix] <command> [<args>]"
 		echo
 		echo "Universe is a versatile tool that effortlessly transfers software and configuration"
-		echo "settings across multiple computers with convenience. It serves as a comprehensive file"
-		echo "manager, configurator and installer."
+		echo "settings across multiple computers with convenience. It serves as a configuration file"
+		echo "manager, a software configurator and a software installer."
 		echo
 		echo "Commands:"
 		echo "    install		   Installs a list of software handled by Universe and related"
