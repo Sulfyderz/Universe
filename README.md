@@ -20,7 +20,7 @@ Universe is a versatile tool that effortlessly transfers software and configurat
 ```
 - **client:** contains the file(s) for a remote machine when you are just a simple user;
 - **build:** contains the `Makefile` files describing where to deploy configuration files from the **files** folder, how configure software, how install software and how update software;
-- **files:** contains the configuration files handled by Universe (**auto** subfolder) and those you have to manually import into the corresponding software (**manual** subfolder);
+- **files:** contains the configuration files handled by Universe (**auto** subfolders) and those you have to manually import into the corresponding software (**manual** subfolders);
 - **host:** contains the file(s) for a remote machine when you are in charge of it;
 - **local:** contains the file(s) for your local machine;
 - **server:** contains the file(s) for a remote machine.
