@@ -2,61 +2,86 @@
 By Sulfyderz.
 
 ## About
-Experience the unparalleled convenience of Universe - your ultimate configuration file manager, application configurator, and software installer. Eliminate the hassle of managing countless configuration files - Universe stores them all in one centralized location, effortlessly importing them into their corresponding applications whenever possible. Take control of your applications like never before with our intuitive commands, allowing you to easily configure them to match your unique preferences. And that's not all - Universe even goes the extra mile by seamlessly installing your favorite software, including popular tools like Homebrew. Streamline your digital life with Universe software and unlock a world of simplicity, efficiency, and endless possibilities.
+Universe is a versatile tool that effortlessly transfers software and configuration settings across multiple computers with convenience. It serves as a configuration file manager, a software configurator and a software installer. Eliminate the hassle of managing countless configuration files - Universe stores them all in one centralized location, effortlessly importing them into their corresponding software whenever possible. Take control of your software like never before with our intuitive commands, allowing you to easily configure them to match your unique preferences. And that's not all - Universe even goes the extra mile by seamlessly installing your favorite software. Streamline your digital life with Universe software and unlock a world of simplicity and efficiency.
 
-## Folder
-- **auto:** the configuration files Universe can handle;
-- **manual:** the configuration files you have to manually import into the corresponding application.
+## Directory Structure
+```
+.
+├── build
+│   ├── local
+│   └── server
+│       ├── client
+│       └── host
+└── files
+    ├── local
+    └── server
+        ├── client
+        └── host
+```
+- **client:** contains the file(s) for a remote machine when you are just a simple user;
+- **build:** contains the `Makefile` files describing where to deploy configuration files from the **files** folder, how configure software, how install software and how update software;
+- **files:** contains the configuration files handled by Universe (**auto** subfolder) and those you have to manually import into the corresponding software (**manual** subfolder);
+- **host:** contains the file(s) for a remote machine when you are in charge of it;
+- **local:** contains the file(s) for your local machine;
+- **server:** contains the file(s) for a remote machine.
 
-## Configuration files handled by Universe
-### Non-specific
-- `.bash_profile` for **bash**;
-- `.gitconfig` for **git**;
-- `.inputrc` for **bash**;
-- `starship.toml` for **starship**;
-- `.tmux.conf` for **tmux**;
-- `.vimrc` for **vim**.
-### Linux-specific
-- `.zshrc` for **zsh**.
-### macOS-specific
-- `.skhdrc` for **skhd**;
-- `.yabairc` for **yabai**;
-- `.zshrc` for **zsh**.
+## Installation
+To install, use the following command inside the Universe repository:
+```
+❯ ./install
+```
 
-## Configuration files not handled by Universe
-### macOS-specific
-- `Raycast.raycast` for **Raycast**.
+## Updating Universe
+To update Universe, use the following command:
+```
+❯ universe update
+```
 
-## Software installation handled by Universe
-### Non-specific
-- **tmux-resurrect**.
-### macOS-specific
-- **fzf**;
-- **homebrew**;
-- **starship**;
-- **tmux**;
-- **zsh-autosuggestions**.
+## Uninstallation
+To uninstall, use the following command inside the Universe repository:
+```
+❯ ./uninstall
+```
 
-## Configuration command available with Universe
-### Non-specific
-- **conda-mute** for deactivating the prompt modifier of conda (useful only when starship is applied).
+## Usage
+This is how you use Universe:
+```
+❯ universe [-h | --help] [-p | --prefix] <command> [<args>]
+```
+### Commands
+| Command | Description |
+| ------ | ------ |
+| `install` | Installs a list of software handled by Universe and related to your OS. If nothing is given, it installs all software related to your OS. |
+| `upgrade` | Upgrades a list of software installed with `install`. If nothing is given, it upgrades all software handled by Universe and related to your OS. |
+| `link` | Setups a configuration file handled by Universe and related to your OS for a given software. If nothing is given, it setups all configuration files related to your OS. |
+| `command` | Applies a command for a specific software, according to your OS. |
+| `list` | Shows the available arguments for a list of commands related to your OS. If nothing is given, it shows all the arguments for the `install`, `upgrade`, `link` and `command` commands related to your OS. |
 
-## How to use Universe?
-You just have to use the `Makefile`.<br/>
-To apply a command `x`:
-```
-make command-x
-```
-To install a software `x`:
-```
-make install-x
-```
-To import a configuration file for a software `x`:
-```
-make link-x
-```
+> ℹ
+>
+> Each command has its own specific arguments. To learn more about them, call the `-h` or `--help` after the command (e.g. `universe list -h`).
+
+### Options
+| Option | Description |
+| ------ | ------ |
+| `-p`, `--prefix` | Shows the Universe folder and exit. |
+| `-h`, `--help` | Shows this help message and exit. |
+
+### Modes
+Universe has 3 modes: 
+- `Local`: Universe applies your local-machine configuration; 
+- `Server (Client)`: Universe applies your remote-machine configuration. The configuration when you are just a simple user;
+- `Server (Host)`: Universe applies your remote-machine configuration. The configuration when you are in charge of that machine.
+
+According to the mode, it will apply the corresponding `Makefile` file (see [Directory Structure](#directory-structure)).
+
+Universe automatically detects if you are on your local machine or connected to remote one. If you are on your local machine, you will be on the `Local` mode. If you are on a remote machine, you will be on the `Server (Client)` mode by default. If you
+
+If you use one of the [commands](#commands), you will be informed in which mode you are.
+
+## Customizing your Universe
+To customize your Universe, you just have to edit Makefile
 *Note: For a OS-specific command, software or configuration file, add `__` followed by the OS name (e.g. `link-zsh__macOS`).*
-### Linux-specific
 To install all software and import all configuration files:
 ```
 make linux
@@ -69,7 +94,6 @@ To only import all configuration files:
 ```
 make link__linux
 ```
-### macOS-specific
 To install all software and import all configuration files (`macOS` is optional):
 ```
 make macOS
@@ -82,6 +106,3 @@ To only import all configuration files:
 ```
 make link__macOS
 ```
-
-## Recommendation on the installation path
-We recommmend you to install Universe in the following path: `~/.config/universe`.
