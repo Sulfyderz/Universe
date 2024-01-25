@@ -14,7 +14,7 @@ Universe is a versatile tool that effortlessly transfers software and configurat
     - [Commands](#commands)
     - [Options](#options)
     - [Modes](#modes)
-- [UsagCustomizing your Universe](#customizing-your-universe)
+- [Customizing your Universe](#customizing-your-universe)
 
 ## Directory Structure
 ```
@@ -103,9 +103,12 @@ command-argument__os:
     > ⚠️ `-argument` has to start by a dash.
 
     > ⚠️ `-argument` can only contain dash as a special character (e.g. `-python3-3-10`). 
-- `__os`: The OS that rule concerns. `__os` is optional. If it's not defined, that rule applies to all OS;
-    > ℹ️ OS currently handled:
-    > - macOS (`__macOS`) ;
-    > - Ubuntu and Debian (`__linux`).
+- `__os`: The OS that rule concerns. `__os` is optional. If it's not defined, that rule applies to all OS. Here are the possible values:
+
+    | OS | Value |
+    | ------ | ------ |
+    | Debian | `__linux` |
+    | macOS | `__macOS` |
+    | Ubuntu | `__linux` |
 - `-instructions`: The instructions of that rule.
     > ⚠️ Each line has to start by a dash in order to handled failure.
