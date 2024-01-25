@@ -21,7 +21,7 @@ Universe is a versatile tool that effortlessly transfers software and configurat
 - **client:** contains the file(s) for a remote machine when you are just a simple user;
 - **build:** contains the `Makefile` files describing where to deploy configuration files from the **files** folder, how configure software, how install software and how update software;
 - **files:** contains the configuration files handled by Universe (**auto** subfolders) and those you have to manually import into the corresponding software (**manual** subfolders);
-- **host:** contains the file(s) for a remote machine when you are in charge of it;
+- **host:** contains the file(s) for a remote machine when you are a superuser and in charge of that machine;
 - **local:** contains the file(s) for your local machine;
 - **server:** contains the file(s) for a remote machine.
 
@@ -58,7 +58,6 @@ This is how you use Universe:
 | `list` | Shows the available arguments for a list of commands related to your OS. If nothing is given, it shows all the arguments for the `install`, `upgrade`, `link` and `command` commands related to your OS. |
 
 > ℹ
->
 > Each command has its own specific arguments. To learn more about them, call the `-h` or `--help` after the command (e.g. `universe list -h`).
 
 ### Options
@@ -70,17 +69,32 @@ This is how you use Universe:
 ### Modes
 Universe has 3 modes: 
 - `Local`: Universe applies your local-machine configuration; 
-- `Server (Client)`: Universe applies your remote-machine configuration. The configuration when you are just a simple user;
-- `Server (Host)`: Universe applies your remote-machine configuration. The configuration when you are in charge of that machine.
+- `Server (Client)`: Universe applies your remote-machine configuration, the one when you are just a simple user;
+- `Server (Host)`: Universe applies your remote-machine configuration, the one when you are a superuser and in charge of that machine.
 
 According to the mode, it will apply the corresponding `Makefile` file (see [Directory Structure](#directory-structure)).
 
-Universe automatically detects if you are on your local machine or connected to remote one. If you are on your local machine, you will be on the `Local` mode. If you are on a remote machine, you will be on the `Server (Client)` mode by default. If you
+Universe automatically detects if you are on your local machine or connected to remote one. If you are on your local machine, you will be on the `Local` mode. If you are on a remote machine, you will be on the `Server (Client)` mode by default. If you are on a remote machine and want to activate the `Server (Host)` mode, simply add the `-s` option after any [command](#commands).
 
-If you use one of the [commands](#commands), you will be informed in which mode you are.
+If you use a [command](#commands), you will be informed in which mode you are.
 
 ## Customizing your Universe
-To customize your Universe, you just have to edit Makefile
+To customize your Universe, you just have to edit the `Makefile` files (see [Directory Structure](#directory-structure)) and follow a norm for the rules you declare.
+
+Here is the rule norm to respect:
+```
+command-name__os:
+    -commands
+```
+
+
+> ℹ
+> Each
+> ```
+> ok
+> ```
+
+
 *Note: For a OS-specific command, software or configuration file, add `__` followed by the OS name (e.g. `link-zsh__macOS`).*
 To install all software and import all configuration files:
 ```
