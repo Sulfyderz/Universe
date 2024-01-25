@@ -4,6 +4,18 @@ By Sulfyderz.
 ## About
 Universe is a versatile tool that effortlessly transfers software and configuration settings across multiple computers with convenience. It serves as a configuration file manager, a software configurator and a software installer. Eliminate the hassle of managing countless configuration files - Universe stores them all in one centralized location, effortlessly importing them into their corresponding software whenever possible. Take control of your software like never before with our intuitive commands, allowing you to easily configure them to match your unique preferences. And that's not all - Universe even goes the extra mile by seamlessly installing your favorite software. Streamline your digital life with Universe software and unlock a world of simplicity and efficiency.
 
+## Table of Contents
+
+- [Directory Structure](#directory-structure)
+- [Installation](#installation)
+- [Updating Universe](#updating-universe)
+- [Uninstallation](#uninstallation)
+- [Usage](#usage)
+    - [Commands](#commands)
+    - [Options](#options)
+    - [Modes](#modes)
+- [UsagCustomizing your Universe](#customizing-your-universe)
+
 ## Directory Structure
 ```
 .
@@ -57,7 +69,7 @@ This is how you use Universe:
 | `command` | Applies a command for a specific software, according to your OS. |
 | `list` | Shows the available arguments for a list of commands related to your OS. If nothing is given, it shows all the arguments for the `install`, `upgrade`, `link` and `command` commands related to your OS. |
 
-> ℹ
+> ℹ️
 > Each command has its own specific arguments. To learn more about them, call the `-h` or `--help` after the command (e.g. `universe list -h`).
 
 ### Options
@@ -83,40 +95,17 @@ To customize your Universe, you just have to edit the `Makefile` files (see [Dir
 
 Here is the rule norm to respect:
 ```
-command-name__os:
-    -commands
+command-argument__os:
+    -instructions
 ```
+- `command`: The [command](#commands) that rule concerns;
+- `-argument`: The argument name that should be given to the `command` to activate that rule. `-argument` is optional only if `__os` is defined. If it's not defined, that rule is activated when you call the `command` without arguments (e.g. `universe install`);
+    > ⚠️ `-argument` has to start by a dash.
 
-
-> ℹ
-> Each
-> ```
-> ok
-> ```
-
-
-*Note: For a OS-specific command, software or configuration file, add `__` followed by the OS name (e.g. `link-zsh__macOS`).*
-To install all software and import all configuration files:
-```
-make linux
-```
-To only install all software:
-```
-make install__linux
-```
-To only import all configuration files:
-```
-make link__linux
-```
-To install all software and import all configuration files (`macOS` is optional):
-```
-make macOS
-```
-To only install all software:
-```
-make install__macOS
-```
-To only import all configuration files:
-```
-make link__macOS
-```
+    > ⚠️ `-argument` can only contain dash as a special character (e.g. `-python3-3-10`). 
+- `__os`: The OS that rule concerns. `__os` is optional. If it's not defined, that rule applies to all OS;
+    > ℹ️ OS currently handled:
+    > - macOS (`__macOS`) ;
+    > - Ubuntu and Debian (`__linux`).
+- `-instructions`: The instructions of that rule.
+    > ⚠️ Each line has to start by a dash in order to handled failure.
