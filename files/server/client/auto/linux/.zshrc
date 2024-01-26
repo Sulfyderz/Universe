@@ -36,9 +36,9 @@ export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-11.8/lib64:/usr/local/c
 ## fzf
 export FZF_ALT_C_COMMAND='find . -type d | sed '\''s/^.\///'\'''
 export FZF_DEFAULT_OPTS='--height 30% -m --border --reverse --prompt="❯ " --pointer="❯" --marker="❯" --color="prompt:15,spinner:203,info:203,marker:203,pointer:51"'
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source ~/.fzf.zsh 2> /dev/null
 ## Starship
 eval "$(starship init zsh)"
 ## zsh-autosuggestions
 export ZSH_AUTOSUGGEST_MANUAL_REBIND=true
-source $(universe -p)/bin/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $(universe -p)/bin/zsh-autosuggestions/zsh-autosuggestions.zsh 2> /dev/null

@@ -24,7 +24,6 @@ upgrade__macOS: upgrade-fzf__macOS upgrade-tmux-resurrect upgrade-vundle upgrade
 command-conda-mute:
 	-conda config --set changeps1 false
 
-
 # Installing section
 ## Non-specific
 install-tmux-resurrect:

@@ -30,7 +30,7 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 # Software
 ## Homebrew
-eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(/opt/homebrew/bin/brew shellenv 2> /dev/null)" 
 ## Universe
 export PATH="$PATH:$HOME/.bin"
 ## Conda
@@ -38,10 +38,10 @@ co_arm
 ## fzf
 export FZF_ALT_C_COMMAND='find . -type d | sed '\''s/^.\///'\'''
 export FZF_DEFAULT_OPTS='--height 30% -m --border --reverse --prompt="❯ " --pointer="❯" --marker="❯" --color="prompt:15,spinner:203,info:203,marker:203,pointer:51"'
-source $(brew --prefix)/opt/fzf/shell/completion.zsh
-source $(brew --prefix)/opt/fzf/shell/key-bindings.zsh
+source $(brew --prefix)/opt/fzf/shell/completion.zsh 2> /dev/null
+source $(brew --prefix)/opt/fzf/shell/key-bindings.zsh 2> /dev/null
 ## Starship
-eval "$(starship init zsh)"
+eval "$(starship init zsh 2> /dev/null)"
 ## zsh-autosuggestions 
 export ZSH_AUTOSUGGEST_MANUAL_REBIND=true
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh 2> /dev/null
