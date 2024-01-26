@@ -30,7 +30,9 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 # Software
 ## Universe
 export PATH="$PATH:$HOME/.bin"
-## cuda
+## Conda
+eval "$('/home/broux/Tool/Package-Manager/Miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+## CUDA
 export PATH="$PATH:/usr/local/cuda-11.8/bin"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-11.8/lib64:/usr/local/cuda-11.8/extras/CUPTI/lib64"
 ## fzf
@@ -38,7 +40,7 @@ export FZF_ALT_C_COMMAND='find . -type d | sed '\''s/^.\///'\'''
 export FZF_DEFAULT_OPTS='--height 30% -m --border --reverse --prompt="❯ " --pointer="❯" --marker="❯" --color="prompt:15,spinner:203,info:203,marker:203,pointer:51"'
 source ~/.fzf.zsh 2> /dev/null
 ## Starship
-eval "$(starship init zsh)"
+eval "$(starship init zsh 2> /dev/null)"
 ## zsh-autosuggestions
 export ZSH_AUTOSUGGEST_MANUAL_REBIND=true
 source $(universe -p)/bin/zsh-autosuggestions/zsh-autosuggestions.zsh 2> /dev/null
