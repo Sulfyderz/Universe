@@ -31,9 +31,11 @@ Universe is a versatile tool that effortlessly transfers software and configurat
         └── host
 ```
 - **client:** contains the file(s) for a remote machine when you are just a simple user;
-- **build:** contains the `Makefile` files describing where to deploy configuration files from the **files** directory, how configure software, how install software and how update software;
-- **files:** contains the configuration files handled by Universe (i.e. **auto** subdirectories) and those you have to manually import into the corresponding software (i.e. **manual** subdirectories);
-    > ℹ️ The **auto** and **manual** subdirectories are in **local**, **client** and **host** subdirectories of the **files** directory.
+- **build:** contains the **Makefile** files describing where to deploy configuration files from the **files** directory, how configure software, how install software and how update software;
+- **files:** contains the configuration files handled by Universe and those you have to manually import into the corresponding software;
+    > ℹ️ The configuration files handled by Universe are stored in the **auto** subdirectories. The ones you have to manually import into the corresponding software are stored in the **manual** subdirectories. 
+    > The **auto** and **manual** subdirectories are located in the **local**, **client** and **host** subdirectories of the **files** directory.
+    >> ℹ️ Both the **auto** and **manual** directories have further subdirectories within them: a **all** directory and others such as **macOS** or **linux**. A **all** directory contains the files shared among OS. The others are OS specific.
 - **host:** contains the file(s) for a remote machine when you are a superuser and in charge of that machine;
 - **local:** contains the file(s) for your local machine;
 - **server:** contains the file(s) for a remote machine.
@@ -81,18 +83,18 @@ This is how you use Universe:
 
 ### Modes
 Universe has 3 modes: 
-- `Local`: Universe applies your local-machine configuration; 
-- `Server (Client)`: Universe applies your remote-machine configuration, the one when you are just a simple user;
-- `Server (Host)`: Universe applies your remote-machine configuration, the one when you are a superuser and in charge of that machine.
+- **Local**: Universe applies your local-machine configuration; 
+- **Server (Client)**: Universe applies your remote-machine configuration, the one when you are just a simple user;
+- **Server (Host)**: Universe applies your remote-machine configuration, the one when you are a superuser and in charge of that machine.
 
-According to the mode, it will apply the corresponding `Makefile` file (see [Directory Structure](#directory-structure)).
+According to the mode, it will apply the corresponding **Makefile** file (see [Directory Structure](#directory-structure)).
 
-Universe automatically detects if you are on your local machine or connected to remote one. If you are on your local machine, you will be on the `Local` mode. If you are on a remote machine, you will be on the `Server (Client)` mode by default. If you are on a remote machine and want to activate the `Server (Host)` mode, simply add the `-s` option after any [command](#commands).
+Universe automatically detects if you are on your local machine or connected to remote one. If you are on your local machine, you will be on the **Local** mode. If you are on a remote machine, you will be on the **Server (Client)** mode by default. If you are on a remote machine and want to activate the **Server (Host)** mode, simply add the `-s` option after any [command](#commands).
 
 If you use a [command](#commands), you will be informed in which mode you are.
 
 ## Customizing your Universe
-To customize your Universe, you just have to edit the `Makefile` files (see [Directory Structure](#directory-structure)) and follow a norm for the rules you declare.
+To customize your Universe, you just have to edit the **Makefile** files (see [Directory Structure](#directory-structure)) and follow a norm for the rules you declare.
 
 Here is the rule norm to respect:
 ```
