@@ -31,8 +31,9 @@ Universe is a versatile tool that effortlessly transfers software and configurat
         └── host
 ```
 - **client:** contains the file(s) for a remote machine when you are just a simple user;
-- **build:** contains the `Makefile` files describing where to deploy configuration files from the **files** folder, how configure software, how install software and how update software;
-- **files:** contains the configuration files handled by Universe (**auto** subfolders) and those you have to manually import into the corresponding software (**manual** subfolders);
+- **build:** contains the `Makefile` files describing where to deploy configuration files from the **files** directory, how configure software, how install software and how update software;
+- **files:** contains the configuration files handled by Universe (i.e. **auto** subdirectories) and those you have to manually import into the corresponding software (i.e. **manual** subdirectories);
+    > ℹ️ The **auto** and **manual** subdirectories are in **local**, **client** and **host** subdirectories of the **files** directory.
 - **host:** contains the file(s) for a remote machine when you are a superuser and in charge of that machine;
 - **local:** contains the file(s) for your local machine;
 - **server:** contains the file(s) for a remote machine.
@@ -75,7 +76,7 @@ This is how you use Universe:
 ### Options
 | Option | Description |
 | ------ | ------ |
-| `-p`, `--prefix` | Shows the Universe folder and exit. |
+| `-p`, `--prefix` | Shows the Universe directory and exit. |
 | `-h`, `--help` | Shows this help message and exit. |
 
 ### Modes
