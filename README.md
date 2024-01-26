@@ -103,7 +103,9 @@ command-argument__os:
     > ⚠️ `-argument` has to start by a dash.
 
     > ⚠️ `-argument` can only contain dash as a special character (e.g. `-python3-3-10`). 
-- `__os`: The OS that rule concerns. `__os` is optional. If it's not defined, that rule applies to all OS. Here are the possible values:
+- `__os`: The OS that rule concerns. `__os` is optional. If it's not defined, that rule applies to all OS. 
+
+    Here are the possible values:
 
     | OS | Value |
     | ------ | ------ |
