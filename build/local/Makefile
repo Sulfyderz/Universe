@@ -20,6 +20,10 @@ upgrade__macOS: upgrade-fzf__macOS upgrade-tmux-resurrect upgrade-vundle upgrade
 
 # Command section
 ## Non-specific
+### Deactivating conda on startup
+command-conda-not-on-startup:
+	-conda config --set auto_activate_base false
+
 ### Deactivating the prompt modifier of conda (useful only when starship is applied)
 command-conda-mute:
 	-conda config --set changeps1 false
