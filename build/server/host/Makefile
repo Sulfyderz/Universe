@@ -20,7 +20,7 @@ command-os-setup-ssh-connection-timeout__linux:
 
 ### Setup locale to utf-8
 command-os-setup-locale-utf-8__linux:
-	-sudo locate-gen --purge en_US.UTF-8 && sudo update-locale LC_ALL=en_US.UTF-8 LC_CTYPE=en_US.UTF-8 LC_MESSAGES=en_US.UTF-8 LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8
+	-sudo locale-gen --purge en_US.UTF-8 && sudo update-locale LC_ALL=en_US.UTF-8 LC_CTYPE=en_US.UTF-8 LC_MESSAGES=en_US.UTF-8 LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8
 
 ### Setup Paris timezone
 command-os-setup-timezone-paris__linux:
