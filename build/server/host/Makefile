@@ -11,6 +11,7 @@ root_universe := $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../../../)
 install__linux: install-git__linux install-nvidia-driver__linux install-python3__linux install-shell-completion__linux
 upgrade__linux: upgrade-os__linux
 
+
 # Command section
 ## Linux-specific
 ### Setup ssh connection timeout
