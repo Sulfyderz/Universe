@@ -18,10 +18,6 @@ upgrade__linux: upgrade-os__linux
 command-os-setup-ssh-connection-timeout__linux:
 	-sudo sed -i -e 's/#ClientAliveInterval .*/#ClientAliveInterval 600/' /etc/ssh/sshd_config && sudo sed -i -e 's/#ClientAliveCountMax .*/#ClientAliveCountMax 3/' /etc/ssh/sshd_config && sudo service ssh restart
 
-### Setup locale to utf-8
-command-os-setup-locale-utf-8__linux:
-	-sudo locale-gen --purge en_US.UTF-8 && sudo update-locale LC_ALL=en_US.UTF-8 LC_CTYPE=en_US.UTF-8 LC_MESSAGES=en_US.UTF-8 LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8
-
 ### Setup Paris timezone
 command-os-setup-timezone-paris__linux:
 	-sudo timedatectl set-timezone Europe/Paris
