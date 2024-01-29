@@ -13,13 +13,17 @@ upgrade__linux: upgrade-os__linux
 
 # Command section
 ## Linux-specific
-### Setup zsh as default shell
-command-os-setup-zsh__linux:
-	-chsh -s $(which zsh)
-
 ### Setup ssh connection timeout
 command-os-setup-ssh-connection-timeout__linux:
 	-sudo sed -i -e 's/#ClientAliveInterval .*/#ClientAliveInterval 600/' /etc/ssh/sshd_config && sudo sed -i -e 's/#ClientAliveCountMax .*/#ClientAliveCountMax 3/' /etc/ssh/sshd_config && sudo service ssh restart
+
+### Setup Paris timezone
+command-os-setup-timezone-paris__linux:
+	-sudo timedatectl set-timezone Europe/Paris
+
+### Setup zsh as default shell
+command-os-setup-zsh__linux:
+	-chsh -s $(which zsh)
 
 
 # Installing section
