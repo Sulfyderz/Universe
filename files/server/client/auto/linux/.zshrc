@@ -27,6 +27,10 @@ autoload -Uz compinit
 compinit
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
+# Locale
+export LANG="en_US"
+export LC_ALL=$LANG.UTF-8
+
 # Software
 ## Universe
 export PATH="$PATH:$HOME/.bin"
