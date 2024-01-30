@@ -38,7 +38,7 @@ install-git__linux:
 	-sudo apt install git
 
 install-mlflow__linux:
-	-conda create --name MLflow -y && $(CONDA_ACTIVATE) MLflow && pip install psycopg2
+	-conda create --name MLflow -y && $(CONDA_ACTIVATE) MLflow && pip install psycopg2 mlflow
 
 install-nvidia-driver-535__linux:
 	-sudo apt install nvidia-driver-535 --yes
