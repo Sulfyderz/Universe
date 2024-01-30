@@ -1,7 +1,6 @@
 # Oneshell means all lines in a recipe run in the same shell
 .ONESHELL:
 
-SHELL=/bin/bash
 
 # Variables
 root_universe := $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../../../)
@@ -37,7 +36,7 @@ install-git__linux:
 	-sudo apt install git
 
 install-mlflow__linux:
-	-conda create --name MLflow -y && conda activate MLflow && conda activate MLflow && conda install -y mlflow psycopg2
+	-conda create --name MLflow -y && conda install -n MLflow -y mlflow psycopg2
 
 install-nvidia-driver-535__linux:
 	-sudo apt install nvidia-driver-535 --yes
