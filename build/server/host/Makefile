@@ -8,7 +8,7 @@ root_universe := $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../../../)
 
 # Shortcuts
 ## Linux-specific
-install__linux: install-git__linux install-nvidia-driver__linux install-python3__linux install-shell-completion__linux
+install__linux: install-cuda-11.8__linux install-git__linux install-nvidia-driver__linux install-python3__linux install-shell-completion__linux
 upgrade__linux: upgrade-os__linux
 
 
@@ -35,8 +35,14 @@ install-cuda-11.8__linux:
 install-git__linux:
 	-sudo apt install git
 
+install-mlflow-server__linux:
+	-conda create --name MLflow && conda activate MLflow && conda install mlflow && conda install psycopg2 && sudo psql "CREATE DATABASE MLflow; CREATE USER MLflow WITH ENCRYPTED PASSWORD 'MLflow'; GRANT ALL PRIVILEGES ON DATABASE MLflow TO MLflow;"
+
 install-nvidia-driver-535__linux:
 	-sudo apt install nvidia-driver-535 --yes
+
+install-postgresql__linux:
+	-sudo apt-get install postgresql postgresql-contrib postgresql-server-dev-all
 
 install-python3__linux:
 	-sudo apt install python3 python3-wheel python3-pip python3-venv python3-dev python3-setuptools --yes
