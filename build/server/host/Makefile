@@ -2,13 +2,10 @@
 .ONESHELL:
 
 
-# Need to specify bash in order for conda activate to work.
-SHELL = /bin/bash
-
-
 # Variables
-root_universe := $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../../../)
-
+ROOT_UNIVERSE := $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../../../)
+## Need to specify bash in order for conda activate to work
+SHELL = /bin/bash
 
 # Shortcuts
 ## Linux-specific
