@@ -1,6 +1,7 @@
 # Oneshell means all lines in a recipe run in the same shell
 .ONESHELL:
 
+SHELL=/bin/bash
 
 # Variables
 root_universe := $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../../../)
