@@ -6,6 +6,7 @@
 ROOT_UNIVERSE := $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../../../)
 ## Need to specify bash in order for conda activate to work
 SHELL = /bin/bash
+CONDA_ACTIVATE=source $$(conda info --base)/etc/profile.d/conda.sh ; conda activate ;
 
 # Shortcuts
 ## Linux-specific
@@ -37,7 +38,7 @@ install-git__linux:
 	-sudo apt install git
 
 install-mlflow__linux:
-	-conda create --name MLflow -y && conda activate MLflow && conda activate MLflow && pip install psycopg2
+	-conda create --name MLflow -y && $(CONDA_ACTIVATE) && conda activate MLflow && pip install psycopg2
 
 install-nvidia-driver-535__linux:
 	-sudo apt install nvidia-driver-535 --yes
