@@ -3,10 +3,11 @@
 
 
 # Variables
-ROOT_UNIVERSE := $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../../../)
+## Note that the extra activate is needed to ensure that the activate floats env to the front of PATH
+CONDA_ACTIVATE=source $$(conda info --base)/etc/profile.d/conda.sh; conda activate; conda activate
 ## Need to specify bash in order for conda activate to work
 SHELL = /bin/bash
-CONDA_ACTIVATE=source $$(conda info --base)/etc/profile.d/conda.sh; conda activate; conda activate
+ROOT_UNIVERSE := $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../../../)
 
 # Shortcuts
 ## Linux-specific
@@ -16,6 +17,14 @@ upgrade__linux: upgrade-os__linux
 
 # Command section
 ## Linux-specific
+### 
+command-conda-setup-mlflow-env__linux:
+	-conda create --name Universe-MLflow -y && $(CONDA_ACTIVATE) Universe-MLflow && pip install psycopg2 mlflow
+
+###
+command-postgresql-setup-mlflow-database__linux:
+	-sudo -u postgres psql -c "CREATE DATABASE MLflow;" && sudo -u postgres psql -c "CREATE USER MLflow WITH ENCRYPTED PASSWORD 'MLflow';" && sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE MLflow TO MLflow;"
+
 ### Setup ssh connection timeout
 command-os-setup-ssh-connection-timeout__linux:
 	-sudo sed -i -e 's/#ClientAliveInterval .*/#ClientAliveInterval 600/' /etc/ssh/sshd_config && sudo sed -i -e 's/#ClientAliveCountMax .*/#ClientAliveCountMax 3/' /etc/ssh/sshd_config && sudo service ssh restart
@@ -36,9 +45,6 @@ install-cuda-11.8__linux:
 
 install-git__linux:
 	-sudo apt install git
-
-install-mlflow__linux:
-	-conda create --name MLflow -y && $(CONDA_ACTIVATE) MLflow && pip install psycopg2 mlflow
 
 install-nvidia-driver-535__linux:
 	-sudo apt install nvidia-driver-535 --yes
