@@ -35,8 +35,8 @@ install-cuda-11.8__linux:
 install-git__linux:
 	-sudo apt install git
 
-install-mlflow-server__linux:
-	-conda create --name MLflow && conda activate MLflow && conda install mlflow && conda install psycopg2 && sudo psql "CREATE DATABASE MLflow; CREATE USER MLflow WITH ENCRYPTED PASSWORD 'MLflow'; GRANT ALL PRIVILEGES ON DATABASE MLflow TO MLflow;"
+install-mlflow__linux:
+	-conda create --name MLflow && conda activate MLflow && conda install -y mlflow psycopg2
 
 install-nvidia-driver-535__linux:
 	-sudo apt install nvidia-driver-535 --yes
