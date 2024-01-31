@@ -51,10 +51,10 @@ install-zsh-autosuggestions__linux:
 
 ## macOS-specific
 install-conda-arm64__macOS:
-	-mkdir -p ~/Workshop/Tool/Package-Manager/Miniconda3 && curl https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh -o ~/Workshop/Tool/Package-Manager/Miniconda3/miniconda.sh && bash ~/Workshop/Tool/Package-Manager/Miniconda3/miniconda.sh -b -u -p ~/Workshop/Tool/Package-Manager/Miniconda3 && rm -rf ~/Workshop/Tool/Package-Manager/Miniconda3/miniconda.sh
+	-mkdir -p $(ROOT_UNIVERSE)/bin/miniconda3 && curl https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh -o $(ROOT_UNIVERSE)/bin/miniconda3/miniconda.sh && bash $(ROOT_UNIVERSE)/bin/miniconda3/miniconda.sh -b -u -p $(ROOT_UNIVERSE)/bin/miniconda3 && rm -rf $(ROOT_UNIVERSE)/bin/miniconda3/miniconda.sh
 
 install-conda-x86__macOS:
-	-mkdir -p ~/Workshop/Tool/Package-Manager/Miniconda3-x86 && curl https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -o ~/Workshop/Tool/Package-Manager/Miniconda3-x86/miniconda.sh && bash ~/Workshop/Tool/Package-Manager/Miniconda3-x86/miniconda.sh -b -u -p ~/Workshop/Tool/Package-Manager/Miniconda3-x86 && rm -rf ~/Workshop/Tool/Package-Manager/Miniconda3-x86/miniconda.sh
+	-mkdir -p $(ROOT_UNIVERSE)/bin/miniconda3-x86 && curl https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -o $(ROOT_UNIVERSE)/bin/miniconda3-x86/miniconda.sh && bash $(ROOT_UNIVERSE)/bin/miniconda3-x86/miniconda.sh -b -u -p $(ROOT_UNIVERSE)/bin/miniconda3-x86 && rm -rf $(ROOT_UNIVERSE)/bin/miniconda3/miniconda.sh
 
 install-fzf__macOS:
 	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew install fzf

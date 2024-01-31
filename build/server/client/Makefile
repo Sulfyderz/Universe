@@ -34,7 +34,7 @@ install-vundle:
 
 ## Linux-specific
 install-conda__linux:
-	-mkdir -p ~/Tool/Package-Manager/Miniconda3 && wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/Tool/Package-Manager/Miniconda3/miniconda.sh && bash ~/Tool/Package-Manager/Miniconda3/miniconda.sh -b -u -p ~/Tool/Package-Manager/Miniconda3 && rm -rf ~/Tool/Package-Manager/Miniconda3/miniconda.sh
+	-mkdir -p $(ROOT_UNIVERSE)/bin/miniconda3 && wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O $(ROOT_UNIVERSE)/bin/miniconda3/miniconda.sh && bash $(ROOT_UNIVERSE)/bin/miniconda3/miniconda.sh -b -u -p $(ROOT_UNIVERSE)/bin/miniconda3 && rm -rf $(ROOT_UNIVERSE)/bin/miniconda3/miniconda.sh
 
 install-fzf__linux:
 	-git clone --depth 1 https://github.com/junegunn/fzf.git $(ROOT_UNIVERSE)/bin/fzf/ && $(ROOT_UNIVERSE)/bin/fzf/install --key-bindings --completion --no-update-rc
