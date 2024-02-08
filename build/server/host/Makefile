@@ -34,8 +34,8 @@ command-os-setup-zsh__linux:
 
 # Installing section
 ## Linux-specific
-install-bacula__linux: install-postgresql__linux
-	-sudo add-apt-repository universe && sudo apt install bacula
+install-rsnapshot__linux:
+	-sudo add-apt-repository universe && sudo apt install rsnapshot
 
 install-cuda-11.8__linux:
 	-sudo apt install linux-headers-$(uname -r) && wget https://developer.download.nvidia.com/compute/cuda/11.8.0/local_installers/cuda_11.8.0_520.61.05_linux.run && sudo sh cuda_11.8.0_520.61.05_linux.run --override --silent --toolkit && rm cuda_11.8.0_520.61.05_linux.run
@@ -45,9 +45,6 @@ install-git__linux:
 
 install-nvidia-driver-535__linux:
 	-sudo apt install nvidia-driver-535 --yes
-
-install-postgresql__linux:
-	-sudo apt install postgresql
 
 install-python3__linux:
 	-sudo apt install python3 python3-wheel python3-pip python3-venv python3-dev python3-setuptools --yes
