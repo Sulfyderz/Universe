@@ -4,8 +4,9 @@ set fileencoding=utf-8
 
 " Required
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+let vp = substitute(system("universe -p"), '\n', '', 'g') . '/bin/vim/bundle/'
+let &rtp .= ',' . vp . 'Vundle.vim'
+call vundle#begin(vp)
 Plugin 'VundleVim/Vundle.vim'
 
 " Theme

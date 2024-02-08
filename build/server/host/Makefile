@@ -1,13 +1,15 @@
-# Oneshell means all lines in a recipe run in the same shell
+# Configuration
+## Oneshell means all lines in a recipe run in the same shell
 .ONESHELL:
-
-
-# Variables
 ## Note that the extra activate is needed to ensure that the activate floats env to the front of PATH
 CONDA_ACTIVATE=source $$(conda info --base)/etc/profile.d/conda.sh; conda activate; conda activate
 ## Need to specify bash in order for conda activate to work
 SHELL = /bin/bash
+
+
+# Variables
 ROOT_UNIVERSE := $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../../../)
+
 
 # Shortcuts
 ## Linux-specific
@@ -17,14 +19,6 @@ upgrade__linux: upgrade-os__linux
 
 # Command section
 ## Linux-specific
-### 
-command-conda-setup-mlflow-env__linux:
-	-conda create --name Universe-MLflow -y && $(CONDA_ACTIVATE) Universe-MLflow && pip install psycopg2 mlflow
-
-###
-command-postgresql-setup-mlflow-database__linux:
-	-sudo -u postgres psql -c "CREATE DATABASE MLflow;" && sudo -u postgres psql -c "CREATE USER MLflow WITH ENCRYPTED PASSWORD 'MLflow';" && sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE MLflow TO MLflow;"
-
 ### Setup ssh connection timeout
 command-os-setup-ssh-connection-timeout__linux:
 	-sudo sed -i -e 's/#ClientAliveInterval .*/#ClientAliveInterval 600/' /etc/ssh/sshd_config && sudo sed -i -e 's/#ClientAliveCountMax .*/#ClientAliveCountMax 3/' /etc/ssh/sshd_config && sudo service ssh restart
@@ -40,6 +34,9 @@ command-os-setup-zsh__linux:
 
 # Installing section
 ## Linux-specific
+install-bacula__linux: install-postgresql__linux
+	-sudo add-apt-repository universe && sudo apt install bacula
+
 install-cuda-11.8__linux:
 	-sudo apt install linux-headers-$(uname -r) && wget https://developer.download.nvidia.com/compute/cuda/11.8.0/local_installers/cuda_11.8.0_520.61.05_linux.run && sudo sh cuda_11.8.0_520.61.05_linux.run --override --silent --toolkit && rm cuda_11.8.0_520.61.05_linux.run
 
@@ -50,7 +47,7 @@ install-nvidia-driver-535__linux:
 	-sudo apt install nvidia-driver-535 --yes
 
 install-postgresql__linux:
-	-sudo apt-get install postgresql postgresql-contrib postgresql-server-dev-all
+	-sudo apt install postgresql
 
 install-python3__linux:
 	-sudo apt install python3 python3-wheel python3-pip python3-venv python3-dev python3-setuptools --yes

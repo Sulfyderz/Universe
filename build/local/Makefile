@@ -1,4 +1,5 @@
-# Oneshell means all lines in a recipe run in the same shell
+# Configuration
+## Oneshell means all lines in a recipe run in the same shell
 .ONESHELL:
 
 
@@ -34,11 +35,11 @@ install-tmux-resurrect:
 	-git clone https://github.com/tmux-plugins/tmux-resurrect $(ROOT_UNIVERSE)/bin/tmux-resurrect/
 
 install-vundle:
-	-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim && vim +PluginInstall +qall
+	-git clone https://github.com/VundleVim/Vundle.vim.git $(ROOT_UNIVERSE)/bin/vim/bundle/Vundle.vim && vim +PluginInstall +qall
 
 ## Linux-specific
 install-conda__linux:
-	-mkdir -p ~/Workshop/Tool/Package-Manager/Miniconda3 && wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/Workshop/Tool/Package-Manager/Miniconda3/miniconda.sh && bash ~/Workshop/Tool/Package-Manager/Miniconda3/miniconda.sh -b -u -p ~/Workshop/Tool/Package-Manager/Miniconda3 && rm -rf ~/Workshop/Tool/Package-Manager/Miniconda3/miniconda.sh
+	-mkdir -p $(ROOT_UNIVERSE)/bin/miniconda3 && wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O $(ROOT_UNIVERSE)/bin/miniconda3/miniconda.sh && bash $(ROOT_UNIVERSE)/bin/miniconda3/miniconda.sh -b -u -p $(ROOT_UNIVERSE)/bin/miniconda3 && rm -rf $(ROOT_UNIVERSE)/bin/miniconda3/miniconda.sh
 
 install-fzf__linux:
 	-git clone --depth 1 https://github.com/junegunn/fzf.git $(ROOT_UNIVERSE)/bin/fzf/ && $(ROOT_UNIVERSE)/bin/fzf/install --key-bindings --completion --no-update-rc
