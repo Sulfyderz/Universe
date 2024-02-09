@@ -35,7 +35,7 @@ export LC_ALL=$LANG.UTF-8
 ## Universe
 export PATH="$PATH:$HOME/.bin"
 ## Conda
-eval "$('/home/broux/Tool/Package-Manager/Miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+eval "$($(universe -p)/bin/miniconda3/bin/conda 'shell.zsh' 'hook' 2> /dev/null)"
 ## CUDA
 export PATH="$PATH:/usr/local/cuda-11.8/bin"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-11.8/lib64:/usr/local/cuda-11.8/extras/CUPTI/lib64"
