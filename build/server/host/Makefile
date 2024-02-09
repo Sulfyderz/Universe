@@ -13,19 +13,15 @@ ROOT_UNIVERSE := $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../../../)
 
 # Shortcuts
 ## Linux-specific
-install__linux: install-cuda-11.8__linux install-git__linux install-nvidia-driver__linux install-python3__linux install-shell-completion__linux
+install__linux: install-git__linux install-nvidia-driver__linux install-cuda-11.8__linux install-python3__linux install-shell-completion__linux
 upgrade__linux: upgrade-os__linux
 
 
 # Command section
 ## Linux-specific
-### Add universe repository to apt
-command-apt-add-repository-universe__linux:
-	-sudo add-apt-repository -y universe
-
 ### Setup ssh connection timeout
 command-os-setup-ssh-connection-timeout__linux:
-	-sudo sed -i -e 's/#ClientAliveInterval .*/ClientAliveInterval 600/' /etc/ssh/sshd_config && sudo sed -i -e 's/#ClientAliveCountMax .*/ClientAliveCountMax 3/' /etc/ssh/sshd_config && sudo service ssh restart
+	-sudo sed -i -e 's/.*ClientAliveInterval .*/ClientAliveInterval 600/' /etc/ssh/sshd_config && sudo sed -i -e 's/.*ClientAliveCountMax .*/ClientAliveCountMax 3/' /etc/ssh/sshd_config && sudo service ssh restart
 
 ### Setup Paris timezone
 command-os-setup-timezone-paris__linux:
@@ -38,9 +34,6 @@ command-os-setup-zsh__linux:
 
 # Installing section
 ## Linux-specific
-install-rsnapshot__linux: command-apt-add-repository-universe__linux
-	-sudo apt install rsnapshot --yes
-
 install-cuda-11.8__linux:
 	-sudo apt install linux-headers-$(uname -r) && wget https://developer.download.nvidia.com/compute/cuda/11.8.0/local_installers/cuda_11.8.0_520.61.05_linux.run && sudo sh cuda_11.8.0_520.61.05_linux.run --override --silent --toolkit && rm cuda_11.8.0_520.61.05_linux.run
 
@@ -53,6 +46,9 @@ install-nvidia-driver-535__linux:
 install-python3__linux:
 	-sudo apt install python3 python3-wheel python3-pip python3-venv python3-dev python3-setuptools --yes
 
+install-rsnapshot__linux:
+	-sudo add-apt-repository -y universe && sudo apt install rsnapshot --yes
+
 install-shell-completion__linux:
 	-sudo apt install bash-completion
 
@@ -61,3 +57,9 @@ install-shell-completion__linux:
 ## Linux-specific
 upgrade-os__linux:
 	-sudo apt update && sudo apt full-upgrade --yes && sudo apt autoremove --yes && sudo apt autoclean --yes
+
+# Link section
+## Linux-specific
+link-rsnapshot__linux:
+	-sudo cp -rf $(ROOT_UNIVERSE)/files/server/host/auto/linux/rsnapshot /etc/rsnapshot.conf
+	-sudo cp -rf $(ROOT_UNIVERSE)/files/server/host/auto/linux/cron_rsnapshot /etc/cron.d/rsnapshot

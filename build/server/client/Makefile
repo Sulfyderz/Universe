@@ -16,13 +16,13 @@ upgrade__linux: upgrade-fzf__linux upgrade-tmux-resurrect upgrade-vundle upgrade
 
 # Command section
 ## Non-specific
-### Deactivating conda on startup
-command-conda-not-on-startup:
-	-conda config --set auto_activate_base false
-
 ### Deactivating the prompt modifier of conda (useful only when starship is applied)
 command-conda-mute:
 	-conda config --set changeps1 false
+
+### Deactivating conda on startup
+command-conda-not-on-startup:
+	-conda config --set auto_activate_base false
 
 
 # Installing section
@@ -63,7 +63,7 @@ upgrade-zsh-autosuggestions__linux:
 	-git -C $(ROOT_UNIVERSE)/bin/zsh-autosuggestions pull
 
 
-# Symbolic link section
+# Link section
 ## Non-specific
 link-bash:
 	-ln -sf $(ROOT_UNIVERSE)/files/server/client/auto/all/.bash_profile ~

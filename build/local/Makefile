@@ -21,13 +21,14 @@ upgrade__macOS: upgrade-fzf__macOS upgrade-tmux-resurrect upgrade-vundle upgrade
 
 # Command section
 ## Non-specific
+### Deactivating the prompt modifier of conda (useful only when starship is applied)
+command-conda-mute:
+	-conda config --set changeps1 false
+
 ### Deactivating conda on startup
 command-conda-not-on-startup:
 	-conda config --set auto_activate_base false
 
-### Deactivating the prompt modifier of conda (useful only when starship is applied)
-command-conda-mute:
-	-conda config --set changeps1 false
 
 # Installing section
 ## Non-specific
@@ -95,7 +96,8 @@ upgrade-fzf__macOS:
 upgrade-zsh-autosuggestions__macOS:
 	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew update && brew upgrade zsh-autosuggestions
 
-# Symbolic link section
+
+# Link section
 ## Non-specific
 link-bash:
 	-ln -sf $(ROOT_UNIVERSE)/files/local/auto/all/.bash_profile ~
