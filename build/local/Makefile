@@ -79,7 +79,7 @@ upgrade-tmux-resurrect:
 	-git -C $(ROOT_UNIVERSE)/bin/tmux-resurrect pull
 
 upgrade-vundle:
-	-git -C ~/.vim/bundle/Vundle.vim pull && vim +PluginInstall +qall
+	-git -C $(ROOT_UNIVERSE)/bin/vim/bundle/Vundle.vim pull && vim +PluginInstall +qall
 
 ## Linux-specific
 upgrade-fzf__linux:
