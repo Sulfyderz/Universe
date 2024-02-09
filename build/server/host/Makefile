@@ -25,7 +25,7 @@ command-apt-add-repository-universe__linux:
 
 ### Setup ssh connection timeout
 command-os-setup-ssh-connection-timeout__linux:
-	-sudo sed -i -e 's/#ClientAliveInterval .*/#ClientAliveInterval 600/' /etc/ssh/sshd_config && sudo sed -i -e 's/#ClientAliveCountMax .*/#ClientAliveCountMax 3/' /etc/ssh/sshd_config && sudo service ssh restart
+	-sudo sed -i -e 's/#ClientAliveInterval .*/ClientAliveInterval 600/' /etc/ssh/sshd_config && sudo sed -i -e 's/#ClientAliveCountMax .*/ClientAliveCountMax 3/' /etc/ssh/sshd_config && sudo service ssh restart
 
 ### Setup Paris timezone
 command-os-setup-timezone-paris__linux:
