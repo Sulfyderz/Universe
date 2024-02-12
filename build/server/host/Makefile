@@ -62,4 +62,4 @@ upgrade-os__linux:
 ## Linux-specific
 link-rsnapshot__linux:
 	-sudo cp -rf $(ROOT_UNIVERSE)/files/server/host/auto/linux/rsnapshot.conf /etc/rsnapshot.conf
-	-sudo cp -rf $(ROOT_UNIVERSE)/files/server/host/auto/linux/rsnapshot /etc/cron.d/rsnapshot
+	-sudo cp -rf $(ROOT_UNIVERSE)/files/server/host/auto/linux/rsnapshot /etc/cron.d/rsnapshotx
