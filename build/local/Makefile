@@ -14,7 +14,7 @@ link__linux: link-git link-tmux link-starship link-vim link-zsh__linux
 upgrade__linux: upgrade-fzf__linux upgrade-tmux-resurrect upgrade-vundle upgrade-zsh-autosuggestions__linux
 
 ## macOS-specific
-install__macOS: install-fzf__macOS install-tmux-resurrect install-homebrew__macOS install-starship__macOS install-tmux__macOS install-vundle install-zsh-autosuggestions__macOS
+install__macOS: install-homebrew__macOS install-raycast__macOS install-fzf__macOS install-tmux-resurrect install-starship__macOS install-tmux__macOS install-vundle install-zsh-autosuggestions__macOS
 link__macOS: link-git link-tmux link-skhd__macOS link-starship link-vim link-yabai__macOS link-zsh__macOS
 upgrade__macOS: upgrade-fzf__macOS upgrade-tmux-resurrect upgrade-vundle upgrade-zsh-autosuggestions__macOS
 
@@ -63,6 +63,9 @@ install-fzf__macOS:
 
 install-homebrew__macOS:
 	-/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+install-raycast__macOS:
+	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew install --cask raycast
 
 install-starship__macOS:
 	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew install starship
@@ -120,6 +123,9 @@ link-zsh__linux:
 	-ln -sf $(ROOT_UNIVERSE)/files/local/auto/linux/.zshrc ~
 
 ## macOS-specific
+link-raycast__macOS:
+	-open $(ROOT_UNIVERSE)/files/local/auto/macOS/Raycast.rayconfig
+
 link-skhd__macOS:
 	-ln -sf $(ROOT_UNIVERSE)/files/local/auto/macOS/.skhdrc ~
 
