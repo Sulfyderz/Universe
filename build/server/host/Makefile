@@ -13,7 +13,8 @@ ROOT_UNIVERSE := $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../../../)
 
 # Shortcuts
 ## Linux-specific
-install__linux: install-git__linux install-nvidia-driver__linux install-cuda-11.8__linux install-python3__linux install-shell-completion__linux
+install__linux: install-git__linux install-nvidia-driver__linux install-cuda-11.8__linux install-python3__linux install-rsnapshot__linux install-shell-completion__linux install-slurm__linux
+link__linux: link-rsnapshot__linux
 upgrade__linux: upgrade-os__linux
 
 
@@ -38,7 +39,7 @@ install-cuda-11.8__linux:
 	-sudo apt install linux-headers-$(uname -r) && wget https://developer.download.nvidia.com/compute/cuda/11.8.0/local_installers/cuda_11.8.0_520.61.05_linux.run && sudo sh cuda_11.8.0_520.61.05_linux.run --override --silent --toolkit && rm cuda_11.8.0_520.61.05_linux.run
 
 install-git__linux:
-	-sudo apt install git
+	-sudo apt install git --yes
 
 install-nvidia-driver-535__linux:
 	-sudo apt install nvidia-driver-535 --yes
@@ -50,7 +51,10 @@ install-rsnapshot__linux:
 	-sudo add-apt-repository -y universe && sudo apt install rsnapshot --yes
 
 install-shell-completion__linux:
-	-sudo apt install bash-completion
+	-sudo apt install bash-completion --yes
+
+install-slurm__linux:
+	-sudo apt install slurmd slurmctld --yes
 
 
 # Upgrading section
@@ -63,3 +67,6 @@ upgrade-os__linux:
 link-rsnapshot__linux:
 	-sudo cp -rf $(ROOT_UNIVERSE)/files/server/host/auto/linux/rsnapshot.conf /etc/rsnapshot.conf
 	-sudo cp -rf $(ROOT_UNIVERSE)/files/server/host/auto/linux/rsnapshot /etc/cron.d/rsnapshotx
+
+link-slurm__linux:
+	-sudo echo "ok"
