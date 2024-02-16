@@ -20,6 +20,10 @@ upgrade__linux: upgrade-os__linux
 
 # Command section
 ## Linux-specific
+command-os-service-apply-ssh-config:
+
+command-os-service-start-slurm:
+
 ### Setup ssh connection timeout
 command-os-setup-ssh-connection-timeout__linux:
 	-sudo sed -i -e 's/.*ClientAliveInterval .*/ClientAliveInterval 600/' /etc/ssh/sshd_config && sudo sed -i -e 's/.*ClientAliveCountMax .*/ClientAliveCountMax 3/' /etc/ssh/sshd_config && sudo systemctl restart ssh
@@ -69,4 +73,4 @@ link-rsnapshot__linux:
 	-sudo cp -rf $(ROOT_UNIVERSE)/files/server/host/auto/linux/rsnapshot /etc/cron.d/rsnapshot
 
 link-slurm__linux:
-	-sudo echo "ok"
+	-sudo cp -rf $(ROOT_UNIVERSE)/files/server/host/auto/linux/slurm.conf /etc/slurm/slurm.conf && sudo mkdir -p /var/spool/slurmctld && sudo chown slurm: /var/spool/slurmctld
