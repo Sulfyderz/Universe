@@ -69,8 +69,8 @@ upgrade-os__linux:
 # Link section
 ## Linux-specific
 link-rsnapshot__linux:
-	-sudo cp -rf $(ROOT_UNIVERSE)/files/server/host/auto/linux/rsnapshot.conf /etc/rsnapshot.conf
-	-sudo cp -rf $(ROOT_UNIVERSE)/files/server/host/auto/linux/rsnapshot /etc/cron.d/rsnapshot
+	-sudo cp -rf $(ROOT_UNIVERSE)/files/server/host/auto/linux/rsnapshot/rsnapshot.conf /etc/
+	-sudo cp -rf $(ROOT_UNIVERSE)/files/server/host/auto/linux/rsnapshot/rsnapshot /etc/cron.d/
 
 link-slurm__linux:
-	-sudo cp -rf $(ROOT_UNIVERSE)/files/server/host/auto/linux/slurm.conf /etc/slurm/slurm.conf && sudo mkdir -p /var/spool/slurmctld && sudo chown slurm: /var/spool/slurmctld
+	-sudo cp -rf $(ROOT_UNIVERSE)/files/server/host/auto/linux/slurm/{slurm.conf,gres.conf,cgroup.conf} /etc/slurm/ && sudo mkdir -p /var/spool/slurmctld && sudo chown slurm: /var/spool/slurmctld

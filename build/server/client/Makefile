@@ -66,21 +66,20 @@ upgrade-zsh-autosuggestions__linux:
 # Link section
 ## Non-specific
 link-bash:
-	-ln -sf $(ROOT_UNIVERSE)/files/server/client/auto/all/.bash_profile ~
-	-ln -sf $(ROOT_UNIVERSE)/files/server/client/auto/all/.inputrc ~
+	-ln -sf $(ROOT_UNIVERSE)/files/server/client/auto/all/bash/{.bash_profile,.inputrc} ~
 
 link-git:
-	-ln -sf $(ROOT_UNIVERSE)/files/server/client/auto/all/.gitconfig ~
+	-ln -sf $(ROOT_UNIVERSE)/files/server/client/auto/all/git/.gitconfig ~
 
 link-tmux:
-	-ln -sf $(ROOT_UNIVERSE)/files/server/client/auto/all/.tmux.conf ~
+	-ln -sf $(ROOT_UNIVERSE)/files/server/client/auto/all/tmux/.tmux.conf ~
 
 link-starship:
-	-mkdir -p ~/.config/ && ln -sf $(ROOT_UNIVERSE)/files/server/client/auto/all/starship.toml ~/.config/
+	-mkdir -p ~/.config/ && ln -sf $(ROOT_UNIVERSE)/files/server/client/auto/all/starship/starship.toml ~/.config/
 
 link-vim:
-	-ln -sf $(ROOT_UNIVERSE)/files/server/client/auto/all/.vimrc ~
+	-ln -sf $(ROOT_UNIVERSE)/files/server/client/auto/all/vim/.vimrc ~
 
 ## Linux-specific
 link-zsh__linux:
-	-ln -sf $(ROOT_UNIVERSE)/files/server/client/auto/linux/.zshrc ~
+	-ln -sf $(ROOT_UNIVERSE)/files/server/client/auto/linux/zsh/.zshrc ~

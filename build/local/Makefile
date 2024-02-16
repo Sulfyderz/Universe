@@ -103,34 +103,33 @@ upgrade-zsh-autosuggestions__macOS:
 # Link section
 ## Non-specific
 link-bash:
-	-ln -sf $(ROOT_UNIVERSE)/files/local/auto/all/.bash_profile ~
-	-ln -sf $(ROOT_UNIVERSE)/files/local/auto/all/.inputrc ~
+	-ln -sf $(ROOT_UNIVERSE)/files/local/auto/all/bash/{.bash_profile,.inputrc} ~
 
 link-git:
-	-ln -sf $(ROOT_UNIVERSE)/files/local/auto/all/.gitconfig ~
+	-ln -sf $(ROOT_UNIVERSE)/files/local/auto/all/git/.gitconfig ~
 
 link-tmux:
-	-ln -sf $(ROOT_UNIVERSE)/files/local/auto/all/.tmux.conf ~
+	-ln -sf $(ROOT_UNIVERSE)/files/local/auto/all/tmux/.tmux.conf ~
 
 link-starship:
-	-mkdir -p ~/.config/ && ln -sf $(ROOT_UNIVERSE)/files/local/auto/all/starship.toml ~/.config/
+	-mkdir -p ~/.config/ && ln -sf $(ROOT_UNIVERSE)/files/local/auto/all/starship/starship.toml ~/.config/
 
 link-vim:
-	-ln -sf $(ROOT_UNIVERSE)/files/local/auto/all/.vimrc ~
+	-ln -sf $(ROOT_UNIVERSE)/files/local/auto/all/vim/.vimrc ~
 
 ## Linux-specific
 link-zsh__linux:
-	-ln -sf $(ROOT_UNIVERSE)/files/local/auto/linux/.zshrc ~
+	-ln -sf $(ROOT_UNIVERSE)/files/local/auto/linux/zsh/.zshrc ~
 
 ## macOS-specific
 link-raycast__macOS:
-	-open $(ROOT_UNIVERSE)/files/local/auto/macOS/Raycast.rayconfig
+	-open $(ROOT_UNIVERSE)/files/local/auto/macOS/raycast/raycast.rayconfig
 
 link-skhd__macOS:
-	-ln -sf $(ROOT_UNIVERSE)/files/local/auto/macOS/.skhdrc ~
+	-ln -sf $(ROOT_UNIVERSE)/files/local/auto/macOS/skhd/.skhdrc ~
 
 link-yabai__macOS:
-	-ln -sf $(ROOT_UNIVERSE)/files/local/auto/macOS/.yabairc ~
+	-ln -sf $(ROOT_UNIVERSE)/files/local/auto/macOS/yabai/.yabairc ~
 
 link-zsh__macOS:
-	-ln -sf $(ROOT_UNIVERSE)/files/local/auto/macOS/.zshrc ~
+	-ln -sf $(ROOT_UNIVERSE)/files/local/auto/macOS/zsh/.zshrc ~
