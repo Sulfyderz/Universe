@@ -20,9 +20,7 @@ upgrade__linux: upgrade-os__linux
 
 # Command section
 ## Linux-specific
-command-os-service-apply-ssh-config:
-
-command-os-service-start-slurm:
+### TO DO: command-os-service-start-slurm:
 
 ### Setup ssh connection timeout
 command-os-setup-ssh-connection-timeout__linux:
@@ -71,6 +69,6 @@ upgrade-os__linux:
 link-rsnapshot__linux:
 	-sudo cp -rf $(ROOT_UNIVERSE)/files/server/host/auto/linux/rsnapshot/rsnapshot.conf /etc/
 	-sudo cp -rf $(ROOT_UNIVERSE)/files/server/host/auto/linux/rsnapshot/rsnapshot /etc/cron.d/
-
-link-slurm__linux:
-	-sudo cp -rf $(ROOT_UNIVERSE)/files/server/host/auto/linux/slurm/{slurm.conf,gres.conf,cgroup.conf} /etc/slurm/ && sudo mkdir -p /var/spool/slurmctld && sudo chown slurm: /var/spool/slurmctld
+### TO DO: Make slurm config files functionnal (see files/server/host/auto/linux/slurm/README.txt); Dividing the following command into several ones?
+###link-slurm__linux:
+###	-sudo cp -rf $(ROOT_UNIVERSE)/files/server/host/auto/linux/slurm/{slurm.conf,gres.conf,cgroup.conf} /etc/slurm/ && sudo mkdir -p /var/spool/slurmctld && sudo chown slurm: /var/spool/slurmctld
