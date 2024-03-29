@@ -16,8 +16,7 @@ upgrade__linux: upgrade-fzf__linux upgrade-tmux-resurrect upgrade-vundle upgrade
 ## macOS-specific
 install__macOS: install-homebrew__macOS install-raycast__macOS install-fzf__macOS install-tmux-resurrect install-starship__macOS install-tmux__macOS install-vundle install-zsh-autosuggestions__macOS
 link__macOS: link-git link-tmux link-skhd__macOS link-starship link-vim link-yabai__macOS link-zsh__macOS
-upgrade__macOS: upgrade-fzf__macOS upgrade-tmux-resurrect upgrade-vundle upgrade-zsh-autosuggestions__macOS
-
+upgrade__macOS: upgrade-homebrew__macOS upgrade-tmux-resurrect upgrade-vundle
 
 # Command section
 ## Non-specific
@@ -93,8 +92,20 @@ upgrade-zsh-autosuggestions__linux:
 	-git -C $(ROOT_UNIVERSE)/bin/zsh-autosuggestions pull
 
 ## macOS-specific
+upgrade-homebrew__macOS:
+	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew update && brew upgrade
+
 upgrade-fzf__macOS:
 	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew update && brew upgrade fzf
+
+upgrade-raycast__macOS:
+	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew update && brew upgrade --cask raycast
+
+upgrade-starship__macOS:
+	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew update && brew upgrade starship
+
+upgrade-tmux__macOS:
+	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew update && brew upgrade tmux 
 
 upgrade-zsh-autosuggestions__macOS:
 	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew update && brew upgrade zsh-autosuggestions
