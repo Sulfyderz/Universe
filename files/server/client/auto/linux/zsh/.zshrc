@@ -31,6 +31,10 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 export LANG="en_US"
 export LC_ALL=$LANG.UTF-8
 
+# Default editor
+export VISUAL="vim"
+export EDITOR="$VISUAL"
+
 # Software
 ## Universe
 export PATH="$PATH:$HOME/.bin"
