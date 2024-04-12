@@ -24,6 +24,10 @@ command-conda-mute:
 command-conda-not-on-startup:
 	-conda config --set auto_activate_base false
 
+### Setup zsh as default shell
+command-os-setup-zsh__linux:
+	-chsh -s $(which zsh)
+
 
 # Installing section
 ## Non-specific

@@ -30,10 +30,6 @@ command-os-setup-ssh-connection-timeout__linux:
 command-os-setup-timezone-paris__linux:
 	-sudo timedatectl set-timezone Europe/Paris
 
-### Setup zsh as default shell
-command-os-setup-zsh__linux:
-	-chsh -s $(which zsh)
-
 
 # Installing section
 ## Linux-specific
