@@ -34,6 +34,8 @@ export LC_ALL=$LANG.UTF-8
 # Default editor
 export VISUAL="vim"
 export EDITOR="$VISUAL"
+
+# Key bindings
 bindkey -e
 
 # Software
