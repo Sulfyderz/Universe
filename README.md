@@ -1,4 +1,4 @@
-# <img width="40" height="40" src="https://gitlab.com/uploads/-/system/project/avatar/24016226/galaxy.png" alt="Banner"> Universe
+# <img width="40" height="40" src="https://gitlab.com/uploads/-/system/project/avatar/24016226/galaxy.png?width=96" alt="Banner"> Universe
 By Sulfyderz.
 
 ## About
