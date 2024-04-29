@@ -11,3 +11,4 @@ TO DO:
 - Sites should also configure pam_slurm_adopt to ensure users can not escape the cgroups via ssh. Source: https://slurm.schedmd.com/cgroup.conf.html
 - Create a CPU partition with no GPU
 - Install POSTFIX (email software) and configure it for being used by SLURM when a process is done
+- Create alias for SLURM in ZSH (https://github.com/ozancaglayan/cluster-rc/blob/master/bashrc)
