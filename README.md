@@ -102,7 +102,7 @@ command-argument__os:
     -instructions
 ```
 - `command`: The [command](#commands) that rule concerns;
-- `-argument`: The argument name that should be given to the `command` to activate that rule. `-argument` is optional only if `__os` is defined. If it's not defined, that rule is activated when you call the `command` without arguments (e.g. `universe install`);
+- `-argument`: The argument name that should be given to the `command` to activate that rule. `-argument` is optional only if `__os` is defined. If `-argument` is not given, that rule is activated when you call the `command` without arguments (e.g. `universe install`);
     > ⚠️ `-argument` has to start by a dash.
 
     > ⚠️ `-argument` can contain any special character except underscore (e.g. `-python3-3.10`). 
