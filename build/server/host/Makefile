@@ -13,7 +13,7 @@ ROOT_UNIVERSE := $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../../../)
 
 # Shortcuts
 ## Linux-specific
-install__linux: install-git__linux install-nvidia-driver__linux install-cuda-11.8__linux install-python3__linux install-rsnapshot__linux install-shell-completion__linux install-slurm__linux
+install__linux: install-cuda-11.8__linux install-git__linux install-htop__linux install-nvidia-driver__linux install-nvtop__linux install-python3__linux install-rsnapshot__linux install-shell-completion__linux #install-slurm__linux
 link__linux: link-rsnapshot__linux
 upgrade__linux: upgrade-os__linux
 
@@ -39,8 +39,14 @@ install-cuda-11.8__linux:
 install-git__linux:
 	-sudo apt install git --yes
 
+install-htop__linux:
+	-sudo apt install htop --yes
+
 install-nvidia-driver-535__linux:
 	-sudo apt install nvidia-driver-535 --yes
+
+install-nvtop__linux:
+	-sudo apt install nvtop --yes
 
 install-python3__linux:
 	-sudo apt install python3 python3-wheel python3-pip python3-venv python3-dev python3-setuptools --yes
@@ -51,8 +57,8 @@ install-rsnapshot__linux:
 install-shell-completion__linux:
 	-sudo apt install bash-completion --yes
 
-install-slurm__linux:
-	-sudo apt install slurmd slurmctld --yes
+#install-slurm__linux:
+#	-sudo apt install slurmd slurmctld --yes
 
 
 # Upgrading section
