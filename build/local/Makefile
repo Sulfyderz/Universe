@@ -93,7 +93,7 @@ upgrade-zsh-autosuggestions__linux:
 
 ## macOS-specific
 upgrade-homebrew__macOS:
-	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew update && brew upgrade
+	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew update && brew upgrade && brew upgrade --cask
 
 upgrade-fzf__macOS:
 	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew update && brew upgrade fzf
