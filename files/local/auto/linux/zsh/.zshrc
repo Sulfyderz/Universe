@@ -39,8 +39,8 @@ setopt hist_verify
 
 # Key bindings
 ## Completion using arrow keys based on history
-bindkey '^[[A' history-search-backward
-bindkey '^[[B' history-search-forward
+bindkey '^[OA' history-search-backward
+bindkey '^[OB' history-search-forward
 
 # Software
 ## Universe
