@@ -1,5 +1,5 @@
 # Alias
-alias cd="z"install-zoxide__linux
+alias cd="z"
 alias co="conda"
 alias coa="conda activate"
 alias cod="conda deactivate"
