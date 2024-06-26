@@ -110,6 +110,9 @@ upgrade-vundle:
 upgrade-fzf__linux:
 	-git -C $(ROOT_UNIVERSE)/bin/fzf pull && $(ROOT_UNIVERSE)/bin/fzf/install --key-bindings --completion --no-update-rc
 
+upgrade-git-lfs__linux:
+	-sudo apt update && sudo apt install --only-upgrade git-lfs && sudo apt autoremove --yes && sudo apt autoclean --yes
+
 upgrade-os__linux:
 	-sudo apt update && sudo apt full-upgrade --yes && sudo apt autoremove --yes && sudo apt autoclean --yes
 
