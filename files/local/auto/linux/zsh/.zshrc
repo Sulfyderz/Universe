@@ -53,6 +53,7 @@ export FZF_DEFAULT_OPTS='--height 30% -m --border --reverse --prompt="❯ " --po
 ## Starship
 eval "$(starship init zsh)"
 ## zoxide
+export PATH="$PATH:$HOME/.local/bin"
 eval "$(zoxide init zsh)"
 ## zsh-autosuggestions
 export ZSH_AUTOSUGGEST_MANUAL_REBIND=true

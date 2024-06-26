@@ -1,5 +1,5 @@
 # Alias
-alias cd="z"
+alias cd="z"install-zoxide__linux
 alias co="conda"
 alias coa="conda activate"
 alias cod="conda deactivate"
@@ -66,6 +66,7 @@ source ~/.fzf.zsh 2> /dev/null
 ## Starship
 eval "$(starship init zsh 2> /dev/null)"
 ## zoxide
+export PATH="$PATH:$HOME/.local/bin"
 eval "$(zoxide init zsh)"
 ## zsh-autosuggestions
 export ZSH_AUTOSUGGEST_MANUAL_REBIND=true
