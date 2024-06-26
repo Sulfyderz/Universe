@@ -9,12 +9,12 @@ ROOT_UNIVERSE := $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../../)
 
 # Shorcuts
 ## Linux-specific
-install__linux: install-fzf__linux install-tmux-resurrect install-starship__linux install-vundle install-zsh-autosuggestions__linux
+install__linux: install-fzf__linux install-tmux-resurrect install-starship__linux install-vundle install-zoxide__linux install-zsh-autosuggestions__linux
 link__linux: link-git link-tmux link-starship link-vim link-zsh__linux
 upgrade__linux: upgrade-fzf__linux upgrade-tmux-resurrect upgrade-vundle upgrade-zsh-autosuggestions__linux
 
 ## macOS-specific
-install__macOS: install-homebrew__macOS install-raycast__macOS install-fzf__macOS install-tmux-resurrect install-starship__macOS install-tmux__macOS install-vundle install-zsh-autosuggestions__macOS
+install__macOS: install-homebrew__macOS install-raycast__macOS install-fzf__macOS install-tmux-resurrect install-starship__macOS install-tmux__macOS install-vundle install-zoxide__macOS install-zsh-autosuggestions__macOS
 link__macOS: link-git link-tmux link-skhd__macOS link-starship link-vim link-yabai__macOS link-zsh__macOS
 upgrade__macOS: upgrade-homebrew__macOS upgrade-tmux-resurrect upgrade-vundle
 
@@ -47,6 +47,9 @@ install-fzf__linux:
 install-starship__linux:
 	-curl -sS https://starship.rs/install.sh | sh
 
+install-zoxide__linux:
+	-curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+
 install-zsh-autosuggestions__linux:
 	-git clone https://github.com/zsh-users/zsh-autosuggestions $(ROOT_UNIVERSE)/bin/zsh-autosuggestions/
 
@@ -71,6 +74,9 @@ install-starship__macOS:
 
 install-tmux__macOS:
 	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew install tmux 
+
+install-zoxide__macOS:
+	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew install zoxide
 
 install-zsh-autosuggestions__macOS:
 	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew install zsh-autosuggestions
@@ -106,6 +112,9 @@ upgrade-starship__macOS:
 
 upgrade-tmux__macOS:
 	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew update && brew upgrade tmux 
+
+upgrade-zoxide__macOS:
+	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew update && brew upgrade zoxide
 
 upgrade-zsh-autosuggestions__macOS:
 	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew update && brew upgrade zsh-autosuggestions

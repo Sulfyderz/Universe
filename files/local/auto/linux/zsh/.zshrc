@@ -1,4 +1,5 @@
 # Alias
+alias cd="z"
 alias co="conda"
 alias coa="conda activate"
 alias cod="conda deactivate"
@@ -51,6 +52,8 @@ export FZF_DEFAULT_OPTS='--height 30% -m --border --reverse --prompt="❯ " --po
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 ## Starship
 eval "$(starship init zsh)"
+## zoxide
+eval "$(zoxide init zsh)"
 ## zsh-autosuggestions
 export ZSH_AUTOSUGGEST_MANUAL_REBIND=true
 source $(universe -p)/bin/zsh-autosuggestions/zsh-autosuggestions.zsh

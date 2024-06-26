@@ -1,4 +1,5 @@
 # Alias
+alias cd="z"
 alias co="conda"
 alias coa="conda activate"
 alias cod="conda deactivate"
@@ -54,6 +55,8 @@ source $(brew --prefix)/opt/fzf/shell/completion.zsh 2> /dev/null
 source $(brew --prefix)/opt/fzf/shell/key-bindings.zsh 2> /dev/null
 ## Starship
 eval "$(starship init zsh 2> /dev/null)"
+## zoxide
+eval "$(zoxide init zsh)"
 ## zsh-autosuggestions 
 export ZSH_AUTOSUGGEST_MANUAL_REBIND=true
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh 2> /dev/null
