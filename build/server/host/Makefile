@@ -1,10 +1,6 @@
 # Configuration
 ## Oneshell means all lines in a recipe run in the same shell
 .ONESHELL:
-## Note that the extra activate is needed to ensure that the activate floats env to the front of PATH
-CONDA_ACTIVATE=source $$(conda info --base)/etc/profile.d/conda.sh; conda activate; conda activate
-## Need to specify bash in order for conda activate to work
-SHELL = /bin/bash
 
 
 # Variables
@@ -13,7 +9,7 @@ ROOT_UNIVERSE := $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../../../)
 
 # Shortcuts
 ## Linux-specific
-install__linux: install-cuda-11.8__linux install-git__linux install-htop__linux install-nvidia-driver__linux install-nvtop__linux install-python3__linux install-rsnapshot__linux install-shell-completion__linux #install-slurm__linux
+install__linux: install-cuda-11.8__linux install-git__linux install-git-lfs__linux install-htop__linux install-nvidia-driver__linux install-nvtop__linux install-python3__linux install-rsnapshot__linux install-shell-completion__linux #install-slurm__linux
 link__linux: link-rsnapshot__linux
 upgrade__linux: upgrade-os__linux
 
@@ -38,6 +34,9 @@ install-cuda-11.8__linux:
 
 install-git__linux:
 	-sudo apt install git --yes
+
+install-git-lfs__linux:
+	-sudo apt install git-lfs --yes
 
 install-htop__linux:
 	-sudo apt install htop --yes
@@ -71,6 +70,7 @@ upgrade-os__linux:
 link-rsnapshot__linux:
 	-sudo cp -rf $(ROOT_UNIVERSE)/files/server/host/auto/linux/rsnapshot/rsnapshot.conf /etc/
 	-sudo cp -rf $(ROOT_UNIVERSE)/files/server/host/auto/linux/rsnapshot/rsnapshot /etc/cron.d/
+
 ### TO DO: Make slurm config files functionnal (see files/server/host/auto/linux/slurm/README.txt); Dividing the following command into several ones?
 ###link-slurm__linux:
 ###	-sudo cp -rf $(ROOT_UNIVERSE)/files/server/host/auto/linux/slurm/{slurm.conf,gres.conf,cgroup.conf} /etc/slurm/ && sudo mkdir -p /var/spool/slurmctld && sudo chown slurm: /var/spool/slurmctld

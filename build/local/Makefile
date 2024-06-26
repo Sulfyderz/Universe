@@ -7,16 +7,17 @@
 ROOT_UNIVERSE := $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../../)
 
 
-# Shorcuts
+# Shortcuts
 ## Linux-specific
-install__linux: install-fzf__linux install-tmux-resurrect install-starship__linux install-vundle install-zoxide__linux install-zsh-autosuggestions__linux
+install__linux: install-fzf__linux install-git-lfs__linux install-tmux-resurrect install-starship__linux install-vundle install-zoxide__linux install-zsh-autosuggestions__linux
 link__linux: link-git link-tmux link-starship link-vim link-zsh__linux
-upgrade__linux: upgrade-fzf__linux upgrade-tmux-resurrect upgrade-vundle upgrade-zsh-autosuggestions__linux
+upgrade__linux: upgrade-os__linux upgrade-fzf__linux upgrade-tmux-resurrect upgrade-vundle upgrade-zsh-autosuggestions__linux
 
 ## macOS-specific
-install__macOS: install-homebrew__macOS install-raycast__macOS install-fzf__macOS install-tmux-resurrect install-starship__macOS install-tmux__macOS install-vundle install-zoxide__macOS install-zsh-autosuggestions__macOS
+install__macOS: install-homebrew__macOS install-raycast__macOS install-fzf__macOS install-git-lfs__macOS install-tmux-resurrect install-starship__macOS install-tmux__macOS install-vundle install-zoxide__macOS install-zsh-autosuggestions__macOS
 link__macOS: link-git link-tmux link-skhd__macOS link-starship link-vim link-yabai__macOS link-zsh__macOS
 upgrade__macOS: upgrade-homebrew__macOS upgrade-tmux-resurrect upgrade-vundle
+
 
 # Command section
 ## Non-specific
@@ -27,6 +28,15 @@ command-conda-mute:
 ### Deactivating conda on startup
 command-conda-not-on-startup:
 	-conda config --set auto_activate_base false
+
+### Initiating git lfs for a user account
+command-git-lfs-init-account:
+	-git lfs install
+
+## Linux-specific
+### Setup zsh as default shell
+command-os-setup-zsh__linux:
+	-chsh -s $(which zsh)
 
 
 # Installing section
@@ -43,6 +53,9 @@ install-conda__linux:
 
 install-fzf__linux:
 	-git clone --depth 1 https://github.com/junegunn/fzf.git $(ROOT_UNIVERSE)/bin/fzf/ && $(ROOT_UNIVERSE)/bin/fzf/install --key-bindings --completion --no-update-rc
+
+install-git-lfs__linux:
+	-sudo apt install git-lfs --yes
 
 install-starship__linux:
 	-curl -sS https://starship.rs/install.sh | sh
@@ -62,6 +75,9 @@ install-conda-x86__macOS:
 
 install-fzf__macOS:
 	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew install fzf
+
+install-git-lfs__macOS:
+	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew install git-lfs
 
 install-homebrew__macOS:
 	-/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -94,15 +110,21 @@ upgrade-vundle:
 upgrade-fzf__linux:
 	-git -C $(ROOT_UNIVERSE)/bin/fzf pull && $(ROOT_UNIVERSE)/bin/fzf/install --key-bindings --completion --no-update-rc
 
+upgrade-os__linux:
+	-sudo apt update && sudo apt full-upgrade --yes && sudo apt autoremove --yes && sudo apt autoclean --yes
+
 upgrade-zsh-autosuggestions__linux:
 	-git -C $(ROOT_UNIVERSE)/bin/zsh-autosuggestions pull
 
 ## macOS-specific
-upgrade-homebrew__macOS:
-	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew update && brew upgrade && brew upgrade --cask
-
 upgrade-fzf__macOS:
 	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew update && brew upgrade fzf
+
+upgrade-git-lfs__macOS:
+	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew update && brew upgrade git-lfs
+
+upgrade-homebrew__macOS:
+	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew update && brew upgrade && brew upgrade --cask
 
 upgrade-raycast__macOS:
 	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew update && brew upgrade --cask raycast

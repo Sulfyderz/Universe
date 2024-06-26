@@ -7,7 +7,7 @@
 ROOT_UNIVERSE := $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../../../)
 
 
-# Shorcuts
+# Shortcuts
 ## Linux-specific
 install__linux: install-fzf__linux install-tmux-resurrect install-starship__linux install-vundle install-zoxide__linux install-zsh-autosuggestions__linux
 link__linux: link-git link-tmux link-starship link-vim link-zsh__linux
@@ -24,6 +24,11 @@ command-conda-mute:
 command-conda-not-on-startup:
 	-conda config --set auto_activate_base false
 
+### Initiating git lfs for a user account
+command-git-lfs-init-account:
+	-git lfs install
+
+## Linux-specific
 ### Setup zsh as default shell
 command-os-setup-zsh__linux:
 	-chsh -s $(which zsh)
