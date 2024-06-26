@@ -62,8 +62,36 @@ install-shell-completion__linux:
 
 # Upgrading section
 ## Linux-specific
+upgrade-cuda-11.8__linux:
+	-sudo apt update && sudo apt install --only-upgrade linux-headers-$(uname -r) && sudo apt autoremove --yes && sudo apt autoclean --yes
+
+upgrade-git__linux:
+	-sudo apt update && sudo apt install --only-upgrade git && sudo apt autoremove --yes && sudo apt autoclean --yes
+
+upgrade-git-lfs__linux:
+	-sudo apt update && sudo apt install --only-upgrade git-lfs && sudo apt autoremove --yes && sudo apt autoclean --yes
+
+upgrade-htop__linux:
+	-sudo apt update && sudo apt install --only-upgrade htop && sudo apt autoremove --yes && sudo apt autoclean --yes
+
+upgrade-nvidia-driver-535__linux:
+	-sudo apt update && sudo apt install --only-upgrade nvidia-driver-535 && sudo apt autoremove --yes && sudo apt autoclean --yes
+
+upgrade-nvtop__linux:
+	-sudo apt update && sudo apt install --only-upgrade nvtop && sudo apt autoremove --yes && sudo apt autoclean --yes
+
 upgrade-os__linux:
 	-sudo apt update && sudo apt full-upgrade --yes && sudo apt autoremove --yes && sudo apt autoclean --yes
+
+upgrade-python3__linux:
+	-sudo apt update && sudo apt install --only-upgrade python3 python3-wheel python3-pip python3-venv python3-dev python3-setuptools && sudo apt autoremove --yes && sudo apt autoclean --yes
+
+upgrade-rsnapshot__linux:
+	-sudo apt update && sudo apt install --only-upgrade rsnapshot && sudo apt autoremove --yes && sudo apt autoclean --yes
+
+upgrade-shell-completion__linux:
+	-sudo apt update && sudo apt install --only-upgrade bash-completion && sudo apt autoremove --yes && sudo apt autoclean --yes
+
 
 # Link section
 ## Linux-specific
