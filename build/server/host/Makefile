@@ -62,9 +62,6 @@ install-shell-completion__linux:
 
 # Upgrading section
 ## Linux-specific
-upgrade-cuda-11.8__linux:
-	-sudo apt update && sudo apt install --only-upgrade linux-headers-$(uname -r) && sudo apt autoremove --yes && sudo apt autoclean --yes
-
 upgrade-git__linux:
 	-sudo apt update && sudo apt install --only-upgrade git && sudo apt autoremove --yes && sudo apt autoclean --yes
 

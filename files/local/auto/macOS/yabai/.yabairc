@@ -17,19 +17,12 @@ yabai -m config auto_balance                 off
 yabai -m config mouse_modifier               ctrl 
 #yabai -m config mouse_action1                move
 #yabai -m config mouse_action2                resize
-
 yabai -m config layout                       bsp
-yabai -m config top_padding                  0
-yabai -m config bottom_padding               0
-yabai -m config left_padding                 0
-yabai -m config right_padding                0
-yabai -m config window_gap                   0
-
-# Starting with no gap for all spaces
-for space in $(yabai -m query --spaces | grep '"index":' | cut -d":" -f2 | cut -d"," -f1)
-do
-	yabai -m space $space --toggle gap
-done
+yabai -m config top_padding                  12
+yabai -m config bottom_padding               12
+yabai -m config left_padding                 12
+yabai -m config right_padding                12
+yabai -m config window_gap                   12
 
 # Rules
 yabai -m rule --add app="System Settings" manage=off layer=normal
@@ -38,10 +31,9 @@ yabai -m rule --add app="Raycast" manage=off layer=normal
 yabai -m rule --add app="Digital Colour Meter" manage=off layer=normal
 
 # Signals
-yabai -m signal --add event=display_removed action="for display in \$(yabai -m query --displays | grep '\"id\":' | cut -d':' -f2 | cut -d',' -f1); do if [ \$(yabai -m query --displays --display \$display | grep '\"w\":' | cut -d':' -f2 | cut -d'.' -f1) -lt 3440 ]; then for space in \$(yabai -m query --displays --display \$display | grep '\"spaces\":' | cut -d'[' -f2 | cut -d']' -f1 | tr -d ','); do yabai -m space \$space --padding abs:0:0:0:0; done; fi; done"
-yabai -m signal --add event=display_resized action="for display in \$(yabai -m query --displays | grep '\"id\":' | cut -d':' -f2 | cut -d',' -f1); do if [ \$(yabai -m query --displays --display \$display | grep '\"w\":' | cut -d':' -f2 | cut -d'.' -f1) -lt 3440 ]; then for space in \$(yabai -m query --displays --display \$display | grep '\"spaces\":' | cut -d'[' -f2 | cut -d']' -f1 | tr -d ','); do yabai -m space \$space --padding abs:0:0:0:0; done; fi; done"
-yabai -m signal --add event=space_created action="for display in \$(yabai -m query --displays | grep '\"id\":' | cut -d':' -f2 | cut -d',' -f1); do if [ \$(yabai -m query --displays --display \$display | grep '\"w\":' | cut -d':' -f2 | cut -d'.' -f1) -lt 3440 ]; then for space in \$(yabai -m query --displays --display \$display | grep '\"spaces\":' | cut -d'[' -f2 | cut -d']' -f1 | tr -d ','); do yabai -m space \$space --padding abs:0:0:0:0; done; fi; done"
-
+yabai -m signal --add event=display_removed action="for display in \$(yabai -m query --displays | grep '\"id\":' | cut -d':' -f2 | cut -d',' -f1); do if [ \$(yabai -m query --displays --display \$display | grep '\"w\":' | cut -d':' -f2 | cut -d'.' -f1) -lt 3440 ]; then for space in \$(yabai -m query --displays --display \$display | grep '\"spaces\":' | cut -d'[' -f2 | cut -d']' -f1 | tr -d ','); do yabai -m space \$space --padding abs:12:12:12:12; done; fi; done"
+yabai -m signal --add event=display_resized action="for display in \$(yabai -m query --displays | grep '\"id\":' | cut -d':' -f2 | cut -d',' -f1); do if [ \$(yabai -m query --displays --display \$display | grep '\"w\":' | cut -d':' -f2 | cut -d'.' -f1) -lt 3440 ]; then for space in \$(yabai -m query --displays --display \$display | grep '\"spaces\":' | cut -d'[' -f2 | cut -d']' -f1 | tr -d ','); do yabai -m space \$space --padding abs:12:12:12:12; done; fi; done"
+yabai -m signal --add event=space_created action="for display in \$(yabai -m query --displays | grep '\"id\":' | cut -d':' -f2 | cut -d',' -f1); do if [ \$(yabai -m query --displays --display \$display | grep '\"w\":' | cut -d':' -f2 | cut -d'.' -f1) -lt 3440 ]; then for space in \$(yabai -m query --displays --display \$display | grep '\"spaces\":' | cut -d'[' -f2 | cut -d']' -f1 | tr -d ','); do yabai -m space \$space --padding abs:12:12:12:12; done; fi; done"
 
 
 echo "Yabai configuration loaded."
