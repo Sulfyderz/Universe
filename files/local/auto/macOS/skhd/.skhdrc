@@ -9,9 +9,9 @@ default < ctrl + fn - s ; silence
 silence < ctrl + fn - s ; default
 
 # change ratio (ultrawide monitor only)
-default < ctrl + fn - 0x12 : if [ $(yabai -m query --displays --space | grep '"w":' | cut -d':' -f2 | cut -d'.' -f1) -ge 3440 ]; then yabai -m space --padding abs:0:0:0:0; fi
-default < ctrl + fn - 0x13 : if [ $(yabai -m query --displays --space | grep '"w":' | cut -d':' -f2 | cut -d'.' -f1) -ge 3440 ]; then yabai -m space --padding abs:0:0:600:600; fi
-default < ctrl + fn - 0x14 : if [ $(yabai -m query --displays --space | grep '"w":' | cut -d':' -f2 | cut -d'.' -f1) -ge 3440 ]; then yabai -m space --padding abs:0:0:1200:1200; fi
+default < ctrl + fn - 0x12 : if [ $(yabai -m query --displays --space | grep '"w":' | cut -d':' -f2 | cut -d'.' -f1) -ge 3440 ]; then yabai -m space --padding abs:12:12:12:12; fi
+default < ctrl + fn - 0x13 : if [ $(yabai -m query --displays --space | grep '"w":' | cut -d':' -f2 | cut -d'.' -f1) -ge 3440 ]; then yabai -m space --padding abs:12:12:600:600; fi
+default < ctrl + fn - 0x14 : if [ $(yabai -m query --displays --space | grep '"w":' | cut -d':' -f2 | cut -d'.' -f1) -ge 3440 ]; then yabai -m space --padding abs:12:12:1200:1200; fi
 
 # focus window
 default < lalt - h : yabai -m window --focus west
