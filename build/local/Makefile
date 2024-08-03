@@ -9,14 +9,14 @@ ROOT_UNIVERSE := $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../../)
 
 # Shortcuts
 ## Linux-specific
-install__linux: install-fzf__linux install-git-lfs__linux install-tmux-resurrect install-starship__linux install-vundle install-zoxide__linux install-zsh-autosuggestions__linux
+install__linux: install-fzf__linux install-git-lfs__linux install-starship__linux install-tpm install-vundle install-zoxide__linux install-zsh-autosuggestions__linux
 link__linux: link-git link-tmux link-starship link-vim link-zsh__linux
-upgrade__linux: upgrade-os__linux upgrade-fzf__linux upgrade-tmux-resurrect upgrade-vundle upgrade-zsh-autosuggestions__linux
+upgrade__linux: upgrade-os__linux upgrade-fzf__linux upgrade-tpm upgrade-vundle upgrade-zsh-autosuggestions__linux
 
 ## macOS-specific
-install__macOS: install-homebrew__macOS install-raycast__macOS install-fzf__macOS install-git-lfs__macOS install-tmux-resurrect install-starship__macOS install-tmux__macOS install-vundle install-zoxide__macOS install-zsh-autosuggestions__macOS
+install__macOS: install-homebrew__macOS install-raycast__macOS install-fzf__macOS install-git-lfs__macOS install-starship__macOS install-tmux__macOS install-tpm install-vundle install-zoxide__macOS install-zsh-autosuggestions__macOS
 link__macOS: link-git link-tmux link-skhd__macOS link-starship link-vim link-yabai__macOS link-zsh__macOS
-upgrade__macOS: upgrade-homebrew__macOS upgrade-tmux-resurrect upgrade-vundle
+upgrade__macOS: upgrade-homebrew__macOS upgrade-tpm upgrade-vundle
 
 
 # Command section
@@ -33,6 +33,14 @@ command-conda-not-on-startup:
 command-git-lfs-init-account:
 	-git lfs install
 
+### Installing tpm plugins specified in tmux conf
+command-tpm-install-plugins:
+	-$(ROOT_UNIVERSE)/bin/tmux/plugins/tpm/bin/install_plugins
+
+### Installing vundle plugins specified in vim conf
+command-vundle-install-plugins:
+	-vim +PluginInstall +qall
+
 ## Linux-specific
 ### Setup zsh as default shell
 command-os-setup-zsh__linux:
@@ -41,11 +49,11 @@ command-os-setup-zsh__linux:
 
 # Installing section
 ## Non-specific
-install-tmux-resurrect:
-	-git clone https://github.com/tmux-plugins/tmux-resurrect $(ROOT_UNIVERSE)/bin/tmux-resurrect/
+install-tpm:
+	-git clone https://github.com/tmux-plugins/tpm $(ROOT_UNIVERSE)/bin/tmux/plugins/tpm
 
 install-vundle:
-	-git clone https://github.com/VundleVim/Vundle.vim.git $(ROOT_UNIVERSE)/bin/vim/bundle/Vundle.vim && vim +PluginInstall +qall
+	-git clone https://github.com/VundleVim/Vundle.vim.git $(ROOT_UNIVERSE)/bin/vim/bundle/Vundle.vim
 
 ## Linux-specific
 install-conda__linux:
@@ -90,7 +98,6 @@ install-starship__macOS:
 
 install-tmux__macOS:
 	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew install tmux 
-
 install-zoxide__macOS:
 	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew install zoxide
 
@@ -100,11 +107,11 @@ install-zsh-autosuggestions__macOS:
 
 # Upgrading section
 ## Non-specific
-upgrade-tmux-resurrect:
-	-git -C $(ROOT_UNIVERSE)/bin/tmux-resurrect pull
+upgrade-tpm:
+	-git -C $(ROOT_UNIVERSE)/bin/tmux/plugins/tpm pull
 
 upgrade-vundle:
-	-git -C $(ROOT_UNIVERSE)/bin/vim/bundle/Vundle.vim pull && vim +PluginInstall +qall
+	-git -C $(ROOT_UNIVERSE)/bin/vim/bundle/Vundle.vim pull
 
 ## Linux-specific
 upgrade-fzf__linux:
