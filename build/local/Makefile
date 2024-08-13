@@ -184,6 +184,9 @@ link-zsh__linux:
 	-ln -sf $(ROOT_UNIVERSE)/files/local/auto/linux/zsh/.zshrc ~
 
 ## macOS-specific
+link-borders__macOS:
+	-mkdir -p ~/.config/borders/ && ln -sf $(ROOT_UNIVERSE)/files/local/auto/macOS/borders/bordersrc ~/.config/borders/
+
 link-raycast__macOS:
 	-open $(ROOT_UNIVERSE)/files/local/auto/macOS/raycast/raycast.rayconfig
 
