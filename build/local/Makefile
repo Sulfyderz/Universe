@@ -75,9 +75,6 @@ install-zsh-autosuggestions__linux:
 	-git clone https://github.com/zsh-users/zsh-autosuggestions $(ROOT_UNIVERSE)/bin/zsh-autosuggestions/
 
 ## macOS-specific
-install-borders__macOS:
-	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew install FelixKratz/formulae/borders && brew services start borders
-
 install-conda-arm64__macOS:
 	-mkdir -p $(ROOT_UNIVERSE)/bin/miniconda3 && curl https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh -o $(ROOT_UNIVERSE)/bin/miniconda3/miniconda.sh && bash $(ROOT_UNIVERSE)/bin/miniconda3/miniconda.sh -b -u -p $(ROOT_UNIVERSE)/bin/miniconda3 && rm -rf $(ROOT_UNIVERSE)/bin/miniconda3/miniconda.sh
 
@@ -184,9 +181,6 @@ link-zsh__linux:
 	-ln -sf $(ROOT_UNIVERSE)/files/local/auto/linux/zsh/.zshrc ~
 
 ## macOS-specific
-link-borders__macOS:
-	-mkdir -p ~/.config/borders/ && ln -sf $(ROOT_UNIVERSE)/files/local/auto/macOS/borders/bordersrc ~/.config/borders/
-
 link-raycast__macOS:
 	-open $(ROOT_UNIVERSE)/files/local/auto/macOS/raycast/raycast.rayconfig
 

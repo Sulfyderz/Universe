@@ -1,7 +1,0 @@
-#!/bin/bash
-
-options=(
-	hidpi=on
-)
-
-borders "${options[@]}"
