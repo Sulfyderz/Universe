@@ -75,6 +75,9 @@ install-zsh-autosuggestions__linux:
 	-git clone https://github.com/zsh-users/zsh-autosuggestions $(ROOT_UNIVERSE)/bin/zsh-autosuggestions/
 
 ## macOS-specific
+install-borders__macOS:
+	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew install FelixKratz/formulae/borders && brew services start borders
+
 install-conda-arm64__macOS:
 	-mkdir -p $(ROOT_UNIVERSE)/bin/miniconda3 && curl https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh -o $(ROOT_UNIVERSE)/bin/miniconda3/miniconda.sh && bash $(ROOT_UNIVERSE)/bin/miniconda3/miniconda.sh -b -u -p $(ROOT_UNIVERSE)/bin/miniconda3 && rm -rf $(ROOT_UNIVERSE)/bin/miniconda3/miniconda.sh
 
@@ -93,11 +96,18 @@ install-homebrew__macOS:
 install-raycast__macOS:
 	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew install --cask raycast
 
+install-skhd__macOS:
+	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew install koekeishiya/formulae/skhd && skhd --start-service
+
 install-starship__macOS:
 	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew install starship
 
 install-tmux__macOS:
 	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew install tmux 
+
+install-yabai__macOS:
+	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew install koekeishiya/formulae/yabai && yabai --start-service
+
 install-zoxide__macOS:
 	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew install zoxide
 
