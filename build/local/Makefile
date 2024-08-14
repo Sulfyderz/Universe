@@ -14,7 +14,7 @@ link__linux: link-git link-tmux link-starship link-vim link-zsh__linux
 upgrade__linux: upgrade-os__linux upgrade-fzf__linux upgrade-tpm upgrade-vundle upgrade-zsh-autosuggestions__linux
 
 ## macOS-specific
-install__macOS: install-homebrew__macOS install-raycast__macOS install-fzf__macOS install-git-lfs__macOS install-starship__macOS install-tmux__macOS install-tpm install-vundle install-zoxide__macOS install-zsh-autosuggestions__macOS
+install__macOS: install-homebrew__macOS install-raycast__macOS install-fzf__macOS install-git-lfs__macOS install-skhd__macOS install-starship__macOS install-tmux__macOS install-tpm install-vundle install-yabai__macOS install-zoxide__macOS install-zsh-autosuggestions__macOS
 link__macOS: link-git link-tmux link-skhd__macOS link-starship link-vim link-yabai__macOS link-zsh__macOS
 upgrade__macOS: upgrade-homebrew__macOS upgrade-tpm upgrade-vundle
 

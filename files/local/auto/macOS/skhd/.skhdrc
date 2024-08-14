@@ -83,33 +83,8 @@ default < ctrl + fn - c : yabai -m space --create;\
                 yabai -m space --focus $(echo $id | rev | cut -d' ' -f 1 | rev)
 
 # destroy desktop
-default < ctrl + fn - w : idss=$(yabai -m query --displays --display | grep "spaces" | sed 's/.*\[//g' | sed 's/].*//g' | sed 's/,//g' | cut -d' ' -f 1);\
-		ids=$(yabai -m query --spaces --space | grep "index" | sed 's/[^0-9]*//g');\
-		idbeg=$(echo $idss | cut -d' ' -f 1);\
-		maxs=$(echo $idss | tr -cd ' \t' |wc -c);\
-                maxs=$(echo $(($maxs+1)));\
-		natfulState=$(yabai -m query --windows --space | grep "native");\
-		focusW="-658";\
-		if [[ $natfulState != *"true"* ]];\
-			then if [[ "$maxs" -gt "2" ]] && [[ "$idbeg" != "$ids" ]];\
-				then wids=$(yabai -m query --windows --space | grep '"id"' | sed 's/[^0-9]*//g' | tr "\n" " ");\
-				eval "arrWids=($wids)";\
-				for s in "${arrWids[@]}";\
-					do query=$(yabai -m query --windows --window $s);\
-					focusState=$(echo $query|grep "focus");\
-					if [[ "$focusState" == *"true"* ]]; then focusW=$(echo $query | grep '"id"' | sed 's/[^0-9]*//g'); fi;\
-				done;\
-				for s in "${arrWids[@]}";\
-					do query=$(yabai -m query --windows --window $s);\
-					vsbleState=$(echo $query|grep "visible");\
-					if [[ "$vsbleState" == *"true"* ]]; then yabai -m window $s --space prev; fi;\
-				done;\
-				yabai -m space --focus prev;\
-				if [[ "$focusW" != "-658" ]]; then yabai -m window --focus $focusW; fi;\
-				yabai -m space recent --destroy;\
-			else yabai -m space --destroy;\
-			fi;\
-		fi
+default < ctrl + fn - w : natfulState=$(yabai -m query --windows --space | grep "native");\
+		if [[ $natfulState != *"true"* ]]; then yabai -m space --destroy; fi
 
 # move window
 default < fn + lalt - h : yabai -m window --warp west
