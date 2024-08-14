@@ -146,11 +146,17 @@ upgrade-homebrew__macOS:
 upgrade-raycast__macOS:
 	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew update && brew upgrade --cask raycast
 
+upgrade-skhd__macOS:
+	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew update && brew upgrade skhd
+
 upgrade-starship__macOS:
 	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew update && brew upgrade starship
 
 upgrade-tmux__macOS:
 	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew update && brew upgrade tmux 
+
+upgrade-yabai__macOS:
+	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew update && brew upgrade yabai
 
 upgrade-zoxide__macOS:
 	-eval "$$(/opt/homebrew/bin/brew shellenv)" && brew update && brew upgrade zoxide
