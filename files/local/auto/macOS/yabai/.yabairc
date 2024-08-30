@@ -25,10 +25,10 @@ yabai -m config right_padding                12
 yabai -m config window_gap                   12
 
 # Rules
-yabai -m rule --add app="System Settings" manage=off layer=normal
-yabai -m rule --add app="Calculator" manage=off layer=normal
-yabai -m rule --add app="Raycast" manage=off layer=normal
-yabai -m rule --add app="Digital Colour Meter" manage=off layer=normal
+yabai -m rule --add app="System Settings" manage=off sub-layer=normal
+yabai -m rule --add app="Calculator" manage=off sub-layer=normal
+yabai -m rule --add app="Raycast" manage=off sub-layer=normal
+yabai -m rule --add app="Digital Colour Meter" manage=off sub-layer=normal
 
 # Signals
 yabai -m signal --add event=display_removed action="for display in \$(yabai -m query --displays | grep '\"id\":' | cut -d':' -f2 | cut -d',' -f1); do if [ \$(yabai -m query --displays --display \$display | grep '\"w\":' | cut -d':' -f2 | cut -d'.' -f1) -lt 3440 ]; then for space in \$(yabai -m query --displays --display \$display | grep '\"spaces\":' | cut -d'[' -f2 | cut -d']' -f1 | tr -d ','); do yabai -m space \$space --padding abs:12:12:12:12; done; fi; done"
