@@ -116,4 +116,4 @@ command-argument__os:
     | macOS | `__macOS` |
     | Ubuntu | `__linux` |
 - `-instructions`: The instructions of that rule.
-    > ⚠️ Each line has to start by a dash in order to handled failure.
+    > ⚠️ Each line has to start by a dash in order to handle failure.
