@@ -1,8 +1,9 @@
-# <img width="40" height="40" src="https://gitlab.com/uploads/-/system/project/avatar/24016226/galaxy.png?width=96" alt="Banner"> Universe
-By Sulfyderz.
+# <img width="20" height="20" src="https://gitlab.com/uploads/-/system/project/avatar/24016226/galaxy.png?width=96" alt="Banner"> Universe
 
 ## About
 Universe is a versatile tool that effortlessly transfers software and configuration settings across multiple computers with convenience. It serves as a configuration file manager, a software configurator and a software installer. Eliminate the hassle of managing countless configuration files - Universe stores them all in one centralized location, effortlessly importing them into their corresponding software whenever possible. Take control of your software like never before with our intuitive commands, allowing you to easily configure them to match your unique preferences. And that's not all - Universe even goes the extra mile by seamlessly installing your favorite software. Streamline your digital life with Universe software and unlock a world of simplicity and efficiency.
+
+⚠️ Universe is now deprecated. See [unvX](https://gitlab.com/Sulfyderz/unvX) for a better solution.
 
 ## Table of Contents
 
