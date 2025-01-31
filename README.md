@@ -1,9 +1,9 @@
 # Universe
 
+**⚠ Universe is now deprecated and no longer maintained. See [unvX](https://github.com/Sulfyderz/unvX) for a better solution.**
+
 ## About
 Universe is a versatile tool that effortlessly transfers software and configuration settings across multiple computers with convenience. It serves as a configuration file manager, a software configurator and a software installer. Eliminate the hassle of managing countless configuration files - Universe stores them all in one centralized location, effortlessly importing them into their corresponding software whenever possible. Take control of your software like never before with our intuitive commands, allowing you to easily configure them to match your unique preferences. And that's not all - Universe even goes the extra mile by seamlessly installing your favorite software. Streamline your digital life with Universe software and unlock a world of simplicity and efficiency.
-
-**⚠ Universe is now deprecated and no longer maintained. See [unvX](https://github.com/Sulfyderz/unvX) for a better solution.**
 
 ## Table of Contents
 
