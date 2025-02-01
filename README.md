@@ -44,25 +44,25 @@ Universe is a versatile tool that effortlessly transfers software and configurat
 ## Installation
 To install, use the following command inside the Universe repository:
 ```
-❯ ./install
+./install
 ```
 
 ## Updating Universe
 To update Universe, use the following command:
 ```
-❯ universe update
+universe update
 ```
 
 ## Uninstallation
 To uninstall, use the following command inside the Universe repository:
 ```
-❯ ./uninstall
+./uninstall
 ```
 
 ## Usage
 This is how you use Universe:
 ```
-❯ universe [-h | --help] [-p | --prefix] <command> [<args>]
+universe [-h | --help] [-p | --prefix] <command> [<args>]
 ```
 ### Commands
 | Command | Description |
