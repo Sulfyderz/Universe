@@ -1,6 +1,7 @@
 # Universe
 
-**⚠ Universe is now deprecated and no longer maintained. See [unvX](https://github.com/pabroux/unvX) for a better solution.**
+> [!WARNING]
+> Universe is now deprecated and no longer maintained. See [unvX](https://github.com/pabroux/unvX) for a better solution.
 
 ## About
 Universe is a versatile tool that effortlessly transfers software and configuration settings across multiple computers with convenience. It serves as a configuration file manager, a software configurator and a software installer. Eliminate the hassle of managing countless configuration files - Universe stores them all in one centralized location, effortlessly importing them into their corresponding software whenever possible. Take control of your software like never before with our intuitive commands, allowing you to easily configure them to match your unique preferences. And that's not all - Universe even goes the extra mile by seamlessly installing your favorite software. Streamline your digital life with Universe software and unlock a world of simplicity and efficiency.
@@ -34,9 +35,12 @@ Universe is a versatile tool that effortlessly transfers software and configurat
 - **client:** contains the file(s) for a remote machine when you are just a simple user;
 - **build:** contains the **Makefile** files describing where to deploy configuration files from the **files** directory, how configure software, how install software and how update software;
 - **files:** contains the configuration files handled by Universe and those you have to manually import into the corresponding software;
-    > ⓘ The configuration files handled by Universe are stored in the **auto** subdirectories. The ones you have to manually import into the corresponding software are stored in the **manual** subdirectories. 
-    > The **auto** and **manual** subdirectories are located in the **local**, **client** and **host** subdirectories of the **files** directory.
-    >> ⓘ Both the **auto** and **manual** directories have further subdirectories within them: a **all** directory and others such as **macOS** or **linux**. A **all** directory contains the files shared among OS. The others are OS specific.
+> [!NOTE]
+> The configuration files handled by Universe are stored in the **auto** subdirectories. The ones you have to manually import into the corresponding software are stored in the **manual** subdirectories. 
+> The **auto** and **manual** subdirectories are located in the **local**, **client** and **host** subdirectories of the **files** directory.
+
+> [!NOTE]
+> Both the **auto** and **manual** directories have further subdirectories within them: a **all** directory and others such as **macOS** or **linux**. A **all** directory contains the files shared among OS. The others are OS specific.
 - **host:** contains the file(s) for a remote machine when you are a superuser and in charge of that machine;
 - **local:** contains the file(s) for your local machine;
 - **server:** contains the file(s) for a remote machine.
@@ -73,7 +77,7 @@ universe [-h | --help] [-p | --prefix] <command> [<args>]
 | `command` | Applies a command for a specific software, according to your OS. |
 | `list` | Shows the available arguments for a list of commands related to your OS. If nothing is given, it shows all the arguments for the `install`, `upgrade`, `link` and `command` commands related to your OS. |
 
-> ⓘ
+> [!NOTE]
 > Each command has its own specific arguments. To learn more about them, call the `-h` or `--help` after the command (e.g. `universe list -h`).
 
 ### Options
@@ -104,9 +108,11 @@ command-argument__os:
 ```
 - `command`: The [command](#commands) that rule concerns;
 - `-argument`: The argument name that should be given to the `command` to activate that rule. `-argument` is optional only if `__os` is defined. If `-argument` is not given, that rule is activated when you call the `command` without arguments (e.g. `universe install`);
-    > ⚠ `-argument` has to start by a dash.
+> [!IMPORTANT]
+> `-argument` has to start by a dash.
 
-    > ⚠ `-argument` can contain any special character except underscore (e.g. `-python3-3.10`). 
+> [!IMPORTANT]
+> `-argument` can contain any special character except underscore (e.g. `-python3-3.10`). 
 - `__os`: The OS that rule concerns. `__os` is optional. If it's not defined, that rule applies to all OS. 
 
     Here are the possible values:
@@ -117,4 +123,5 @@ command-argument__os:
     | macOS | `__macOS` |
     | Ubuntu | `__linux` |
 - `-instructions`: The instructions of that rule.
-    > ⚠ Each line has to start by a dash in order to handle failure.
+> [!IMPORTANT]
+> Each instruction line has to start by a dash in order to handle failure.
